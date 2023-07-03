@@ -1,20 +1,54 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8" isELIgnored="false"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>index.jsp에서 회원가입 클릭하면 나오는 2.회원가입 폼 </title>
-</head>
- 2-1+ view 파일에 header,footer import
- 2-2+SUF.css 만들어서 링크 or 이 안에 css코드 넣기
- 2-3+이메일, 이름, 비밀번호, 비밀번호 체크 입력받는 input-text 
- 2-4+input-text밑에 광고 이메일 수신 여부 버튼
+<title>인스턴트 이력서 생성기 | 회원가입</title>
+<%@ include file="/view/header.jsp"%>
 
+</head>
 <body>
+	<h1>회원가입</h1>
+	<form name="signUpForm">
+		<div class="container grid w-50 gap-3" style="margin: auto;">
+			<div class="row">
+				<div class="col-4">Email ID</div>
+				<div class="col-8">
+					<input type="text" class="form-control" id="user_id" name="user_id" value="">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-4">Name</div>
+				<div class="col-8">
+					<input type="text" class="form-control" id="user_name" name="user_name" value="">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-4">PW</div>
+				<div class="col-8">
+					<input type="password" class="form-control" id="user_pw" name="user_pw" value="">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-4">PW check</div>
+				<div class="col-8">
+					<input type="password" class="form-control" id="check_pw" value="">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-4">광고 이메일 수신</div>
+				<div class="col-8">
+					<div class="form-check form-switch">
+						<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
+					<input type="hidden" value="" name="email_YN">
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
 
 </body>
 </html>
-
+<!-- 
 UserController 에 연결해서 회원가입 로직 실행 
  회원가입 성공 후 성공 alert메세지 띄우고(j.s),index.jsp로 이동시켜야함
+ -->
