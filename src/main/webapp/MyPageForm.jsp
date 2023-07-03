@@ -4,9 +4,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>6.[상단 내비바에서 마이페이지 선택했을때 마이페이지 화면 jsp] (정보수정, 로그아웃, 최하단 회원 탈퇴 버튼 있음)</title>
+<title>인스턴트 이력서 생성기 | 내정보 수정</title>
 </head>
 <body>
+
+
+<!-- 
+6.[상단 내비바에서 마이페이지 선택했을때 마이페이지 화면 jsp] (정보수정, 로그아웃, 최하단 회원 탈퇴 버튼 있음)
 
  6-1+ view 파일에 header,footer import
  6-2+MPF.css 만들어서 링크 or 이 안에 css코드 넣기
@@ -21,7 +25,7 @@
 -출력할 정보 : 이메일, 비밀번호(암호화), 이름
 
 [MyPageController] 연결
-
+ -->
 
 </body>
 </html>
