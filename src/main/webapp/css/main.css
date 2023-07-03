@@ -1,0 +1,81 @@
+@charset "UTF-8";
+
+body {
+	padding: 0px 80px;
+	font-family: 'Noto Sans', sans-serif;
+	font-family: 'Noto Sans KR', sans-serif;
+}
+
+.btn-color1 {
+	background-color: #0C134F;
+	border: 1px solid #0C134F;
+	color: white;
+}
+
+.btn-color1:hover {
+	background-color: #0C134F;
+	border: 1px solid #0C134F;
+	color: white;
+	filter: brightness(180%);
+}
+
+.btn-line-color1 {
+	background-color: white;
+	border: 1px solid #0C134F;
+	color: #0C134F;
+}
+
+.btn-line-color1:hover {
+	background-color: #0C134F;
+	border: 1px solid #0C134F;
+	color: white;
+	filter: brightness(180%);
+}
+
+.btn-color2 {
+	background-color: #1D267D;
+	border: 1px solid #1D267D;
+	color: white;
+}
+
+.btn-color2:hover {
+	background-color: #1D267D;
+	border: 1px solid #1D267D;
+	color: white;
+	filter: brightness(180%);
+}
+
+.btn-line-color2 {
+	background-color: white;
+	border: 1px solid #1D267D;
+	color: #1D267D;
+}
+
+.btn-line-color2:hover {
+	background-color: #1D267D;
+	border: 1px solid #1D267D;
+	color: white;
+	filter: brightness(180%);
+}
+
+.center {
+	text-align: center;
+	margin: auto;
+}
+
+.loginform-img {
+	position: relative;
+	top: -1px;
+	filter: opacity(0.2);
+	margin-right: 2rem;
+}
+
+.border-none {
+	border: none;
+}
+
+.small-img {
+	position: relative;
+	top: -1px;
+	width: 16px;
+}

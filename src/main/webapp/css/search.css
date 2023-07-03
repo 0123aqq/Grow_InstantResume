@@ -1,0 +1,62 @@
+@charset "UTF-8";
+
+body {
+	margin: 0px;
+	padding: 0px;
+	line-height: 1.6;
+}
+
+#body {
+	display: grid;
+	padding: 15px 50px;
+	grid-template-columns: repeat(auto-fill, 30%);
+}
+
+#header {
+	width: 100%;
+	margin: 0px !important;
+	height: 80px;
+	color: white;
+	background: linear-gradient(135deg, rgba(20, 108, 148, 1) 0%,
+		rgba(25, 167, 206, 1) 30%, rgba(177, 224, 237, 1) 100%);
+	position: sticky;
+	top: 0;
+	box-shadow: 0px 3px 10px rgb(0, 0, 0, 0.3);
+	filter: opacity(0.8);
+}
+
+#header:hover {
+	animation: opacity 0.3s forwards;
+}
+
+@keyframes opacity { 0%{filter: opacity(0.8);}100%{filter:opacity(1.0);}}
+
+
+label {
+	display: block;
+	font-weight: bold;
+	padding-top: 20px;
+	font-size: 1.2rem;
+}
+
+form {
+	padding-bottom: 15px;
+}
+
+input {
+	padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 1.1rem;
+}
+
+button {
+ padding: 8px 12px;
+    border-radius: 5px;
+    border: 1px solid rgb(20, 108, 148);
+    font-size: 1.1rem;
+    background: rgb(20, 108, 148);
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+}

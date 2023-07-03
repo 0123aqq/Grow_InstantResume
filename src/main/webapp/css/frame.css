@@ -1,0 +1,136 @@
+
+#header {
+	width: 100%;
+	margin: 0px !important;
+	height: 80px;
+	color: white;
+	background: linear-gradient(135deg, rgba(20,108,148,1) 0%, rgba(25,167,206,1) 30%, rgba(177,224,237,1) 100%);
+	position: sticky;
+	top: 0;
+	box-shadow: 0px 3px 10px rgb(0,0,0,0.3);
+	filter: opacity(0.8);
+}
+
+#header:hover{
+	animation: opacity 0.3s forwards;
+}
+
+@keyframes opacity{
+	0%{filter: opacity(0.8);}
+	100%{filter: opacity(1.0);}
+}
+
+body {
+	background-color: #F6F1F1;
+	color: #333;
+	margin: 0px;
+}
+
+nav {
+	border-radius: 20px;
+	background: rgb(255 255 255 / 30%);
+	border: 1px solid #19A7CE;
+	color: #19A7CE;
+	padding: 10px 15px;
+	line-height: 1.8;
+	margin: 17px 0px 0px 0px;
+	font-weight: bold;
+}
+
+div[id="contents"]>div {
+	background-color: white;
+	border-radius: 10px;
+	padding: 1px 25px 25px 25px;
+	border-top: 5px solid #146C94;
+	margin-top: 15px;
+	box-shadow: 0px 2px 8px rgb(0,0,0,0.08);
+	scroll-margin-top: 100px;
+}
+
+div[id="about"] .container {
+	display: grid;
+	grid-template-columns: 160px auto;
+}
+
+footer {
+	background: #146C94;
+	color: white;
+	text-align: center;
+	height: 120px;
+	padding-block-start: 34px;
+}
+
+
+/** 반응형 웹 구현 **/
+
+#realbody {
+	padding: 3px 20px;
+	display: grid;
+	grid-template-columns: 300px 1fr;
+	grid-column-gap: 25px;
+}
+
+@media (max-width: 1300px) {
+	#realbody {
+	grid-template-columns: 1fr;
+	grid-row-gap: 25px;
+	}
+	
+	nav {
+	margin: 25px 0px -10px 0px;
+	}
+}
+
+
+div[id="projects"]> .container {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		grid-gap: 30px;
+	}
+
+#projects {
+	grid-column: 1 / span 2;
+}
+
+#contents {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr auto;
+    grid-column-gap: 15px;
+}
+
+
+@media (max-width : 970px) {
+	#projects {}
+	
+div[id="projects"]> .container {
+		grid-template-columns: 1fr;
+		grid-row-gap: 45px;
+	}
+	#contents {
+		display: block;
+	}
+}
+
+/** 와이드 해상도 대응 **/
+
+@media (min-width : 2200px) {
+
+div[id="projects"]> .container {
+		grid-template-columns: repeat(auto-fill, 30%);
+	}
+}
+
+#scrollTop {
+	position: fixed;
+	bottom: 30px;
+	right: 32px;
+	width: 50px;
+	filter: opacity(0.8);
+	border-radius: 50px;
+	box-shadow: 0px 3px 10px rgb(0,0,0,0.3);
+}
+
+#scrollTop:hover{
+	animation: opacity 0.3s forwards;
+}

@@ -1,0 +1,65 @@
+table{
+    table-layout: fixed;
+    width: 100%;
+    display: table;
+}
+
+div[id="skills"]>table td:first-child {
+	border-left: 0;
+	background: #19A7CE;
+	color: white;
+	padding: 7px 20px;
+	border-radius: 10px;
+	width: 80px;
+}
+
+div[id="skills"]>table tr:nth-child(2) img {
+	margin-top: 3px;
+	margin-bottom: -1px;
+}
+
+div[id="skills"]>table tr:nth-child(3) img {
+	margin-top: 3px;
+	margin-bottom: -1px;
+}
+
+div[id="projects"]> .container > .item > table td:first-child {
+	border-left: 0;
+	background: #19A7CE;
+	color: white;
+	padding: 7px 20px;
+	border-radius: 10px;
+	width: 25%;
+	max-width: 200px;
+}
+
+table td {
+	padding: 5px 15px;
+	border: 0.5px solid #ccc;
+	border-radius: 10px;
+	background-color: white;
+}
+
+div[id="projects"]> .container > .item > table tr:last-child > td:last-child {
+	padding: 1rem;
+    line-height: 1.5;
+}
+
+td>ul {
+    display: block;
+    list-style-type: disc;
+    margin-block-start: 1em;
+    padding-inline-start: 20px;
+}
+
+td>ul>li{
+	display: list-item;
+    text-align: -webkit-match-parent;
+    margin-bottom: 10px;
+}
+
+li:marker{
+	color: white;
+	border: 1px solid #146C94;
+	
+}
