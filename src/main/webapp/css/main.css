@@ -6,6 +6,28 @@ body {
 	font-family: 'Noto Sans KR', sans-serif;
 }
 
+a {
+	color: #1D267D;
+	word-wrap: break-word;
+}
+
+a:hover{
+	filter: brightness(180%);
+}
+
+hr {
+	border-top: 1px solid #ccc;
+}
+
+label {
+	display: block;
+	font-weight: bold;
+}
+
+.btn{
+	cursor: pointer;
+}
+
 .grid{
 	display: grid;
 }
@@ -14,6 +36,7 @@ body {
 	background-color: #0C134F;
 	border: 1px solid #0C134F;
 	color: white;
+	margin-top: -5px;
 }
 
 .btn-color1:hover {
@@ -27,6 +50,7 @@ body {
 	background-color: white;
 	border: 1px solid #0C134F;
 	color: #0C134F;
+	margin-top: -5px;
 }
 
 .btn-line-color1:hover {
@@ -40,6 +64,7 @@ body {
 	background-color: #1D267D;
 	border: 1px solid #1D267D;
 	color: white;
+	margin-top: -5px;
 }
 
 .btn-color2:hover {
@@ -53,6 +78,7 @@ body {
 	background-color: white;
 	border: 1px solid #1D267D;
 	color: #1D267D;
+	margin-top: -5px;
 }
 
 .btn-line-color2:hover {
@@ -80,6 +106,19 @@ body {
 
 .small-img {
 	position: relative;
+	padding: 0px;
 	top: -1px;
 	width: 16px;
+}
+
+.small-img-2x {
+	position: relative;
+	padding: 0px;
+	top: -3px;
+	width: 32px;
+}
+
+.form-check-input:checked{
+	background-color: #D4ADFC;
+	border-color: #D4ADFC;
 }
