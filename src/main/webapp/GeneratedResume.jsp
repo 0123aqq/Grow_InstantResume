@@ -1,23 +1,43 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<html><head>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
+<!DOCTYPE html>
+<html>
+<head>
 <meta charset="UTF-8">
 <title>인스턴트 이력서 생성기</title>
-<link rel="stylesheet" href="./css/frame.css">
-<link rel="stylesheet" href="./css/tag.css">
-<link rel="stylesheet" href="./css/table.css">
-<script src="./script/myscript.js"></script>
+<%@ include file="/view/header.jsp"%>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta property="og:title" content="유맑음 이력서">
 <meta property="og:image" content="./img/thumbnail.png">
 <meta property="og:description" content="유맑음의 이력서입니다.">
+
+<link rel="stylesheet" href="./css/main.css">
+<link rel="stylesheet" href="./css/frame.css">
+<link rel="stylesheet" href="./css/table.css">
+<script src="./script/myscript.js"></script>
+
+<style>
+a{
+	text-decoration: none;
+}
+
+h2 {
+	color: #000000;
+	padding-top: 1.2rem;
+}
+
+div[id="projects"] img{
+	margin: 0px 0px 5px 5px;
+}
+</style>
+
 </head>
 
 <body>
 
 	<div id="realbody">
 		<nav>
-			<label style="font-size: 1.2rem; padding: 15px 15px 0px 15px; margin-bottom: -10px; color: #000;">📑목차</label>
+			<h4 style="padding: 15px 0px 0px 10px">📑목차</h4>
+			<hr>
 			<ol>
 				<li><a href="#about">자기소개</a><br></li>
 				<li><a href="#skills">보유 기술</a><br></li>
@@ -74,12 +94,12 @@
 			<div id="projects">
 				<h2>🗂️ Projects</h2>
 				<hr>
-				<div class="container">
+				<div class="container column-gap-5">
 					<div class="item">
-						<h3>
+						<h4>
 							<img src="https://img.shields.io/badge/Project-Personal-blue">
 							Dummy Project A
-						</h3>
+						</h4>
 						<table>
 							<tbody><tr>
 								<td><strong>참여자 (기여도)</strong></td>
@@ -114,10 +134,10 @@
 					
 					
 					<div class="item">
-						<h3>
+						<h4>
 							<img src="https://img.shields.io/badge/Project-TEAM-green">
 							Dummy Project B
-						</h3>
+						</h4>
 						<table>
 							<tbody><tr>
 								<td><strong>참여자 (기여도)</strong></td>
