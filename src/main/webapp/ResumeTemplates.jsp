@@ -1,10 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8" isELIgnored="false"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>인스턴트 이력서 생성기</title>
+<title>인스턴트 이력서 생성기 | 이력서 양식 선택</title>
+<%@ include file="/view/header.jsp" %>
+
 </head>
 <body>
 
@@ -14,6 +14,7 @@
  ResumeTemplatesCon에 연결
 
 
+<%@ include file="/view/footer.jsp" %>
 
 </body>
 </html>

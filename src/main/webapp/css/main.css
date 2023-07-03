@@ -6,6 +6,10 @@ body {
 	font-family: 'Noto Sans KR', sans-serif;
 }
 
+.grid{
+	display: grid;
+}
+
 .btn-color1 {
 	background-color: #0C134F;
 	border: 1px solid #0C134F;
