@@ -6,11 +6,6 @@
 <%@ include file="/view/header.jsp" %>
 
 <script>
-$( document ).ready(function() {
-	$(wrongID).hide();
-	$(wrongPW).hide();
-});
-
 function IDValidation() {
 	  let user_id = document.loginForm.user_id.value;
 	  let regex = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-z]+$/;
@@ -21,19 +16,6 @@ function IDValidation() {
 	  } else {
 	    $("#wrongID").show();
 	  	return false;
-	  }
-	}
-
-function PWValidation() {
-	  let user_pw = document.loginForm.user_pw.value;
-	  let regex = /^[a-zA-Z0-9]{4,20}$/;
-	  
-	  if (regex.test(user_pw)){
-	    $("#wrongPW").hide();
-	    return true;
-	  } else {
-	    $("#wrongPW").show();
-	    return false;
 	  }
 	}
 
@@ -83,12 +65,12 @@ function login() {
 					<input type="email" class="form-control border-none" id="floatingInput" placeholder=" " name="user_id" onInput="javascript:IDValidation();"> 
 					<label for="floatingInput" style="color: #ccc;"><img src="./repo/person-fill.svg" class="loginform-img"> Email ID</label>
 				</div>
-				<span id="wrongID" class="wrongNotice"><img src="./repo/exclamation-circle.svg" class="small-img"> ID는 올바른 이메일 형식을 따라야 합니다.</span>
+				<span id="wrongID" class="wrongNotice" style="display: none;"><img src="./repo/exclamation-circle.svg" class="small-img"> ID는 올바른 이메일 형식을 따라야 합니다.</span>
 				<div class="form-floating mb-3" style="border-bottom: 1px solid #ccc;">
 					<input type="password" class="form-control border-none" id="floatingPassword" placeholder=" " name="user_pw" onInput="javascript:PWValidation();"> 
 					<label for="floatingPassword" style="color: #ccc;"><img src="./repo/lock-fill.svg" class="loginform-img"> Password</label>
 				</div>
-				<span id="wrongPW" class="wrongNotice"><img src="./repo/exclamation-circle.svg" class="small-img"> 비밀번호는 영문, 숫자로 이루어진 4~20자리의 문자여야 합니다.</span>
+				<span id="wrongPW" class="wrongNotice" style="display: none;"><img src="./repo/exclamation-circle.svg" class="small-img"> 비밀번호는 영문, 숫자로 이루어진 4~20자리의 문자여야 합니다.</span>
 				<div class="mb-4">
 				<a href="">Forgot password?</a>
 				</div>
