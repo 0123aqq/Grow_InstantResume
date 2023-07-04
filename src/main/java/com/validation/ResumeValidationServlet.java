@@ -8,7 +8,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class ResumeValidationServlet
+* 5. [이력서 입력 정보 검증 서블릿] : 에러나면 alert 경고 메세지
+* 검증 기능 수행 : ValidationService
+* 사용자가 입력한 이력서 정보를 담는 클래스 : ResumeDataDTO(사용자가 입력한 데이터 및 해당 데이터와 관련된 메서드를 포함)
+* 
  */
 @WebServlet("/ResumeValidationServlet")
 public class ResumeValidationServlet extends HttpServlet {
@@ -60,12 +63,6 @@ public class ResumeValidationServlet extends HttpServlet {
         // 예를 들어, 필수 필드가 비어있는지, 이메일 형식이 유효한지 등을 확인할 수 있습니다.
         return !name.isEmpty() && !email.isEmpty() && !phone.isEmpty();
         }
-        
-        
-        
-        
-    
-
 
     }
 

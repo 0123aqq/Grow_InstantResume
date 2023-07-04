@@ -53,7 +53,7 @@ function login() {
 }
 </style>
 </head>
-<body>
+<body style="padding-top: 100px;">
 	<div class="row">
 		<div class="col-7 p-5 center">
 			<img src="./repo/main-gradation.svg">

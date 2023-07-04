@@ -15,6 +15,10 @@ a:hover{
 	filter: brightness(180%);
 }
 
+h1{
+	padding-top: 100px;
+}
+
 hr {
 	border-top: 1px solid #ccc;
 }
