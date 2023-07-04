@@ -22,7 +22,7 @@ footer{
     bottom: 0;
     left: 0;
     right: 0;
-    background: #111;
+    background: #5C469C;
     height: auto;
     width: 100vw;
 
@@ -81,10 +81,11 @@ footer{
 }
 
 .footer-bottom{
-    background: #000;
+    background: #5C469C;
     width: 100vw;
-    padding: 20px;
-padding-bottom: 40px;
+    padding-right: 20px;
+    padding-left: 20px;
+	padding-bottom: 40px;
     text-align: center;
 }
 .footer-bottom p{
@@ -94,7 +95,7 @@ float: left;
     text-transform: capitalize;
 }
 .footer-bottom p a{
-  color:#44bae8;
+  color:#FFFFFF;
   font-size: 16px;
   text-decoration: none;
 }
@@ -115,7 +116,7 @@ padding-right: 10px;
 display: block;
 }
 .footer-menu ul li a{
-  color: #cfd2d6;
+  color: #FFFFFF;
   text-decoration: none;
 }
 .footer-menu ul li a:hover{
@@ -133,16 +134,12 @@ display: block;
 </head>
 <body>
     <footer>
-        <div class="footer-content">
-            <h3>Developer ResumeForm</h3>
-        </div>
         <div class="footer-bottom">
             <p>23.07.06 ~ 23.07.10 &copy; <a href="./Team.jsp">Team Grow</a>  </p>
                     <div class="footer-menu">
                       <ul class="f-menu">
                         <li><a href="./index.jsp">Home</a></li>
                         <li><a href="./About.jsp">About</a></li>
-                        <li><a href="https://www.notion.so/c349cb31c03e491c8b9c53712c9348c4?v=37a86ae17dff4eb784a3e8e8e8c064df">Contact</a></li>
                         <li><a href="./Reference.jsp">Reference</a></li>
                       </ul>
                     </div>

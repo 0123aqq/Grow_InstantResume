@@ -25,21 +25,24 @@
 	rel="stylesheet">
 	
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script  src="/js/main.js"></script>
+<script  src="./js/main.js"></script>
 
 </head>
 <body>
 
-<nav class="navbar navbar-dark bg-dark fixed-top">
+<nav class="navbar bg-body-tertiary fixed-top">
   <div class="container-fluid">
-    <a class="navbar-brand" href="./index.jsp">Grow_InstantResume</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
+<nav class="navbar navbar-light fixed-top" style="background-color: #0C134F;">
+  
+    <a class="navbar-brand" href="./index.jsp" style="padding-left: 20px; color: white;">인스턴트 이력서 생성기</a>
+    
+    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation" >
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
       <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Menu</h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close" "style="filter: brightness(1000%)";></button>
       </div>
       <div class="offcanvas-body">
         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
@@ -53,7 +56,7 @@
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Reference
             </a>
-            <ul class="dropdown-menu dropdown-menu-dark">
+            <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="#">이력서폼1</a></li>
               <li><a class="dropdown-item" href="#">이력서폼2</a></li>
               <li><a class="dropdown-item" href="#">이력서폼3</a></li>
@@ -62,11 +65,13 @@
         </ul>
         <form class="d-flex mt-3" role="search">
           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-success" type="submit">Search</button>
+          <button class="btn btn-outline-success" type="submit">Search</button>
         </form>
       </div>
     </div>
+    </nav>
   </div>
 </nav>
+
 </body>
 </html>
