@@ -1,7 +1,7 @@
-function IDValidation(user_id) {
+function IDValidation(userID) {
 	  let regex = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-z]+$/;
 	  
-	  if (regex.test(user_id)){
+	  if (regex.test(userID)){
 	    $("#wrongID").hide();
 	    return true;
 	  } else {
@@ -10,10 +10,10 @@ function IDValidation(user_id) {
 	  }
 	}
 	
-function PWValidation(user_pw) {
+function PWValidation(userPW) {
 	  let regex = /^[a-zA-Z0-9]{4,20}$/;
 	  
-	  if (regex.test(user_pw)){
+	  if (regex.test(userPW)){
 	    $("#wrongPW").hide();
 	    return true;
 	  } else {
@@ -21,4 +21,16 @@ function PWValidation(user_pw) {
 	    return false;
 	  }
 	}
+
+function PWCheck() {
+	let form = document.getElementById("checkPW").closest("form");
+	let PWone = form.userPW.value;
+	let PWtwo = form.checkPW.value;
 	
+	if (PWone != PWtwo) {
+		$("#wrongPWCheck").show();
+	} else {		
+		$("#wrongPWCheck").hide();
+	}
+	
+}

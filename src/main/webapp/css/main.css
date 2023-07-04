@@ -28,6 +28,10 @@ label {
 	font-weight: bold;
 }
 
+::selection {
+	background-color: #aaa;
+}
+	
 .btn{
 	cursor: pointer;
 }
