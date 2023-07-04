@@ -1,12 +1,13 @@
 package com.instantresume;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class LoginServlet
  */
@@ -34,10 +35,36 @@ public class LoginServlet extends HttpServlet {
 		System.out.println("비밀번호:"+"user_pw");
 		
 	}
-
-	public void destroy()
 	
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    // 로그인 처리
+    String userId = request.getParameter("userId");
+    String password = request.getParameter("password");
+
+    // 예시: 사용자 아이디와 이름 정보
+    String userName = "John Doe";
+
+    if (userId.equals("yourUserId") && password.equals("yourPassword")) {
+        // 세션 생성 및 정보 저장
+        HttpSession session = request.getSession();
+        session.setAttribute("userId", userId);
+        session.setAttribute("userName", userName);
+    
+    }
+
+   response.sendRedirect("home.jsp");
+	}
+	public void destroy()
+   
 	{
 	System.out.println("destroy 메소드 호출");
 }
+
+	
+
+
+
+
+
 }
