@@ -23,10 +23,19 @@ function login() {
 		} else {
 			$(wrongPW).hide();
 			//alert(userID + " / " + userPW);
-			document.loginForm.action = "LoginServlet";
+			document.loginForm.action = "/login";
 			document.loginForm.submit();
 		}
 	}
+}
+
+<% String error = request.getParameter("error");%>
+if ("<%=error%>" == 0) {
+	alert("비밀번호가 틀렸습니다.");
+	window.location.href="/";
+} else if ("<%=error%>" == -2 ){
+	alert("가입되지 않은 아이디입니다.");
+	window.location.href="/";
 }
 </script>
 
@@ -59,7 +68,7 @@ function login() {
 				</div>
 				<div>
 					<input type="button" onClick="javascript:login();" class="btn btn-color2 rounded-pill w-50 p-2 mb-3" value="Login">
-					<input type="button" onClick="location.href='/SignUpForm.jsp'" class="btn btn-line-color2 rounded-pill w-50 p-2" value="Sign up">
+					<input type="button" onClick="location.href='/signup'" class="btn btn-line-color2 rounded-pill w-50 p-2" value="Sign up">
 				</div>
 			</form>
 		</div>

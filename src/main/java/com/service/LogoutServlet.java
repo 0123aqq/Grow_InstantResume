@@ -19,7 +19,7 @@ import javax.servlet.http.HttpSession;
  * 
  * 
  */
-@WebServlet("/LogoutServlet")
+@WebServlet("/logout")
 public class LogoutServlet extends HttpServlet {
 
 	/**
@@ -44,7 +44,7 @@ public class LogoutServlet extends HttpServlet {
 
 	session.invalidate(); // 세션 무효화
 
-	response.sendRedirect("Login.jsp"); // 로그아웃 후 로그인 페이지로 이동
+	response.sendRedirect("/"); // 로그아웃 후 로그인 페이지로 이동
 
 	}
 

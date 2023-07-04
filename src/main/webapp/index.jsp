@@ -9,9 +9,14 @@
 <%
 String userID = (String) session.getAttribute("userID");
 if (userID == null || userID.equals("")) {
-    response.sendRedirect("/Login.jsp");
+    //response.sendRedirect("Login.jsp");
+	RequestDispatcher dispatch = request.getRequestDispatcher("Login.jsp");
+	dispatch.forward(request, response);
+    
 } else {	
-    response.sendRedirect("/ResumeTemplates.jsp");
+    //response.sendRedirect("ResumeTemplates.jsp");
+	RequestDispatcher dispatch = request.getRequestDispatcher("ResumeTemplates.jsp");
+	dispatch.forward(request, response);
 }
 %>
 

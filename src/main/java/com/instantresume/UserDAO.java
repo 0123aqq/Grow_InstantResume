@@ -50,27 +50,26 @@ public class UserDAO {
 	public int login(String userID, String userPW) {
 		String SQL = "SELECT USER_PW FROM USER_DATA WHERE USER_ID = ?";
 		try {
+			conn = dataFactory.getConnection();
+
 			pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1, userID);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				if (rs.getString(1).equals(userPW)) {
-					System.out.print("login 성공");
 					return -1;
 				} else {
-					System.out.print("login 실패");
 					return 0;
 				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.out.print("login 오류 발생");
 		return -2;
 	}
 
 
-	public boolean isExisted(UserVO userVO) {
+	public boolean authenticateUser(UserVO userVO) {
 		boolean result = false;
 		String userID = userVO.getUserID();
 		String userPW = userVO.getUserPW();
