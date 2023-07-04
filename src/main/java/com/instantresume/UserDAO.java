@@ -130,7 +130,7 @@ public List<UserVO> listUsers() {
 	try {
 		conn = dataFactory.getConnection();
 
-		String query = "SELECT * order by JOIN_DATE DESC;";
+		String query = "SELECT * FROM instant_resume.user_data;";
 		System.out.println(query);
 		
 		pstmt = conn.prepareStatement(query);
@@ -138,6 +138,46 @@ public List<UserVO> listUsers() {
 
 		while (rs.next()) {
 			String userID = rs.getString("user_id");
+			String userPW = rs.getString("user_pw");
+			String userName = rs.getString("user_name");
+			String emailYN = rs.getString("EMAIL_YN");
+			String profilePic = rs.getString("profile_pic");
+			String joinDate = rs.getString("JOIN_DATE").substring(0,10);
+			
+			UserVO vo = new UserVO();
+			
+			vo.setUserID(userID);
+			vo.setUserPW(userPW);
+			vo.setUserName(userName);
+			vo.setEmailYN(emailYN);
+			vo.setProfilePic(profilePic);
+			vo.setJoinDate(joinDate);
+			
+			list.add(vo);
+		}
+		
+		rs.close();
+		pstmt.close();
+		conn.close();
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+	return list;
+}
+
+public List<UserVO> userInfo(String userID) {
+	List<UserVO> list = new ArrayList<UserVO>();
+	
+	try {
+		conn = dataFactory.getConnection();
+		
+		String query = "SELECT * FROM instant_resume.user_data where user_id = '"+userID+"';";
+		System.out.println(query);
+		
+		pstmt = conn.prepareStatement(query);
+		ResultSet rs = pstmt.executeQuery();
+		
+		while (rs.next()) {
 			String userPW = rs.getString("user_pw");
 			String userName = rs.getString("user_name");
 			String emailYN = rs.getString("EMAIL_YN");

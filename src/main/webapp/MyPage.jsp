@@ -1,4 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"%>
+<%@ page import="com.instantresume.UserDAO" %>
+<%@ page import="com.instantresume.UserVO" %>
+<%@ page import="java.util.List" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,10 +12,32 @@
 </head>
 <body>
 <h1>마이페이지</h1>
-<%String userID = (String) session.getAttribute("userID"); %>
+<%String userID = (String) session.getAttribute("userID"); 
+String userPW = null;
+String userName = null;
+String emailYN = null;
+String profilePic = null;
+String joinDate = null;
+
+UserDAO dao = new UserDAO();
+List<UserVO> vo = dao.userInfo(userID);
+
+if (vo.size() != 0) {
+    userPW = vo.get(0).getUserPW();
+    userName = vo.get(0).getUserName();
+    emailYN = vo.get(0).getEmailYN();
+    profilePic = vo.get(0).getProfilePic();
+    joinDate = vo.get(0).getJoinDate().substring(0, 10);
+} else {
+    response.sendRedirect("/");
+}
+
+%>
 
 <div class="container row-gap-3">
-<div class="center m-3"><img src="/profile/" class="m-3"><button class="btn btn-line-color2 d-block center mb-3">프로필 사진 변경</button></div>
+<div class="center m-3">
+<img src="/repo/profile/<%= profilePic %>" class="m-3" style="width: 150px;">
+<button class="btn btn-line-color2 d-block center mb-3">프로필 사진 변경</button></div>
 <hr>
 <div class="row mt-5">
 	<form name="signUpForm">
@@ -25,13 +51,19 @@
 			<div class="row">
 				<div class="col-4">Name</div>
 				<div class="col-8">
-					<input type="text" class="form-control" id="userName" value="" disabled>
+					<input type="text" class="form-control" id="userName" value="<%= userName %>" disabled>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-4">가입일</div>
+				<div class="col-8">
+					<input type="text" class="form-control" id="joinDate" value="<%= joinDate %>" disabled>
 				</div>
 			</div>
 			<div class="row" id="oldPW">
 				<div class="col-4">PW</div>
 				<div class="col-8">
-					<input type="password" class="form-control w-auto d-inline" id="userPW" name="userPW" value=""> <span class="btn btn-line-color2" onclick="javascript:checkPW();">비밀번호 변경</span>
+					<input type="password" class="form-control w-auto d-inline" id="oldPWVal" value=""> <span class="btn btn-line-color2" onclick="javascript:checkPW();">비밀번호 변경</span>
 				</div>
 			</div>
 
@@ -39,7 +71,7 @@
 			<div class="row">
 				<div class="col-4">New PW</div>
 				<div class="col-8">
-					<input type="password" class="form-control" id="newUserPW" name="new_userPW" value="">
+					<input type="password" class="form-control" id="userPW" name="userPW" value="" onInput="PWValidation(this.value); PWCheck();">
 					<span id="wrongPW" class="wrongNotice" style="display: none;">
 					<img src="./repo/exclamation-circle.svg" class="small-img"> 비밀번호는 영문, 숫자로 이루어진 4~20자리의 문자여야 합니다.</span>
 				</div>
@@ -47,7 +79,8 @@
 			<div class="row">
 				<div class="col-4">PW check</div>
 				<div class="col-8">
-					<input type="password" class="form-control" id="newCheckPW" value="">
+					<input type="password" class="form-control" id="checkPW" value="" onInput="PWCheck();">
+					<span id="wrongPWCheck" class="wrongNotice" style="display: none;"><img src="./repo/exclamation-circle.svg" class="small-img"> 비밀번호 확인이 일치하지 않습니다.</span>
 				</div>
 			</div>
 </div>
