@@ -26,7 +26,7 @@ public class LoginCheckServlet extends HttpServlet {
             session.setAttribute("username", username);
 
             // 홈 페이지로 리다이렉트합니다. (로그인 후의 이동 경로를 지정해 주세요.)
-            response.sendRedirect("home.jsp");
+            response.sendRedirect("index.jsp");
         } else {
          
         }
@@ -39,7 +39,7 @@ public class LoginCheckServlet extends HttpServlet {
             // 세션 유효 시간 설정 (예: 30분)
             session.setMaxInactiveInterval(30 * 60);
 
-            response.sendRedirect("home.jsp"); // 로그인 후 홈 페이지로 이동
+            response.sendRedirect("index.jsp"); // 로그인 후 홈 페이지로 이동
         } else {
             response.sendRedirect("login.jsp?error=1"); // 로그인 실패 시 로그인 페이지로 이동 (에러 코드 전달)
         }

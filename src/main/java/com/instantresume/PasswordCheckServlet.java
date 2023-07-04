@@ -29,7 +29,7 @@ public class PasswordCheckServlet extends HttpServlet {
 	            HttpSession session = request.getSession();
 	            session.setAttribute("username", username);
 
-	            response.sendRedirect("home.jsp");
+	            response.sendRedirect("index.jsp");
 	        } else {
 	            response.sendRedirect("login.jsp?error=1");
 	        }

@@ -126,3 +126,10 @@ label {
 	background-color: #D4ADFC;
 	border-color: #D4ADFC;
 }
+
+.wrongNotice {
+    font-size: 0.8rem;
+    margin-bottom: 10px;
+    position: relative;
+    filter: invert(36%) sepia(97%) saturate(6269%) hue-rotate(352deg) brightness(91%) contrast(130%);
+}
