@@ -215,8 +215,22 @@ function developersDiv(){
 	  newdiv.innerHTML = '<div style=\"text-align: right; margin-top:3px;\"><button onclick=\"event.currentTarget.parentNode.parentNode.remove()\" class=\"btn\"><img src=\"/repo/subtract-color-outline-icon.svg\" class=\"small-img\"> Delete Project</button></div><div class=\"row\"><div class=\"col-4\">프로젝트 종류</div><div class=\"col-8\"><select class=\"form-select\" name=\"project_type\"><option value=\"personal\">개인 프로젝트</option><option value=\"team\">팀 프로젝트</option></select></div></div><div class=\"row\"><div class=\"col-4\">프로젝트 제목</div><div class=\"col-8\"><input type=\"text\" class=\"form-control\"></div></div><div class=\"row\"><div class=\"col-4\">참여자 (기여도)</div><div class=\"col-8\"><input type=\"text\" class=\"form-control w-auto d-inline\" name=\"developer_name\"><span> (</span><input type=\"text\" class=\"form-control d-inline\" style=\"width: 80px;\" name=\"develop_ratio\"><span>%)</span></div></div><div class=\"row\"><div class=\"col-4\">수행 기간</div><div class=\"col-8\"><input type=\"date\" class=\"form-control w-auto d-inline\" name=\"start_date\"><span> ~ </span><input type=\"date\" class=\"form-control w-auto d-inline\" name=\"finish_date\"></div></div><div class=\"row\"><div class=\"col-4\">프로젝트 링크</div><div class=\"col-8\"><input type=\"text\" class=\"form-control\" name=\"project_url\"></div></div><div class=\"row\"><div class=\"col-4\">주요 기능</div><div class=\"col-8\"><input type=\"text\" class=\"form-control\" name=\"project_function\"></div></div><div class=\"row\"><div class=\"col-4\">비고</div><div class=\"col-8\"><input type=\"text\" class=\"form-control\" name=\"project_etc\"></div></div>';
 	  skill_list.appendChild(newdiv);
 	}
+  
+//수정 필요
+  function validateForm() {
+      var user_name = document.getElementById("user_name").value;
+      var user_pw = document.getElementById("user_pw").value;
 
-</script>
+      // 양식 정보를 클라이언트 측에서도 검증할 수 있습니다.
+      if (user_name === "" || user_pw === "") {
+          alert("Please fill in all fields.");
+          return false;
+      }
+      return true;
+  }
+  
+  
+  </script>
 
 
 
@@ -230,6 +244,30 @@ function developersDiv(){
 입력칸에 보유 중,공부 중,접해 봄,직접 입력 선택지 +옆에 개발언어 JAVA 등등 선택지
 
 +ResumeFormController에 연결
+ -->
+ 
+ <!-- 
+  5-1+ view 파일에 header,footer import
+ 5-2+ GRF.css 만들어서 링크 or 이 안에 css코드 넣기
+
+5-3+ GeneratedResumeController에 연결
+:생성된 이력서의 정보를 처리하고 페이지에 표시하는 
+컨트롤러 클래스입니다. 사용자가 입력한 이력서 데이터와 선택한
+ 템플릿 스타일을 렌더링하고 HTML로 출력하는 메서드를 포함합니다.
+
+
+5-4+ Projects 부분(+버튼)
+프로젝트 종류 & 옆에 선택지 창(개인 프로젝트 / 팀 프로젝트)
+프로젝트 제목 input-text
+참여자(기여도) input-text ( input-text %)
+수행 기간 input-text ~ input-text (총 #일)
+URL input-text
+주요 기능(+버튼) input-text
+비고 input-textarea
+
+
+5-5+ html형식(pdf는 되면 하기)으로 다운로드 받을 수 있게 링크
+( DownloadService에 연결 ) 
  -->
 
 	<%@ include file="/view/footer.jsp"%>

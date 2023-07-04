@@ -5,16 +5,53 @@
 <title>인스턴트 이력서 생성기 | 회원가입</title>
 <%@ include file="/view/header.jsp"%>
 
+<script>
+
+function signUp() {
+	let userID = document.signUpForm.userID.value;
+	let userPW = document.signUpForm.userPW.value;
+	
+	console.log(IDValidation());
+	if (!IDValidation(userID)){
+		alert("올바른 이메일 아이디를 입력하십시오.");
+		$(wrongID).show();
+	} else {
+		$(wrongID).hide();
+		//alert(userID);
+		if (!PWValidation(userPW)){
+			$(wrongPW).show();
+			alert("올바른 비밀번호를 입력하십시오.");
+		} else {
+			$(wrongPW).hide();
+			//alert(userPW);
+			document.loginForm.method = "post";
+			document.loginForm.action = "SignUpValicationServlet";
+			document.loginForm.submit();
+		}
+	}
+}
+
+function setEmailYN() {
+	if (document.signUpForm.emailSwitch.checked){
+		document.signUpForm.emailYN.value = "Y";
+	} else {
+		document.signUpForm.emailYN.value = "N";			
+	}
+	//console.log(document.signUpForm.emailYN.value);
+}
+
+</script>
 </head>
 <body>
 	<h1>회원가입</h1>
+    
 	<form name="signUpForm">
 		<div class="container grid w-50 gap-3" style="margin: auto;">
 			<div class="row">
 				<div class="col-4">Email ID</div>
 				<div class="col-8">
-					<input type="text" class="form-control" id="user_id" name="user_id"
-						value="">
+					<input type="text" class="form-control" id="userID" name="userID" value="" onInput="javascript:IDValidation(this.value);">
+					<span id="wrongID" class="wrongNotice" style="display: none;"><img src="./repo/exclamation-circle.svg" class="small-img"> ID는 올바른 이메일 형식을 따라야 합니다.</span>
 				</div>
 			</div>
 			<div class="row">
@@ -27,7 +64,7 @@
 			<div class="row">
 				<div class="col-4">PW</div>
 				<div class="col-8">
-					<input type="password" class="form-control" id="user_pw" name="user_pw" value="">
+					<input type="password" class="form-control" id="userPW" name="userPW" value="" onInput="javascript:PWValidation(this.value);">
 						<span id="wrongPW" class="wrongNotice" style="display: none;">
 						<img src="./repo/exclamation-circle.svg" class="small-img"> 비밀번호는 영문, 숫자로 이루어진 4~20자리의 문자여야 합니다.</span>
 				</div>
@@ -42,9 +79,8 @@
 				<div class="col-4">광고 이메일 수신</div>
 				<div class="col-8">
 					<div class="form-check form-switch">
-						<input class="form-check-input" type="checkbox" role="switch"
-							id="flexSwitchCheckChecked" style="height: 1.8rem; width: 3rem;"
-							checked> <input type="hidden" value="" name="email_YN">
+						<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" name="emailSwitch" style="height: 1.8rem; width: 3rem;" onClick="javascript:setEmailYN();" checked>
+						<input type="hidden" value="Y" id="emailYN" name="emailYN">
 					</div>
 				</div>
 			</div>
@@ -54,6 +90,9 @@
 		<button class="btn btn-color2 rounded-pill w-50 p-2 m-5"
 			style="max-width: 240px;">회원가입</button>
 	</div>
+	
+	<%@ include file="/view/footer.jsp"%>
+	
 </body>
 </html>
 <!-- 
