@@ -65,23 +65,22 @@ public class UserDAO {
 		return -2;
 	}
 
-	public boolean authenticateUser(UserVO userVO) {
-		boolean result = false;
-		String userID = userVO.getUserID();
-		String userPW = userVO.getUserPW();
+	public int isDuplicateID(String userID) {
+		int result = -1;
+		
 		try {
 			conn = dataFactory.getConnection();
 
-			String query = "select if(count(*)=1, 'true', 'false') as result from user_data" 
-			+ " where MEMBER_ID = '" + userID + "' and MEMBER_PW = '" + userPW + "';";
+			String query = "select count(*) as result from user_data" 
+			+ " where MEMBER_ID = '" + userID + "';";
 
-			System.out.println("authenticateUser query: " + query);
+			System.out.println("isDuplicateID query: " + query);
 
 			pstmt = conn.prepareStatement(query);
 			ResultSet rs = pstmt.executeQuery();
 			rs.next();
 
-			result = Boolean.parseBoolean(rs.getString("result"));
+			result = Integer.parseInt(rs.getString("result"));
 
 			rs.close();
 			pstmt.close();
@@ -93,27 +92,30 @@ public class UserDAO {
 	}
 
 	public void signUp(UserVO userVO) {
-
-		try {
-			conn = dataFactory.getConnection();
-
-			String userID = userVO.getUserID();
-			String userPW = userVO.getUserPW();
-			String userName = userVO.getUserName();
-			String emailYN = userVO.getEmailYN();
-
-			String query = "insert into user_data" + "(user_id, user_pw, user_name, email_yn) " + "values('" + userID
-					+ "','" + userPW + "','" + userName + "','" + emailYN + "');";
-
-			System.out.println("addUser(): " + query);
-
-			pstmt = conn.prepareStatement(query);
-			pstmt.executeUpdate();
-
-			pstmt.close();
-			conn.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
+		String userID = userVO.getUserID();
+		String userPW = userVO.getUserPW();
+		String userName = userVO.getUserName();
+		String emailYN = userVO.getEmailYN();
+		
+		if (userID != "" && userPW != "" && userName != "") {
+			try {
+				conn = dataFactory.getConnection();
+	
+				String query = "insert into user_data" + "(user_id, user_pw, user_name, email_yn) " + "values('" + userID
+						+ "','" + userPW + "','" + userName + "','" + emailYN + "');";
+	
+				System.out.println("addUser(): " + query);
+	
+				pstmt = conn.prepareStatement(query);
+				pstmt.executeUpdate();
+	
+				pstmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} else {
+			System.out.println("signUp 오류 발생");
 		}
 	}
 

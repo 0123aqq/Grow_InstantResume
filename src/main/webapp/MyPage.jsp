@@ -9,7 +9,11 @@
 <title>인스턴트 이력서 생성기 | 마이페이지</title>
 <%@ include file="/view/header.jsp" %>
 
+<script>
+//ajax로 프로필 사진 변경 구현
+</script>
 </head>
+
 <body>
 <h1>마이페이지</h1>
 <%String userID = (String) session.getAttribute("userID"); 
@@ -35,10 +39,15 @@ if (vo.size() != 0) {
 %>
 
 <div class="container row-gap-3">
-<div class="center m-3">
-<img src="/repo/profile/<%= profilePic %>" class="m-3" style="width: 150px;">
-<button class="btn btn-line-color2 d-block center mb-3">프로필 사진 변경</button></div>
-<hr>
+	<div class="center mb-3">
+		<img src="/repo/profile/<%= profilePic %>" class="mb-3" style="width: 150px;">
+		<div class="container w-50 mb-3">
+			<form name="updatePICForm" method="post">
+				<input type="file" accept="image/gif, image/jpeg, image/png, image/bmp, application/svg" class="form-control d-inline" style="width: 50%"> <button class="btn btn-line-color2">프로필 사진 변경</button>
+			</form>
+		</div>
+	</div>
+	<hr>
 <div class="row mt-5">
 	<form name="signUpForm">
 		<div class="container grid w-50 gap-3" style="margin: auto;">
@@ -63,7 +72,7 @@ if (vo.size() != 0) {
 			<div class="row" id="oldPW">
 				<div class="col-4">PW</div>
 				<div class="col-8">
-					<input type="password" class="form-control w-auto d-inline" id="oldPWVal" value=""> <span class="btn btn-line-color2" onclick="javascript:checkPW();">비밀번호 변경</span>
+					<input type="password" class="form-control d-inline" style="width: calc(100% - 122px)" id="oldPWVal" value=""> <span class="btn btn-line-color2" onclick="javascript:checkPW();">비밀번호 변경</span>
 				</div>
 			</div>
 

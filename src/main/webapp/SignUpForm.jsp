@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,24 +11,48 @@
 function signUp() {
 	let userID = document.signUpForm.userID.value;
 	let userPW = document.signUpForm.userPW.value;
-	
-	if (!IDValidation(userID)){
-		alert("올바른 이메일 아이디를 입력하십시오.");
-		$(wrongID).show();
-	} else {
-		$(wrongID).hide();
-		//alert(userID);
-		if (!PWValidation(userPW)){
-			$(wrongPW).show();
-			alert("올바른 비밀번호를 입력하십시오.");
-		} else {
-			$(wrongPW).hide();
-			//alert(userPW);
-			document.signUpForm.method = "post";
-			document.signUpForm.action = "signup";
-			document.signUpForm.submit();
-		}
+		
+	switch(true) {
+	  case !IDValidation(userID):
+	    alert("올바른 이메일 아이디를 입력하십시오.");
+	    $("#wrongID").show();
+	    setTimeout(function () { $("#userID").focus(); }, 100);
+	    break;
+	    
+	  case !(document.signUpForm.userID.readOnly):
+	    alert("이메일 중복확인이 필요합니다.");
+	    setTimeout(function () { $("#duplicateID").focus(); }, 100);
+	    break;
+
+	  case $("#userName").val().length < 2:
+	    alert("이름을 입력하십시오.");
+	    setTimeout(function () { $("#userName").focus(); }, 100);
+	    break;
+
+	  case !PWValidation(userPW):
+	    $("#wrongPW").show();
+	    alert("올바른 비밀번호를 입력하십시오.");
+	    setTimeout(function () { $("#userPW").focus(); }, 100);
+	    break;
+
+	  case !PWCheck():
+	    $("#wrongPWCheck").show();
+	    alert("비밀번호 확인이 일치하지 않습니다.");
+	    setTimeout(function () { $("#checkPW").focus(); }, 100);
+	    break;
+
+	  case IDValidation(userID) && (document.signUpForm.userID.readOnly) && ($("#userName").val().length >= 2) && PWValidation(userPW) && PWCheck():
+		$("#wrongID").hide();
+	    $("#wrongPWCheck").hide();
+	    document.signUpForm.method = "post";
+	    document.signUpForm.action = "signup";
+	    document.signUpForm.submit();
+	    break;
+
+	  default:
+		alert("오류가 발생했습니다.");
 	}
+
 }
 
 function setEmailYN() {
@@ -37,6 +62,39 @@ function setEmailYN() {
 		document.signUpForm.emailYN.value = "N";			
 	}
 	//console.log(document.signUpForm.emailYN.value);
+}
+
+function duplicateID() {
+	let userID = $("#userID").val();
+	
+	if (!IDValidation(userID)){
+	    alert("올바른 이메일 아이디를 입력하십시오.");
+	    $("#wrongID").show();
+	    setTimeout(function () { $("#userID").focus(); }, 100);
+	} else {
+		 $.ajax({
+		        type: "post",
+		        async: false,
+		        url: "EmailValidationServletDTO",
+		        dataType: "json",
+		        data: {email: userID},
+		        success: function(data, textStatus) {
+		            if (data.isEmailDuplicate == 'false') {
+		                alert("사용할 수 있는 ID입니다.");
+		                $("#userID").prop("readonly", true);
+		            } else {
+		                alert("사용할 수 없는 ID입니다.");
+		        	    setTimeout(function () { $("#userID").focus(); }, 100);
+		            }
+		        },
+		        error: function(data, textStatus) {
+		            alert("오류가 발생했습니다.");
+		        },
+		        complete: function(data, textStatus) {
+		        }
+		    });
+	}
+	
 }
 
 </script>
@@ -52,7 +110,8 @@ function setEmailYN() {
 			<div class="row">
 				<div class="col-4">Email ID</div>
 				<div class="col-8">
-					<input type="text" class="form-control" id="userID" name="userID" value="" onInput="javascript:IDValidation(this.value);">
+<input type="text" class="form-control" id="userID" name="userID" value="" onInput="javascript:IDValidation(this.value);" style="width: calc(100% - 96px); display: inline;">
+<span class="btn btn-line-color2" id="duplicateID" onclick="javascript:duplicateID(this.value);">중복확인</span>
 					<span id="wrongID" class="wrongNotice" style="display: none;"><img src="./repo/exclamation-circle.svg" class="small-img"> ID는 올바른 이메일 형식을 따라야 합니다.</span>
 				</div>
 			</div>

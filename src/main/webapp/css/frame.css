@@ -1,32 +1,5 @@
 
-#header {
-	width: 100%;
-	margin: 0px !important;
-	height: 80px;
-	color: white;
-	background: linear-gradient(135deg, rgba(20,108,148,1) 0%, rgba(25,167,206,1) 30%, rgba(177,224,237,1) 100%);
-	position: sticky;
-	top: 0;
-	box-shadow: 0px 3px 10px rgb(0,0,0,0.3);
-	filter: opacity(0.8);
-}
-
-#header:hover{
-	animation: opacity 0.3s forwards;
-}
-
-@keyframes opacity{
-	0%{filter: opacity(0.8);}
-	100%{filter: opacity(1.0);}
-}
-
-body {
-	background-color: #fefefe;
-	color: #333;
-	margin: 0px;
-}
-
-nav {
+sidebar {
 	border-radius: 20px;
 	background: rgb(255 255 255 / 30%);
 	border: 1px solid #1D267D;
@@ -51,15 +24,6 @@ div[id="about"] .container {
 	display: grid;
 	grid-template-columns: 160px auto;
 }
-
-footer {
-	background: #1D267D;
-	color: white;
-	text-align: center;
-	height: 120px;
-	padding-block-start: 34px;
-}
-
 
 /** 반응형 웹 구현 **/
 

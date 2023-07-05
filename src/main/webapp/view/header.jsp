@@ -49,7 +49,7 @@ font-size: 20px;
   <div class="container-fluid">
     <nav class="navbar navbar-light fixed-top" style="background-color: #0C134F;">
   
-      <a class="navbar-brand" href="/" style="padding-left: 20px; color: white;">인스턴트 이력서 생성기</a>
+      <a class="navbar-brand" href="./" style="padding-left: 20px; color: white;">인스턴트 이력서 생성기</a>
     
       <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation" >
         <span class="navbar-toggler-icon"></span>

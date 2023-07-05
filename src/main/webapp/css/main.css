@@ -1,22 +1,14 @@
 @charset "UTF-8";
 
 body {
-	padding: 0px 80px;
-	font-family: 'Noto Sans', sans-serif;
-	font-family: 'Noto Sans KR', sans-serif;
+	padding: 100px 80px;
+	background-color: #fefefe;
+	font-family: 'Noto Sans', 'Noto Sans KR'!important;
 }
 
 a {
 	color: #1D267D;
 	word-wrap: break-word;
-}
-
-a:hover{
-	filter: brightness(180%);
-}
-
-h1{
-	padding-top: 100px;
 }
 
 hr {

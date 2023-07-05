@@ -1,4 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"%>
+<%@ page import="com.instantresume.UserDAO" %>
+<%@ page import="com.instantresume.UserVO" %>
+<%@ page import="java.util.List" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,15 +23,28 @@
 	background-color: #ff000050;
 	color: #aaa;
 }
-body {
-   padding-top: 30px; /* 헤더때문에 내용이 잘려서 여백 추가 */
-   padding-bottom: 100px; /* 푸터때문에 내용이 잘려서 여백 추가 */
-   }
 </style>
 </head>
 <body>
 	<h1>이력서 양식 01 </h1>
 <br>
+
+<%String userID = (String) session.getAttribute("userID"); 
+String userName = null;
+String profilePic = null;
+
+UserDAO dao = new UserDAO();
+List<UserVO> vo = dao.userInfo(userID);
+
+if (vo.size() != 0) {
+    userName = vo.get(0).getUserName();
+    profilePic = vo.get(0).getProfilePic();
+} else {
+    response.sendRedirect("/");
+}
+
+%>
+
 	<form name="ResumeForm01">
 		<div class="container grid gap-5" style="grid-template-columns: 1fr 1fr;" id="resumeFormDiv">
 			
@@ -38,40 +55,40 @@ body {
 				<div class="row">
 					<div class="col-4">Name</div>
 					<div class="col-8">
-						<input type="text" class="form-control" id="user_name"
-							name="user_name" value="" readonly>
+						<input type="text" class="form-control" id="userName"
+							name="userName" value="<%=userName %>" readonly>
 					</div>
 				</div>
 
 				<div class="row">
 					<div class="col-4">Email</div>
 					<div class="col-8">
-						<input type="text" class="form-control" id="user_id"
-							name="user_id" value="" readonly>
+						<input type="text" class="form-control" id="userID"
+							name="userID" value="<%=userID %>" readonly>
 					</div>
 				</div>
 
 				<div class="row">
 					<div class="col-4">프로필 사진</div>
 					<div class="col-8">
-						<input type="file" class="form-control" id="profile_picture"
-							name="profile_picture" value="">
+						<input type="file" class="form-control" id="profilePic"
+							name="profilePic" value="<%=profilePic %>">
 					</div>
 				</div>
 
 				<div class="row">
 					<div class="col-4">한 줄 자기소개</div>
 					<div class="col-8">
-						<input type="text" class="form-control" id="user_introduction"
-							name="user_introduction" value="">
+						<input type="text" class="form-control" id="introduction"
+							name="introduction" value="">
 					</div>
 				</div>
 
 				<div class="row">
 					<div class="col-4">GitHub Link</div>
 					<div class="col-8">
-						<input type="text" class="form-control" id="user_github"
-							name="user_github" value="">
+						<input type="text" class="form-control" id="githubLink"
+							name="githubLink" value="">
 					</div>
 				</div>
 			</div>
@@ -95,7 +112,7 @@ body {
 					</select> 
 					
 					<input class="form-control w-auto d-inline" style="display: none;" id="skillInput" type="text" onkeydown="addSkill(event)">
-					<div id="skill_list"></div>
+					<div id="skillList"></div>
 				</div>
 				<hr>
 			</div>
@@ -108,7 +125,7 @@ body {
 			<div class="row">
 				<div class="col-4">프로젝트 종류</div>
 				<div class="col-8">
-				<select class="form-select" name="project_type" id="project_type" onchange="javascript:developersDiv();">
+				<select class="form-select" name="projectType" id="projectType" onchange="javascript:developersDiv();">
 					<option value="personal">개인 프로젝트</option>
 					<option value="team">팀 프로젝트</option>
 				</select>
@@ -120,33 +137,33 @@ body {
 			</div>
 			<div class="row" id="projectPersonalDiv">
 				<div class="col-4">참여자 (기여도)</div>
-				<div class="col-8"><input type="text" class="form-control w-auto d-inline" name="developer_name">
-				<span> (</span><input type="text" class="form-control d-inline" style="width: 80px;" name="develop_ratio" value="100" readonly><span>%)</span></div>
+				<div class="col-8"><input type="text" class="form-control w-auto d-inline" name="developerName">
+				<span> (</span><input type="text" class="form-control d-inline" style="width: 80px;" name="partRatio" value="100" readonly><span>%)</span></div>
 			</div>
 			<div class="row" id="projectTeamDiv" style="display: none;">
 				<div class="col-4">참여자 (기여도) <img src="/repo/addition-color-icon.svg" class="small-img btn" onclick="javascript:addDeveloper();"></div>
 				<div class="col-8" id="developerList">
 				<div>
-				<input type="text" class="form-control w-auto d-inline" name="developer_name">
-				<span> (</span><input type="text" class="form-control d-inline" style="width: 80px;" name="develop_ratio"><span>%)</span></div>
+				<input type="text" class="form-control w-auto d-inline" name="developerName">
+				<span> (</span><input type="text" class="form-control d-inline" style="width: 80px;" name="partRatio"><span>%)</span></div>
 			</div>
 			</div>
 			<div class="row">
 				<div class="col-4">수행 기간</div>
-				<div class="col-8"><input type="date" class="form-control w-auto d-inline" name="start_date">
-				<span> ~ </span><input type="date" class="form-control w-auto d-inline" name="finish_date"></div>
+				<div class="col-8"><input type="date" class="form-control w-auto d-inline" name="startDate">
+				<span> ~ </span><input type="date" class="form-control w-auto d-inline" name="finishDate"></div>
 			</div>
 			<div class="row">
 				<div class="col-4">프로젝트 링크</div>
-				<div class="col-8"><input type="text" class="form-control" name="project_url"></div>
+				<div class="col-8"><input type="text" class="form-control" name="projectUrl"></div>
 			</div>
 			<div class="row">
 				<div class="col-4">주요 기능</div>
-				<div class="col-8"><input type="text" class="form-control" name="project_function"></div>
+				<div class="col-8"><input type="text" class="form-control" name="projectFunction"></div>
 			</div>
 			<div class="row">
 				<div class="col-4">비고</div>
-				<div class="col-8"><input type="text" class="form-control" name="project_etc"></div>
+				<div class="col-8"><input type="text" class="form-control" name="projectEtc"></div>
 			</div>
 			
 			</div>
@@ -167,7 +184,7 @@ function skillSelectInput(){
 }
 
 function developersDiv(){
-	if ($("#project_type").val() == "team"){
+	if ($("#projectType").val() == "team"){
 		$("#projectPersonalDiv").hide();
 		$("#projectTeamDiv").show();
 	} else{
@@ -181,52 +198,52 @@ function developersDiv(){
       event.preventDefault();
       var inputText = document.getElementById("skillInput").value.trim();
       if (inputText !== "") {
-        var skill_list = document.getElementById("skill_list");
+        var skillList = document.getElementById("skillList");
         var newdiv = document.createElement("div");
         newdiv.classList.add("skillBox");
         newdiv.classList.add("form-control");
         newdiv.onclick = function(event) { event.currentTarget.remove(); };
         newdiv.innerHTML = inputText;
-        skill_list.appendChild(newdiv);
+        skillList.appendChild(newdiv);
       }
       document.getElementById("skillInput").value = "";
     }
   }
   
   function addSkillSet(event) {
-	  var skill_list = document.getElementById("skillsDiv");
+	  var skillList = document.getElementById("skillsDiv");
 	  var newdiv = document.createElement("div");
 	  newdiv.classList.add("row");
 	  newdiv.style.borderBottom = "1px solid #ccc";
 	  newdiv.style.paddingBottom = "1.05rem";
-	  newdiv.innerHTML = '<select class="form-select w-auto d-inline"><option value="having">보유 중</option><option value="studying">공부 중</option><option value="experienced">접해 봄</option><option value="input">직접 입력</option></select><select class="form-select w-auto d-inline" id="skillSelect" onChange="javascript:skillSelectInput();"><option value="JAVA">JAVA</option><option value="Python">Python</option><option value="C++">C++</option><option value="input">직접 입력</option></select> <input class="form-control w-auto d-inline" style="display: none;" id="skillInput" type="text" onkeydown="addSkill(event)"> <img src="/repo/subtract-color-outline-icon.svg" class="small-img btn" onclick="event.currentTarget.parentNode.remove()" /><div id="skill_list"></div>';
-	  skill_list.appendChild(newdiv);
+	  newdiv.innerHTML = '<select class="form-select w-auto d-inline"><option value="having">보유 중</option><option value="studying">공부 중</option><option value="experienced">접해 봄</option><option value="input">직접 입력</option></select><select class="form-select w-auto d-inline" id="skillSelect" onChange="javascript:skillSelectInput();"><option value="JAVA">JAVA</option><option value="Python">Python</option><option value="C++">C++</option><option value="input">직접 입력</option></select> <input class="form-control w-auto d-inline" style="display: none;" id="skillInput" type="text" onkeydown="addSkill(event)"> <img src="/repo/subtract-color-outline-icon.svg" class="small-img btn" onclick="event.currentTarget.parentNode.remove()" /><div id="skillList"></div>';
+	  skillList.appendChild(newdiv);
 	}
   
   function addDeveloper(event) {
-	  var skill_list = document.getElementById("developerList");
+	  var skillList = document.getElementById("developerList");
 	  var newdiv = document.createElement("div");
 	  newdiv.classList.add("mt-1");
-	  newdiv.innerHTML = '<input type=\"text\" class=\"form-control w-auto d-inline\" name=\"developer_name\"><span> (</span><input type=\"text\" class=\"form-control d-inline\" style=\"width: 80px;\" name=\"develop_ratio\"><span>%) </span> <img src=\"/repo/subtract-color-outline-icon.svg\" class=\"small-img btn\" onclick=\"event.currentTarget.parentNode.remove()\">';
-	  skill_list.appendChild(newdiv);
+	  newdiv.innerHTML = '<input type=\"text\" class=\"form-control w-auto d-inline\" name=\"developerName\"><span> (</span><input type=\"text\" class=\"form-control d-inline\" style=\"width: 80px;\" name=\"partRatio\"><span>%) </span> <img src=\"/repo/subtract-color-outline-icon.svg\" class=\"small-img btn\" onclick=\"event.currentTarget.parentNode.remove()\">';
+	  skillList.appendChild(newdiv);
 	}
   
   function addProject(event) {
-	  var skill_list = document.getElementById("resumeFormDiv");
+	  var skillList = document.getElementById("resumeFormDiv");
 	  var newdiv = document.createElement("div");
 	  newdiv.classList.add("grid");
 	  newdiv.classList.add("row-gap-3");
-	  newdiv.innerHTML = '<div style=\"text-align: right; margin-top:3px;\"><button onclick=\"event.currentTarget.parentNode.parentNode.remove()\" class=\"btn\"><img src=\"/repo/subtract-color-outline-icon.svg\" class=\"small-img\"> Delete Project</button></div><div class=\"row\"><div class=\"col-4\">프로젝트 종류</div><div class=\"col-8\"><select class=\"form-select\" name=\"project_type\"><option value=\"personal\">개인 프로젝트</option><option value=\"team\">팀 프로젝트</option></select></div></div><div class=\"row\"><div class=\"col-4\">프로젝트 제목</div><div class=\"col-8\"><input type=\"text\" class=\"form-control\"></div></div><div class=\"row\"><div class=\"col-4\">참여자 (기여도)</div><div class=\"col-8\"><input type=\"text\" class=\"form-control w-auto d-inline\" name=\"developer_name\"><span> (</span><input type=\"text\" class=\"form-control d-inline\" style=\"width: 80px;\" name=\"develop_ratio\"><span>%)</span></div></div><div class=\"row\"><div class=\"col-4\">수행 기간</div><div class=\"col-8\"><input type=\"date\" class=\"form-control w-auto d-inline\" name=\"start_date\"><span> ~ </span><input type=\"date\" class=\"form-control w-auto d-inline\" name=\"finish_date\"></div></div><div class=\"row\"><div class=\"col-4\">프로젝트 링크</div><div class=\"col-8\"><input type=\"text\" class=\"form-control\" name=\"project_url\"></div></div><div class=\"row\"><div class=\"col-4\">주요 기능</div><div class=\"col-8\"><input type=\"text\" class=\"form-control\" name=\"project_function\"></div></div><div class=\"row\"><div class=\"col-4\">비고</div><div class=\"col-8\"><input type=\"text\" class=\"form-control\" name=\"project_etc\"></div></div>';
-	  skill_list.appendChild(newdiv);
+	  newdiv.innerHTML = '<div style=\"text-align: right; margin-top:3px;\"><button onclick=\"event.currentTarget.parentNode.parentNode.remove()\" class=\"btn\"><img src=\"/repo/subtract-color-outline-icon.svg\" class=\"small-img\"> Delete Project</button></div><div class=\"row\"><div class=\"col-4\">프로젝트 종류</div><div class=\"col-8\"><select class=\"form-select\" name=\"projectType\"><option value=\"personal\">개인 프로젝트</option><option value=\"team\">팀 프로젝트</option></select></div></div><div class=\"row\"><div class=\"col-4\">프로젝트 제목</div><div class=\"col-8\"><input type=\"text\" class=\"form-control\"></div></div><div class=\"row\"><div class=\"col-4\">참여자 (기여도)</div><div class=\"col-8\"><input type=\"text\" class=\"form-control w-auto d-inline\" name=\"developerName\"><span> (</span><input type=\"text\" class=\"form-control d-inline\" style=\"width: 80px;\" name=\"partRatio\"><span>%)</span></div></div><div class=\"row\"><div class=\"col-4\">수행 기간</div><div class=\"col-8\"><input type=\"date\" class=\"form-control w-auto d-inline\" name=\"startDate\"><span> ~ </span><input type=\"date\" class=\"form-control w-auto d-inline\" name=\"finishDate\"></div></div><div class=\"row\"><div class=\"col-4\">프로젝트 링크</div><div class=\"col-8\"><input type=\"text\" class=\"form-control\" name=\"projectUrl\"></div></div><div class=\"row\"><div class=\"col-4\">주요 기능</div><div class=\"col-8\"><input type=\"text\" class=\"form-control\" name=\"projectFunction\"></div></div><div class=\"row\"><div class=\"col-4\">비고</div><div class=\"col-8\"><input type=\"text\" class=\"form-control\" name=\"projectEtc\"></div></div>';
+	  skillList.appendChild(newdiv);
 	}
   
 //수정 필요
   function validateForm() {
-      var user_name = document.getElementById("user_name").value;
+      var userName = document.getElementById("userName").value;
       var user_pw = document.getElementById("user_pw").value;
 
       // 양식 정보를 클라이언트 측에서도 검증할 수 있습니다.
-      if (user_name === "" || user_pw === "") {
+      if (userName === "" || user_pw === "") {
           alert("Please fill in all fields.");
           return false;
       }

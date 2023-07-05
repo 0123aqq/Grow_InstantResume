@@ -26,7 +26,7 @@ public class SignUpServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	doHandle(request, response);
+		doHandle(request, response);
 	}
 	
 	protected void doHandle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
@@ -36,12 +36,13 @@ public class SignUpServlet extends HttpServlet {
 		UserDAO dao = new UserDAO();
 		String command = request.getParameter("command");
 
-		if (command != null && command.equals("signup")) {
-			// 가입 동작
-			String userID = (String) request.getParameter("userID");
-			String userPW = (String) request.getParameter("userPW");
-			String userName = (String) request.getParameter("userName");
-			String emailYN = (String) request.getParameter("emailYN");
+		String userID = (String) request.getParameter("userID");
+		String userPW = (String) request.getParameter("userPW");
+		String userName = (String) request.getParameter("userName");
+		String emailYN = (String) request.getParameter("emailYN");
+
+		if (command != null && command.equals("signup") && userID != "" && userPW != "" && userName != "") {
+			// 데이터에 문제가 없을 때만 가입 동작 실행
 
 			// setter 호출
 			UserVO vo = new UserVO();
@@ -59,7 +60,7 @@ public class SignUpServlet extends HttpServlet {
 			writer.println("<script>alert('"+userID+"님의 회원가입이 완료되었습니다.'); location.href='/';</script>"); 
 			writer.close();
 
-		} else {
+		} else { // 메인에서 회원가입에 접근했을 때, 또는 정상적으로 form을 제출하지 않았을 때 (command == null) 회원가입 form을 띄우는 역할
 			RequestDispatcher dispatch = request.getRequestDispatcher("/SignUpForm.jsp");
 			dispatch.forward(request, response);
 		}

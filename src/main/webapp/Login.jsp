@@ -45,14 +45,14 @@ if ("<%=error%>" == 0) {
 }
 </style>
 </head>
-<body style="padding-top: 100px;">
+<body>
 	<div class="row">
 		<div class="col-7 p-5 center">
 			<img src="./repo/main-gradation.svg">
 		</div>
 		<div class="col-5 center">
 		<div class="center w-75">
-			<form name = "loginForm" method="post">
+			<form name = "loginForm" method="post" onSubmit="return login();">
 				<div class="form-floating mb-3" style="border-bottom: 1px solid #ccc;">
 					<input type="email" class="form-control border-none" id="floatingInput" placeholder=" " name="userID" onInput="javascript:IDValidation(this.value);"> 
 					<label for="floatingInput" style="color: #ccc;"><img src="./repo/person-fill.svg" class="loginform-img"> Email ID</label>
@@ -68,7 +68,7 @@ if ("<%=error%>" == 0) {
 				</div>
 				<div>
 					<input type="button" onClick="javascript:login();" class="btn btn-color2 rounded-pill w-50 p-2 mb-3" value="Login">
-					<input type="button" onClick="location.href='/signup'" class="btn btn-line-color2 rounded-pill w-50 p-2" value="Sign up">
+					<span onClick="location.href='/signup'" class="btn btn-line-color2 rounded-pill w-50 p-2">Sign up</span>
 				</div>
 			</form>
 		</div>

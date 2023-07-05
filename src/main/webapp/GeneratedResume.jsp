@@ -28,11 +28,7 @@ h2 {
 div[id="projects"] img{
 	margin: 0px 0px 5px 5px;
 }
-body {
-   padding-top: 100px; /* 헤더때문에 내용이 잘려서 여백 추가 */
-   padding-bottom: 100px; /* 푸터때문에 내용이 잘려서 여백 추가 */
-   } 
-   
+
 </style>
 
 </head>
@@ -40,7 +36,7 @@ body {
 <body>
 
 	<div id="realbody">
-		<nav>
+		<sidebar>
 			<h4 style="padding: 15px 0px 0px 10px">📑목차</h4>
 			<hr>
 			<ol>
@@ -48,7 +44,7 @@ body {
 				<li><a href="#skills">보유 기술</a><br></li>
 				<li><a href="#projects">수행 프로젝트</a><br></li>
 			</ol>
-		</nav>
+		</sidebar>
 
 		<div id="contents">
 			<div id="about">
