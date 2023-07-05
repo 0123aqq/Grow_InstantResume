@@ -1,4 +1,4 @@
-package com.instantresume;
+package com.validation;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
