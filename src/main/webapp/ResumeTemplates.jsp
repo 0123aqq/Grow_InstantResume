@@ -1,22 +1,57 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<title>인스턴트 이력서 생성기 | 이력서 양식 선택</title>
-<%@ include file="/view/header.jsp" %>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>인스턴트 이력서 생성기 | Reference</title>
 
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+  </head>
+<%@include file="/view/header.jsp" %>
+<style>
+body {
+   padding-top: 200px; /* 간격 맞추기 */
+   padding-bottom: 200px; /* 간격 맞추기 */
+   padding-right: 10px; /* 간격 맞추기 */
+   padding-left: 10px; /* 간격 맞추기 */
+   }
+</style>
 </head>
+
+
 <body>
-<h1>이력서 생성하기</h1>
+<div class="card-group">
+  <div class="card">
+        <a href="./GeneratedResume.jsp">
+    <img src="./repo/resume1.svg" class="card-img-top" alt="..."></a>
+    <div class="card-body">
+      <h5 class="card-title">이력서 양식1 : </h5>
+      <p class="card-text"> 자기소개 / 보유 기술 / 수행 프로젝트 등 기재 가능 </p>
+      <p class="card-text"><small class="text-body-secondary"> 프로젝트에 대한 자세한 설명으로 포트폴리오 작성에 도움이 되는 이력서 </small></p>
+    </div>
+  </div>
+  <div class="card">
+    <img src="..." class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">이력서 양식2 : </h5>
+      <p class="card-text">이력서 양식2 설명</p>
+      <p class="card-text"><small class="text-body-secondary">이력서 양식2 부가설명</small></p>
+    </div>
+  </div>
+  <div class="card">
+    <img src="..." class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">이력서 양식3 : </h5>
+      <p class="card-text">이력서 양식3 설명</p>
+      <p class="card-text"><small class="text-body-secondary">이력서 양식3 부가설명</small></p>
+    </div>
+  </div>
+</div>
 
-<!-- 
- 3-1+ view 파일에 header,footer import
- 3-2+RT.css 만들어서 링크 or 이 안에 css코드 넣기
- 
- ResumeTemplatesCon에 연결
- -->
-
-<%@ include file="/view/footer.jsp" %>
-
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+<%@include file="/view/footer.jsp" %>
 </body>
+
+
 </html>

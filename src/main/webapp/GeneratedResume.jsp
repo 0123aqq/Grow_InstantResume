@@ -28,6 +28,11 @@ h2 {
 div[id="projects"] img{
 	margin: 0px 0px 5px 5px;
 }
+body {
+   padding-top: 100px; /* 헤더때문에 내용이 잘려서 여백 추가 */
+   padding-bottom: 100px; /* 푸터때문에 내용이 잘려서 여백 추가 */
+   } 
+   
 </style>
 
 </head>
@@ -177,5 +182,5 @@ div[id="projects"] img{
 	</div>
 	<br>
 	<br>
-
+<%@include file="/view/footer.jsp" %>
 </body></html>

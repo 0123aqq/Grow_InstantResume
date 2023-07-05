@@ -6,15 +6,21 @@
 <title>인스턴트 이력서 생성기 | About</title>
 
 <%@include file="/view/header.jsp" %>
+<style>
+   .main-content {
+      padding-bottom: 100px; /* footer때문에 내용이 잘려서 바닥에 여백 추가 */
+   }
+</style>
 </head>
 <body>
-	<div class="row row-gap-5">
-<div>
-	<h1>About</h1>
-</div>
-	<div class="center w-50">
-	<img src="./repo/main.svg">
-	</div>
+	<!-- 여기에 main-content 클래스를 추가함(내용 잘림 방지) -->
+	<div class="row row-gap-5 main-content">
+		<div>
+			<h1>About</h1>
+		</div>
+		<div class="center w-50">
+			<img src="./repo/main.svg">
+		</div>
 		<div>
 			<h2>개발자를 위한 이력서 자동생성 서비스</h2>
 			<br>

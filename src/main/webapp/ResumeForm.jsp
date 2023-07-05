@@ -19,11 +19,15 @@
 	background-color: #ff000050;
 	color: #aaa;
 }
+body {
+   padding-top: 30px; /* 헤더때문에 내용이 잘려서 여백 추가 */
+   padding-bottom: 100px; /* 푸터때문에 내용이 잘려서 여백 추가 */
+   }
 </style>
 </head>
 <body>
-	<h1>이력서 양식 01</h1>
-
+	<h1>이력서 양식 01 </h1>
+<br>
 	<form name="ResumeForm01">
 		<div class="container grid gap-5" style="grid-template-columns: 1fr 1fr;" id="resumeFormDiv">
 			

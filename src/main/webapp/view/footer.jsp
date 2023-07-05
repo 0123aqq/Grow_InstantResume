@@ -18,7 +18,7 @@ body{
     font-family: sans-serif;
 }
 footer{
-    position: absolute;
+    position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
@@ -138,7 +138,7 @@ display: block;
             <p>23.07.06 ~ 23.07.10 &copy; <a href="./Team.jsp">Team Grow</a>  </p>
                     <div class="footer-menu">
                       <ul class="f-menu">
-                        <li><a href="./index.jsp">Home</a></li>
+                        <li><a href="./Login.jsp">Home</a></li>
                         <li><a href="./About.jsp">About</a></li>
                         <li><a href="./Reference.jsp">Reference</a></li>
                       </ul>
