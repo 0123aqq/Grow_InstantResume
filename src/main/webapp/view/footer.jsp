@@ -139,8 +139,8 @@ display: block;
                     <div class="footer-menu">
                       <ul class="f-menu">
                         <li><a href="/">Home</a></li>
-                        <li><a href="about">About</a></li>
-                        <li><a href="reference">Reference</a></li>
+                        <li><a href="/About.jsp">About</a></li>
+                        <li><a href="/Reference.jsp">Reference</a></li>
                       </ul>
                     </div>
         </div>
