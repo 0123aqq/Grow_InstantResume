@@ -135,12 +135,12 @@ display: block;
 <body>
     <footer>
         <div class="footer-bottom">
-            <p>23.07.06 ~ 23.07.10 &copy; <a href="./Team.jsp">Team Grow</a>  </p>
+            <p>23.07.06 ~ 23.07.10 &copy; <a href="team">Team Grow</a>  </p>
                     <div class="footer-menu">
                       <ul class="f-menu">
-                        <li><a href="./Login.jsp">Home</a></li>
-                        <li><a href="./About.jsp">About</a></li>
-                        <li><a href="./Reference.jsp">Reference</a></li>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="about">About</a></li>
+                        <li><a href="reference">Reference</a></li>
                       </ul>
                     </div>
         </div>

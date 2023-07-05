@@ -21,13 +21,10 @@ import java.util.ArrayList;
 /**
  * 회원 관련 CRUD 작업을 수행하는 메서드를 구현하여 데이터베이스와의 연동을 처리
  * 
- * [1]회원가입시 정보 저장(회원가입 요청시 사용자 정보를 데이터베이스에 저장하는 메서드 구현)
- * [2]회원정보 조회시 아이디, 비밀번호, 이름, 이메일 등의 사용자 정보와 관련된 메서드를 포함합니다.
- * [3]회원정보 수정
-[4] 회원탈퇴
-4-1비밀번호 동일 값 입력하면 : 사용자에게 정말 탈퇴하시겠습니까? alert 띄우고 
-동의하면 탈퇴 진행
-4-2비밀번호 틀리면 : 비밀번호와 일치하지 않습니다. 메시지 출력 후 다시 입력 요청
+ * [1]회원가입시 정보 저장(회원가입 요청시 사용자 정보를 데이터베이스에 저장하는 메서드 구현) [2]회원정보 조회시 아이디, 비밀번호,
+ * 이름, 이메일 등의 사용자 정보와 관련된 메서드를 포함합니다. [3]회원정보 수정 [4] 회원탈퇴 4-1비밀번호 동일 값 입력하면 :
+ * 사용자에게 정말 탈퇴하시겠습니까? alert 띄우고 동의하면 탈퇴 진행 4-2비밀번호 틀리면 : 비밀번호와 일치하지 않습니다. 메시지 출력
+ * 후 다시 입력 요청
  */
 
 public class UserDAO {
@@ -68,23 +65,22 @@ public class UserDAO {
 		return -2;
 	}
 
-
 	public boolean authenticateUser(UserVO userVO) {
 		boolean result = false;
 		String userID = userVO.getUserID();
 		String userPW = userVO.getUserPW();
 		try {
 			conn = dataFactory.getConnection();
-			
-			String query = "select if(count(*)=1, 'true', 'false') as result from user_data"
-					+ " where MEMBER_ID = '"+userID+"' and MEMBER_PW = '"+userPW+"';";
-			
-			System.out.println("isExisted query: "+query);
-			
+
+			String query = "select if(count(*)=1, 'true', 'false') as result from user_data" 
+			+ " where MEMBER_ID = '" + userID + "' and MEMBER_PW = '" + userPW + "';";
+
+			System.out.println("authenticateUser query: " + query);
+
 			pstmt = conn.prepareStatement(query);
 			ResultSet rs = pstmt.executeQuery();
 			rs.next();
-			
+
 			result = Boolean.parseBoolean(rs.getString("result"));
 
 			rs.close();
@@ -96,24 +92,21 @@ public class UserDAO {
 		return result;
 	}
 
-	
-public void signUp(UserVO userVO) {
-		
+	public void signUp(UserVO userVO) {
+
 		try {
 			conn = dataFactory.getConnection();
-			
+
 			String userID = userVO.getUserID();
 			String userPW = userVO.getUserPW();
 			String userName = userVO.getUserName();
 			String emailYN = userVO.getEmailYN();
-			
-			String query = "insert into user_data"+
-					"(user_id, user_pw, user_name, email_yn) "+
-					"values('"
-					+userID+"','"+userPW+"','"+userName+"','"+emailYN+"');";
-			
-			System.out.println("addUser(): "+query);
-			
+
+			String query = "insert into user_data" + "(user_id, user_pw, user_name, email_yn) " + "values('" + userID
+					+ "','" + userPW + "','" + userName + "','" + emailYN + "');";
+
+			System.out.println("addUser(): " + query);
+
 			pstmt = conn.prepareStatement(query);
 			pstmt.executeUpdate();
 
@@ -124,85 +117,85 @@ public void signUp(UserVO userVO) {
 		}
 	}
 
-public List<UserVO> listUsers() {
-	List<UserVO> list = new ArrayList<UserVO>();
-	
-	try {
-		conn = dataFactory.getConnection();
+	public List<UserVO> listUsers() {
+		List<UserVO> list = new ArrayList<UserVO>();
 
-		String query = "SELECT * FROM instant_resume.user_data;";
-		System.out.println(query);
-		
-		pstmt = conn.prepareStatement(query);
-		ResultSet rs = pstmt.executeQuery();
+		try {
+			conn = dataFactory.getConnection();
 
-		while (rs.next()) {
-			String userID = rs.getString("user_id");
-			String userPW = rs.getString("user_pw");
-			String userName = rs.getString("user_name");
-			String emailYN = rs.getString("EMAIL_YN");
-			String profilePic = rs.getString("profile_pic");
-			String joinDate = rs.getString("JOIN_DATE").substring(0,10);
-			
-			UserVO vo = new UserVO();
-			
-			vo.setUserID(userID);
-			vo.setUserPW(userPW);
-			vo.setUserName(userName);
-			vo.setEmailYN(emailYN);
-			vo.setProfilePic(profilePic);
-			vo.setJoinDate(joinDate);
-			
-			list.add(vo);
+			String query = "SELECT * FROM instant_resume.user_data;";
+			System.out.println(query);
+
+			pstmt = conn.prepareStatement(query);
+			ResultSet rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				String userID = rs.getString("user_id");
+				String userPW = rs.getString("user_pw");
+				String userName = rs.getString("user_name");
+				String emailYN = rs.getString("EMAIL_YN");
+				String profilePic = rs.getString("profile_pic");
+				String joinDate = rs.getString("JOIN_DATE").substring(0, 10);
+
+				UserVO vo = new UserVO();
+
+				vo.setUserID(userID);
+				vo.setUserPW(userPW);
+				vo.setUserName(userName);
+				vo.setEmailYN(emailYN);
+				vo.setProfilePic(profilePic);
+				vo.setJoinDate(joinDate);
+
+				list.add(vo);
+			}
+
+			rs.close();
+			pstmt.close();
+			conn.close();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		
-		rs.close();
-		pstmt.close();
-		conn.close();
-	} catch (Exception e) {
-		e.printStackTrace();
+		return list;
 	}
-	return list;
-}
 
-public List<UserVO> userInfo(String userID) {
-	List<UserVO> list = new ArrayList<UserVO>();
-	
-	try {
-		conn = dataFactory.getConnection();
-		
-		String query = "SELECT * FROM instant_resume.user_data where user_id = '"+userID+"';";
-		System.out.println(query);
-		
-		pstmt = conn.prepareStatement(query);
-		ResultSet rs = pstmt.executeQuery();
-		
-		while (rs.next()) {
-			String userPW = rs.getString("user_pw");
-			String userName = rs.getString("user_name");
-			String emailYN = rs.getString("EMAIL_YN");
-			String profilePic = rs.getString("profile_pic");
-			String joinDate = rs.getString("JOIN_DATE").substring(0,10);
-			
-			UserVO vo = new UserVO();
-			
-			vo.setUserID(userID);
-			vo.setUserPW(userPW);
-			vo.setUserName(userName);
-			vo.setEmailYN(emailYN);
-			vo.setProfilePic(profilePic);
-			vo.setJoinDate(joinDate);
-			
-			list.add(vo);
+	public List<UserVO> userInfo(String userID) {
+		List<UserVO> list = new ArrayList<UserVO>();
+
+		try {
+			conn = dataFactory.getConnection();
+
+			String query = "SELECT * FROM instant_resume.user_data where user_id = '" + userID + "';";
+			System.out.println(query);
+
+			pstmt = conn.prepareStatement(query);
+			ResultSet rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				String userPW = rs.getString("user_pw");
+				String userName = rs.getString("user_name");
+				String emailYN = rs.getString("EMAIL_YN");
+				String profilePic = rs.getString("profile_pic");
+				String joinDate = rs.getString("JOIN_DATE").substring(0, 10);
+
+				UserVO vo = new UserVO();
+
+				vo.setUserID(userID);
+				vo.setUserPW(userPW);
+				vo.setUserName(userName);
+				vo.setEmailYN(emailYN);
+				vo.setProfilePic(profilePic);
+				vo.setJoinDate(joinDate);
+
+				list.add(vo);
+			}
+
+			rs.close();
+			pstmt.close();
+			conn.close();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		
-		rs.close();
-		pstmt.close();
-		conn.close();
-	} catch (Exception e) {
-		e.printStackTrace();
+		return list;
 	}
-	return list;
-}
 
 }
