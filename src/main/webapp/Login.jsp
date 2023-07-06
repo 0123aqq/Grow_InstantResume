@@ -29,6 +29,18 @@ function login() {
 	}
 }
 
+window.onload = function() {
+    showMessage();
+}
+function showMessage() {
+    var message = '<%= session.getAttribute("message") %>';
+    if (message && message !== 'null') {
+        alert(message);
+        <% session.removeAttribute("message"); %>
+    }
+}
+
+
 function enter() {
     if (event.keyCode === 13) {
         login();

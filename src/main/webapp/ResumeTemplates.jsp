@@ -24,14 +24,6 @@ display:none;
 
 
 
-/* body { */
-/*    padding-top: 200px; /* 간격 맞추기 */ */
-/*    padding-bottom: 200px; /* 간격 맞추기 */ */
-/*    padding-right: 10px; /* 간격 맞추기 */ */
-/*    padding-left: 10px; /* 간격 맞추기 */ */
-/*    } */
-
-
 </style>
 </head>
 

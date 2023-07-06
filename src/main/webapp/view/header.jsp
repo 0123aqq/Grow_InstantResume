@@ -42,6 +42,15 @@ font-size: 20px;
 }
 </style>
 
+<script>
+function logout() {
+    alert('로그아웃 하셨습니다.');
+    window.location.href = './logout';
+}
+
+  
+</script>
+
 </head>
 <body>
 
@@ -82,7 +91,7 @@ font-size: 20px;
 </svg>   Resume
                 </a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="./GeneratedResume.jsp">이력서 ver.1</a></li>
+                  <li><a class="dropdown-item" href="./GeneratedResume01.jsp">이력서 ver.1</a></li>
                   <br>
                   <li><a class="dropdown-item" href="#">이력서폼2</a></li>
                   <br>
@@ -93,7 +102,7 @@ font-size: 20px;
             </form>
           </div>
           <div>
-            <a href="logout" class="btn btn-danger">logout</a>
+            <button onClick="logout();" class="btn btn-danger">logout</button>
 
           </div>
         </div>

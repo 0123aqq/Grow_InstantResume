@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="utf-8">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -106,7 +106,7 @@ display: block;
 <body>
     <footer>
         <div class="footer-bottom">
-            <p>23.07.06 ~ 23.07.10 &copy; <a href="team">Team Grow</a>
+            <p>23.07.06 ~ 23.07.10 &copy; <a href="/Team.jsp">Team Grow</a>
             <img class="btn" src="/repo/github.svg" onClick="window.open('https://github.com/yumalg12/Grow_InstantResume')" style="
     filter: invert(1);
     width: 19px;

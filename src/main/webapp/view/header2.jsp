@@ -82,7 +82,7 @@ font-size: 20px;
 </svg>   Resume
                 </a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="./GeneratedResume.jsp">이력서 ver.1</a></li>
+                  <li><a class="dropdown-item" href="./GeneratedResume01.jsp">이력서 ver.1</a></li>
                   <br>
                   <li><a class="dropdown-item" href="#">이력서폼2</a></li>
                   <br>

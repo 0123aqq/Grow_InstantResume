@@ -66,7 +66,7 @@ function duplicateID() {
 		 $.ajax({
 		        type: "post",
 		        async: false,
-		        url: "EmailValidationServletDTO",
+		        url: "EmailValidationDTO",
 		        dataType: "json",
 		        data: {userID: _userID},
 		        success: function(data, textStatus) {
@@ -150,7 +150,3 @@ function duplicateID() {
 	
 </body>
 </html>
-<!-- 
-UserController 에 연결해서 회원가입 로직 실행 
- 회원가입 성공 후 성공 alert메세지 띄우고(j.s),index.jsp로 이동시켜야함
- -->

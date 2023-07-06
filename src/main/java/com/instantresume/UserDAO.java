@@ -18,14 +18,6 @@ import com.instantresume.UserVO;
 
 import java.util.ArrayList;
 
-/**
- * 회원 관련 CRUD 작업을 수행하는 메서드를 구현하여 데이터베이스와의 연동을 처리
- * 
- * [1]회원가입시 정보 저장(회원가입 요청시 사용자 정보를 데이터베이스에 저장하는 메서드 구현) [2]회원정보 조회시 아이디, 비밀번호,
- * 이름, 이메일 등의 사용자 정보와 관련된 메서드를 포함합니다. [3]회원정보 수정 [4] 회원탈퇴 4-1비밀번호 동일 값 입력하면 :
- * 사용자에게 정말 탈퇴하시겠습니까? alert 띄우고 동의하면 탈퇴 진행 4-2비밀번호 틀리면 : 비밀번호와 일치하지 않습니다. 메시지 출력
- * 후 다시 입력 요청
- */
 
 public class UserDAO {
 
@@ -65,6 +57,32 @@ public class UserDAO {
 		return -2;
 	}
 
+	public int isDuplicateID(String userID) {
+		int result = -1;
+		
+		try {
+			conn = dataFactory.getConnection();
+
+			String query = "select count(*) as result from user_data" 
+			+ " where MEMBER_ID = '" + userID + "';";
+
+			System.out.println("isDuplicateID query: " + query);
+
+			pstmt = conn.prepareStatement(query);
+			ResultSet rs = pstmt.executeQuery();
+			rs.next();
+
+			result = Integer.parseInt(rs.getString("result"));
+
+			rs.close();
+			pstmt.close();
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
 	public void signUp(UserVO userVO) {
 		String userID = userVO.getUserID();
 		String userPW = userVO.getUserPW();
@@ -89,7 +107,7 @@ public class UserDAO {
 				e.printStackTrace();
 			}
 		} else {
-			System.out.println("signUp 오류 발생");
+			System.out.println("signUp O");
 		}
 	}
 
@@ -174,4 +192,31 @@ public class UserDAO {
 		return list;
 	}
 
+
+	public boolean deleteUser(String userID, String userPW) {
+	    String SQL = "SELECT USER_PW FROM USER_DATA WHERE USER_ID = ?";
+
+	    try {
+	        conn = dataFactory.getConnection();
+	        pstmt = conn.prepareStatement(SQL);
+	        pstmt.setString(1, userID);
+	        rs = pstmt.executeQuery();
+
+	        if (rs.next()) {
+	            if (rs.getString(1).equals(userPW)) {
+	                SQL = "DELETE FROM USER_DATA WHERE USER_ID = ?";
+	                pstmt = conn.prepareStatement(SQL);
+	                pstmt.setString(1, userID);
+	                pstmt.executeUpdate();
+
+	                return true;
+	            } else {
+	                return false;
+	            }
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    return false;
+	}
 }

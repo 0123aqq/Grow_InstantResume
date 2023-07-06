@@ -1,4 +1,4 @@
-package com.controller;
+package com.instantresume;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,21 +20,21 @@ public class CommonFilter implements Filter {
 	ServletContext context;
 
 	public void init (FilterConfig fConfig) throws ServletException{
-		System.out.println("UTF-8 인코딩");
+		System.out.println("UTF-8 Encoding");
 		context = fConfig.getServletContext();
 	}
 
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) 
 			throws IOException, ServletException {
-//		System.out.println("----------------doFilter 호출------------------");
+		System.out.println("----------------doFilter Calling------------------");
 		
-//		String context = ((HttpServletRequest)request).getContextPath();
+		String context = ((HttpServletRequest)request).getContextPath();
 		String pathinfo = ((HttpServletRequest)request).getRequestURI();
-//		
-//		String msg = "Context 정보: " + context 
-//				+ "\nURI 정보: " + pathinfo;
-//		System.out.println(msg);
-//				
+		
+		String msg = "Context Information: " + context 
+				+ "\nURI Information: " + pathinfo;
+		System.out.println(msg);
+				
 		String[] pathSplits = pathinfo.split("\\.");
 		List<String> exceptionFormat = new ArrayList<>();
 		exceptionFormat.add("html");
@@ -48,18 +48,18 @@ public class CommonFilter implements Filter {
 		
 
 		if (!exceptionFormat.contains(pathSplits[pathSplits.length - 1]) && !pathinfo.equals("/")) {
-//			System.out.println("필터 적용됨\n");
+//			System.out.println("Filter applied\n");
 			request.setCharacterEncoding("UTF-8");
 			response.setContentType("text/html; charset=utf-8");
 		} else {
-//			System.out.println("필터 안 적용됨\n");
+//			System.out.println("Filter not applied\n");
 		}
 		
 		chain.doFilter(request, response);
 	}
 	
 	public void destroy() {
-		System.out.println("destroy 호출");
+		System.out.println("destroy calling");
 	}
 
 }
