@@ -64,7 +64,7 @@ function duplicateID() {
 	    setTimeout(function () { $("#userID").focus(); }, 100);
 	} else {
 		 $.ajax({
-		        type: "get",
+		        type: "post",
 		        async: false,
 		        url: "EmailValidationServletDTO",
 		        dataType: "json",

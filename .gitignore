@@ -97,3 +97,5 @@ replay_pid*
 # End of https://www.toptal.com/developers/gitignore/api/java,eclipse
 src/main/webapp/repo/main-bold.svg
 src/main/webapp/repo/main-bold-gradation.svg
+src/main/webapp/testForm.jsp
+src/main/webapp/testResume.jsp

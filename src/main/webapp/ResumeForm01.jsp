@@ -23,6 +23,10 @@
 	background-color: #ff000050;
 	color: #aaa;
 }
+
+#projectFeaturesList>li{
+margin-bottom: 0.275rem;
+}
 </style>
 </head>
 <body>
@@ -135,15 +139,15 @@ if (vo.size() != 0) {
 			</div>
 			<div class="row" id="projectPersonalDiv">
 				<div class="col-4">참여자 (기여도)</div>
-				<div class="col-8"><input type="text" class="form-control d-inline" style=" width: calc(100% - 108px);" name="developerName" value="<%=userName %>" readonly>
-				<span> (</span><input type="text" class="form-control d-inline" style="width: 80px;" name="partRatio" value="100" readonly><span>%)</span></div>
+				<div class="col-8"><input type="text" class="form-control d-inline" style=" width: calc(100% - 128px);" name="developerName" value="<%=userName %>" readonly>
+				<span> (</span><input type="text" class="form-control d-inline" style="width: 80px;" name="developContribution" value="100" readonly><span>%)</span></div>
 			</div>
 			<div class="row" id="projectTeamDiv" style="display: none;">
 				<div class="col-4">참여자 (기여도) <img src="/repo/addition-color-icon.svg" class="small-img btn" onclick="javascript:addDeveloper();"></div>
 				<div class="col-8" id="developerList">
 				<div>
-				<input type="text" class="form-control w-auto d-inline" name="developerName" value="<%=userName %>" readonly>
-				<span> (</span><input type="text" class="form-control d-inline" style="width: 80px;" name="partRatio"><span>%)</span></div>
+				<input type="text" class="form-control d-inline" style="width: calc(100% - 128px);" name="developerName" value="<%=userName %>" readonly>
+				<span> (</span><input type="text" class="form-control d-inline" style="width: 80px;" name="developContribution"><span>%)</span></div>
 			</div>
 			</div>
 			<div class="row">
@@ -156,12 +160,16 @@ if (vo.size() != 0) {
 				<div class="col-8"><input type="text" class="form-control" name="projectUrl"></div>
 			</div>
 			<div class="row">
-				<div class="col-4">주요 기능</div>
-				<div class="col-8"><input type="text" class="form-control" name="projectFunction"></div>
+				<div class="col-4">주요 기능 <img src="/repo/addition-color-icon.svg" class="small-img btn" onclick="javascript:addFeature();"></div>
+				<div class="col-8">
+				<ul id="projectFeaturesList">
+				<li><input type="text" class="form-control" name="projectFeature"></li>
+				</ul>
+				</div>
 			</div>
 			<div class="row">
 				<div class="col-4">비고</div>
-				<div class="col-8"><input type="text" class="form-control" name="projectEtc"></div>
+				<div class="col-8"><textarea type="text" class="form-control" name="projectEtc"></textarea></div>
 			</div>
 			
 			</div>
@@ -194,10 +202,10 @@ function developersDiv(){
   function addSkill(event) {
     if (event.keyCode === 32 || event.keyCode === 9 || event.keyCode === 13) {
       event.preventDefault();
-      var inputText = document.getElementById("skillInput").value.trim();
+      let inputText = document.getElementById("skillInput").value.trim();
       if (inputText !== "") {
-        var skillList = document.getElementById("skillList");
-        var newdiv = document.createElement("div");
+        let skillList = document.getElementById("skillList");
+        let newdiv = document.createElement("div");
         newdiv.classList.add("skillBox");
         newdiv.classList.add("form-control");
         newdiv.onclick = function(event) { event.currentTarget.remove(); };
@@ -209,8 +217,8 @@ function developersDiv(){
   }
   
   function addSkillSet(event) {
-	  var skillList = document.getElementById("skillsDiv");
-	  var newdiv = document.createElement("div");
+	  let skillList = document.getElementById("skillsDiv");
+	  let newdiv = document.createElement("div");
 	  newdiv.classList.add("row");
 	  newdiv.style.borderBottom = "1px solid #ccc";
 	  newdiv.style.paddingBottom = "1.05rem";
@@ -219,25 +227,32 @@ function developersDiv(){
 	}
   
   function addDeveloper(event) {
-	  var skillList = document.getElementById("developerList");
-	  var newdiv = document.createElement("div");
+	  let skillList = document.getElementById("developerList");
+	  let newdiv = document.createElement("div");
 	  newdiv.classList.add("mt-1");
-	  newdiv.innerHTML = '<input type=\"text\" class=\"form-control w-auto d-inline\" name=\"developerName\"><span> (</span><input type=\"text\" class=\"form-control d-inline\" style=\"width: 80px;\" name=\"partRatio\"><span>%) </span> <img src=\"/repo/subtract-color-outline-icon.svg\" class=\"small-img btn\" onclick=\"event.currentTarget.parentNode.remove()\">';
+	  newdiv.innerHTML = '<input type=\"text\" class=\"form-control d-inline\" style=\"width: calc(100% - 128px);\" name=\"developerName\"><span> (</span><input type=\"text\" class=\"form-control d-inline\" style=\"width: 80px;\" name=\"developContribution\"><span>%) </span> <img src=\"/repo/subtract-color-outline-icon.svg\" class=\"small-img btn\" onclick=\"event.currentTarget.parentNode.remove()\">';
 	  skillList.appendChild(newdiv);
 	}
   
   function addProject(event) {
-	  var skillList = document.getElementById("resumeFormDiv");
-	  var newdiv = document.createElement("div");
+	  let skillList = document.getElementById("resumeFormDiv");
+	  let newdiv = document.createElement("div");
 	  newdiv.classList.add("grid");
 	  newdiv.classList.add("row-gap-3");
-	  newdiv.innerHTML = '<div style=\"text-align: right; margin-top:3px;\"><button onclick=\"event.currentTarget.parentNode.parentNode.remove()\" class=\"btn\"><img src=\"/repo/subtract-color-outline-icon.svg\" class=\"small-img\"> Delete Project</button></div><div class=\"row\"><div class=\"col-4\">프로젝트 종류</div><div class=\"col-8\"><select class=\"form-select\" name=\"projectType\"><option value=\"personal\">개인 프로젝트</option><option value=\"team\">팀 프로젝트</option></select></div></div><div class=\"row\"><div class=\"col-4\">프로젝트 제목</div><div class=\"col-8\"><input type=\"text\" class=\"form-control\"></div></div><div class=\"row\"><div class=\"col-4\">참여자 (기여도)</div><div class=\"col-8\"><input type=\"text\" class=\"form-control w-auto d-inline\" name=\"developerName\"><span> (</span><input type=\"text\" class=\"form-control d-inline\" style=\"width: 80px;\" name=\"partRatio\"><span>%)</span></div></div><div class=\"row\"><div class=\"col-4\">수행 기간</div><div class=\"col-8\"><input type=\"date\" class=\"form-control w-auto d-inline\" name=\"startDate\"><span> ~ </span><input type=\"date\" class=\"form-control w-auto d-inline\" name=\"finishDate\"></div></div><div class=\"row\"><div class=\"col-4\">프로젝트 링크</div><div class=\"col-8\"><input type=\"text\" class=\"form-control\" name=\"projectUrl\"></div></div><div class=\"row\"><div class=\"col-4\">주요 기능</div><div class=\"col-8\"><input type=\"text\" class=\"form-control\" name=\"projectFunction\"></div></div><div class=\"row\"><div class=\"col-4\">비고</div><div class=\"col-8\"><input type=\"text\" class=\"form-control\" name=\"projectEtc\"></div></div>';
+	  newdiv.innerHTML = '<div style=\"text-align: right; margin-top:3px;\"><button onclick=\"event.currentTarget.parentNode.parentNode.remove()\" class=\"btn\"><img src=\"/repo/subtract-color-outline-icon.svg\" class=\"small-img\"> Delete Project</button></div><div class=\"row\"><div class=\"col-4\">프로젝트 종류</div><div class=\"col-8\"><select class=\"form-select\" name=\"projectType\"><option value=\"personal\">개인 프로젝트</option><option value=\"team\">팀 프로젝트</option></select></div></div><div class=\"row\"><div class=\"col-4\">프로젝트 제목</div><div class=\"col-8\"><input type=\"text\" class=\"form-control\"></div></div><div class=\"row\"><div class=\"col-4\">참여자 (기여도)</div><div class=\"col-8\"><input type=\"text\" class=\"form-control d-inline\" style=\"width: calc(100% - 128px);\" name=\"developerName\"><span> (</span><input type=\"text\" class=\"form-control d-inline\" style=\"width: 80px;\" name=\"developContribution\"><span>%)</span></div></div><div class=\"row\"><div class=\"col-4\">수행 기간</div><div class=\"col-8\"><input type=\"date\" class=\"form-control w-auto d-inline\" name=\"startDate\"><span> ~ </span><input type=\"date\" class=\"form-control w-auto d-inline\" name=\"finishDate\"></div></div><div class=\"row\"><div class=\"col-4\">프로젝트 링크</div><div class=\"col-8\"><input type=\"text\" class=\"form-control\" name=\"projectUrl\"></div></div><div class=\"row\"><div class=\"col-4\">주요 기능</div><div class=\"col-8\"><input type=\"text\" class=\"form-control\" name=\"projectFunction\"></div></div><div class=\"row\"><div class=\"col-4\">비고</div><div class=\"col-8\"><textarea type=\"text\" class=\"form-control\" name=\"projectEtc\"></textarea></div></div>';
 	  skillList.appendChild(newdiv);
 	}
   
+  function addFeature(){
+	  let featuresList = document.getElementById("projectFeaturesList");
+	  let newli = document.createElement("li");
+	  newli.innerHTML='<input type="text" class="form-control" name="projectFeature">';
+	  featuresList.appendChild(newli);  
+  }
+  
 //수정 필요
   function validateForm() {
-      var userName = document.getElementById("userName").value;
+      let userName = document.getElementById("userName").value;
 
       // 양식 정보를 클라이언트 측에서도 검증할 수 있습니다.
       if (userName === "") {
