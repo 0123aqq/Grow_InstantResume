@@ -26,15 +26,15 @@ public class CommonFilter implements Filter {
 
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) 
 			throws IOException, ServletException {
-		System.out.println("----------------doFilter 호출------------------");
+//		System.out.println("----------------doFilter 호출------------------");
 		
-		String context = ((HttpServletRequest)request).getContextPath();
+//		String context = ((HttpServletRequest)request).getContextPath();
 		String pathinfo = ((HttpServletRequest)request).getRequestURI();
-		
-		String msg = "Context 정보: " + context 
-				+ "\nURI 정보: " + pathinfo;
-		System.out.println(msg);
-				
+//		
+//		String msg = "Context 정보: " + context 
+//				+ "\nURI 정보: " + pathinfo;
+//		System.out.println(msg);
+//				
 		String[] pathSplits = pathinfo.split("\\.");
 		List<String> exceptionFormat = new ArrayList<>();
 		exceptionFormat.add("html");

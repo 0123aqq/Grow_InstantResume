@@ -65,32 +65,6 @@ public class UserDAO {
 		return -2;
 	}
 
-	public int isDuplicateID(String userID) {
-		int result = -1;
-		
-		try {
-			conn = dataFactory.getConnection();
-
-			String query = "select count(*) as result from user_data" 
-			+ " where MEMBER_ID = '" + userID + "';";
-
-			System.out.println("isDuplicateID query: " + query);
-
-			pstmt = conn.prepareStatement(query);
-			ResultSet rs = pstmt.executeQuery();
-			rs.next();
-
-			result = Integer.parseInt(rs.getString("result"));
-
-			rs.close();
-			pstmt.close();
-			conn.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return result;
-	}
-
 	public void signUp(UserVO userVO) {
 		String userID = userVO.getUserID();
 		String userPW = userVO.getUserPW();

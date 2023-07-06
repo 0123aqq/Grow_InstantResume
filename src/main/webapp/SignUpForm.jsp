@@ -56,21 +56,22 @@ function setEmailYN() {
 }
 
 function duplicateID() {
-	let userID = $("#userID").val();
+	let _userID = $("#userID").val();
 	
-	if (!IDValidation(userID)){
+	if (!IDValidation(_userID)){
 	    alert("올바른 이메일 아이디를 입력하십시오.");
 	    $("#wrongID").show();
 	    setTimeout(function () { $("#userID").focus(); }, 100);
 	} else {
 		 $.ajax({
-		        type: "post",
+		        type: "get",
 		        async: false,
 		        url: "EmailValidationServletDTO",
 		        dataType: "json",
-		        data: {email: userID},
+		        data: {userID: _userID},
 		        success: function(data, textStatus) {
-		            if (data.isEmailDuplicate == 'false') {
+		        	console.log(data.isEmailDuplicate);
+		            if (data.isEmailDuplicate == false) {
 		                alert("사용할 수 있는 ID입니다.");
 		                $("#userID").prop("readonly", true);
 		            } else {
@@ -79,6 +80,7 @@ function duplicateID() {
 		            }
 		        },
 		        error: function(data, textStatus) {
+		        	console.log("data: "+ data +" / textStatus: "+textStatus);
 		            alert("오류가 발생했습니다.");
 		        },
 		        complete: function(data, textStatus) {
@@ -101,7 +103,7 @@ function duplicateID() {
 			<div class="row">
 				<div class="col-4">Email ID</div>
 				<div class="col-8">
-<input type="text" class="form-control" id="userID" name="userID" value="" onInput="javascript:IDValidation(this.value);" style="width: calc(100% - 96px); display: inline;">
+<input type="text" class="form-control" id="userID" name="userID" value="" onInput="javascript:IDValidation(this.value);" style="width: calc(100% - 89px); display: inline;">
 <span class="btn btn-line-color2" id="duplicateID" onclick="javascript:duplicateID(this.value);">중복확인</span>
 					<span id="wrongID" class="wrongNotice" style="display: none;"><img src="./repo/exclamation-circle.svg" class="small-img"> ID는 올바른 이메일 형식을 따라야 합니다.</span>
 				</div>
