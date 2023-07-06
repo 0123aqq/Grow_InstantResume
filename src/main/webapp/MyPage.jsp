@@ -58,15 +58,15 @@ if (vo.size() != 0) {
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-4">Name</div>
-				<div class="col-8">
-					<input type="text" class="form-control" id="userName" value="<%= userName %>" disabled>
-				</div>
-			</div>
-			<div class="row">
 				<div class="col-4">가입일</div>
 				<div class="col-8">
 					<input type="text" class="form-control" id="joinDate" value="<%= joinDate %>" disabled>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-4">Name</div>
+				<div class="col-8">
+					<input type="text" class="form-control" id="userName" value="<%= userName %>">
 				</div>
 			</div>
 			<div class="row" id="oldPW">

@@ -41,8 +41,10 @@ display:none;
 <br>
 <div class="card-group">
   <div class="card">
-  <img src="./repo/template01_gray.svg" class="card-img-top grayImg btn">
-        <a href="./ResumeForm01.jsp"><img src="./repo/template01_color.svg" class="card-img-top colorImg"></a>
+        <a href="./ResumeForm01.jsp">
+		<img src="./repo/template01_gray.svg" class="card-img-top grayImg btn">
+		<img src="./repo/template01_color.svg" class="card-img-top colorImg">
+        </a>
     <div class="card-body">
       <h5 class="card-title">이력서 양식1 : </h5>
       <p class="card-text"> 자기소개 / 보유 기술 / 수행 프로젝트 등 기재 가능 </p>
@@ -50,8 +52,10 @@ display:none;
     </div>
   </div>
   <div class="card">
-  <img src="./repo/template02_gray.svg" class="card-img-top grayImg btn">
-    <a href="./ResumeForm02.jsp"><img src="./repo/template02_color.svg" class="card-img-top colorImg"></a>
+    <a href="./ResumeForm02.jsp">
+	<img src="./repo/template02_gray.svg" class="card-img-top grayImg btn">
+    <img src="./repo/template02_color.svg" class="card-img-top colorImg">
+    </a>
     <div class="card-body">
       <h5 class="card-title">이력서 양식2 : </h5>
       <p class="card-text">이력서 양식2 설명</p>
@@ -59,8 +63,10 @@ display:none;
     </div>
   </div>
   <div class="card">
-  <img src="./repo/template03_gray.svg" class="card-img-top grayImg btn">
-    <a href="./ResumeForm03.jsp"><img src="./repo/template03_color.svg" class="card-img-top colorImg"></a>
+    <a href="./ResumeForm03.jsp">
+	<img src="./repo/template03_gray.svg" class="card-img-top grayImg btn">
+    <img src="./repo/template03_color.svg" class="card-img-top colorImg">
+    </a>
     <div class="card-body">
       <h5 class="card-title">이력서 양식3 : </h5>
       <p class="card-text">이력서 양식3 설명</p>

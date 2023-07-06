@@ -29,6 +29,12 @@ function login() {
 	}
 }
 
+function enter() {
+    if (event.keyCode === 13) {
+        login();
+    }
+}
+
 <% String error = request.getParameter("error");%>
 if ("<%=error%>" == 0) {
 	alert("비밀번호가 틀렸습니다.");
@@ -54,12 +60,12 @@ if ("<%=error%>" == 0) {
 		<div class="center w-75">
 			<form name = "loginForm" method="post" onSubmit="return login();">
 				<div class="form-floating mb-3" style="border-bottom: 1px solid #ccc;">
-					<input type="email" class="form-control border-none" id="floatingInput" placeholder=" " name="userID" onInput="javascript:IDValidation(this.value);"> 
+					<input type="email" class="form-control border-none" id="floatingInput" placeholder=" " name="userID" onInput="javascript:IDValidation(this.value);" onkeyup="enter(event);"> 
 					<label for="floatingInput" style="color: #ccc;"><img src="./repo/person-fill.svg" class="loginform-img"> Email ID</label>
 				</div>
 				<span id="wrongID" class="wrongNotice" style="display: none;"><img src="./repo/exclamation-circle.svg" class="small-img"> ID는 올바른 이메일 형식을 따라야 합니다.</span>
 				<div class="form-floating mb-3" style="border-bottom: 1px solid #ccc;">
-					<input type="password" class="form-control border-none" id="floatingPassword" placeholder=" " name="userPW" onInput="javascript:PWValidation(this.value);"> 
+					<input type="password" class="form-control border-none" id="floatingPassword" placeholder=" " name="userPW" onInput="javascript:PWValidation(this.value);" onkeyup="enter(event);"> 
 					<label for="floatingPassword" style="color: #ccc;"><img src="./repo/lock-fill.svg" class="loginform-img"> Password</label>
 				</div>
 				<span id="wrongPW" class="wrongNotice" style="display: none;"><img src="./repo/exclamation-circle.svg" class="small-img"> 비밀번호는 영문, 숫자로 이루어진 4~20자리의 문자여야 합니다.</span>

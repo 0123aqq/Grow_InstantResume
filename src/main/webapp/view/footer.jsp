@@ -49,36 +49,6 @@ footer{
     font-size: 14px;
     color: #cacdd2;
 }
-.socials{
-    list-style: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 1rem 0 3rem 0;
-}
-.socials li{
-    margin: 0 10px;
-}
-.socials a{
-    text-decoration: none;
-    color: #fff;
-    border: 1.1px solid white;
-    padding: 5px;
-
-    border-radius: 50%;
-
-}
-.socials a i{
-    font-size: 1.1rem;
-    width: 20px;
-
-
-    transition: color .4s ease;
-
-}
-.socials a:hover i{
-    color: aqua;
-}
 
 .footer-bottom{
     background: #5C469C;
@@ -104,6 +74,10 @@ float: left;
     opacity: .4;
     font-weight: 200;
 }
+.footer-bottom a:hover{
+  color: #D4ADFC;
+}
+
 .footer-menu{
   float: right;
 
@@ -119,9 +93,6 @@ display: block;
   color: #FFFFFF;
   text-decoration: none;
 }
-.footer-menu ul li a:hover{
-  color: #27bcda;
-}
 
 @media (max-width:500px) {
 .footer-menu ul{
@@ -135,7 +106,13 @@ display: block;
 <body>
     <footer>
         <div class="footer-bottom">
-            <p>23.07.06 ~ 23.07.10 &copy; <a href="team">Team Grow</a>  </p>
+            <p>23.07.06 ~ 23.07.10 &copy; <a href="team">Team Grow</a>
+            <img class="btn" src="/repo/github.svg" onClick="window.open('https://github.com/yumalg12/Grow_InstantResume')" style="
+    filter: invert(1);
+    width: 19px;
+    padding: 0;
+    margin-top: -3px;
+"></p>
                     <div class="footer-menu">
                       <ul class="f-menu">
                         <li><a href="/">Home</a></li>

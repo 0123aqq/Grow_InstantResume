@@ -1,14 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"%>
+<%@ page import="com.instantresume.UserDAO" %>
+<%@ page import="com.instantresume.UserVO" %>
+<%@ page import="java.util.List" %>
+
 <!DOCTYPE html>
 <html>
+		
+<%String userID = request.getParameter("userID"); 
+String userName = request.getParameter("userName"); 
+String profilePic = request.getParameter("profilePic"); 
+String userIntroduction = request.getParameter("userIntroduction"); 
+String userGitHub = request.getParameter("userGitHub"); 
+
+String startDate = request.getParameter("startDate"); 
+String finishDate = request.getParameter("finishDate"); 
+
+%>
+
 <head>
 <meta charset="UTF-8">
 <title>인스턴트 이력서 생성기</title>
 <%@ include file="/view/header.jsp"%>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta property="og:title" content="유맑음 이력서">
-<meta property="og:image" content="./img/thumbnail.png">
-<meta property="og:description" content="유맑음의 이력서입니다.">
+<meta property="og:title" content="<%=userName %> 이력서">
+<meta property="og:image" content="./repo/profile/<%=profilePic %>">
+<meta property="og:description" content="<%=userName %>의 이력서입니다.">
 
 <link rel="stylesheet" href="./css/main.css">
 <link rel="stylesheet" href="./css/frame.css">
@@ -16,13 +32,17 @@
 <script src="./script/myscript.js"></script>
 
 <style>
-a{
-	text-decoration: none;
-}
-
 h2 {
 	color: #000000;
 	padding-top: 1.2rem;
+}
+
+div[id="projects"] a{
+	text-decoration: none;
+}
+
+div[id="projects"] a:hover {
+filter: brightness(180%);
 }
 
 div[id="projects"] img{
@@ -31,9 +51,19 @@ div[id="projects"] img{
 
 </style>
 
+<script>
+if ("<%=userGitHub %>" != null && "<%=userGitHub %>" != ""){
+$("#gitHubDiv").show();	
+}
+</script>
+
 </head>
 
 <body>
+
+<div style="text-align: right;">
+<button class="btn btn-line-color2"><img src="/repo/file-earmark-arrow-down.svg" class="small-img">HTML Download</button>
+</div>
 
 	<div id="realbody">
 		<sidebar>
@@ -47,25 +77,28 @@ div[id="projects"] img{
 		</sidebar>
 
 		<div id="contents">
+
 			<div id="about">
-				<h2>🧩‍ About Me</h2>
+				<h2>😀‍ About Me</h2>
 				<hr>
 				<div class="container">
 					<aside class="item">
-						<img src="./img/window_imoji_developer.svg" style="width: 130px;">
+						<img src="./repo/profile/<%=profilePic %>" style="width: 130px;">
 					</aside>
 					<section class="item">
-						<label style="font-size: 1.3rem;">유맑음 (Malg-Eum Yu)</label>
-						<p style="font-size: 0.9rem; color: #aaa; margin-top: 0px;">yumalg12@gmail.com</p>
-						<p>실 사용자 관점에서 생각하는 개발자를 목표로 합니다.</p>
-						<img src="https://img.shields.io/badge/-GitHub-181717?style=for-the-badge&amp;logo=GitHub&amp;logoColor=white" width="120px;" onclick="window.open('https://github.com/yumalg12');" style="cursor: pointer;">
+						<label style="font-size: 1.3rem;"><%=userName %></label>
+						<p style="font-size: 0.9rem; color: #aaa; margin-top: 0px;"><%=userID %></p>
+						<p><%=userIntroduction %></p>
+						<div id="gitHubDiv" style="display: none;">
+						<img src="https://img.shields.io/badge/-GitHub-181717?style=for-the-badge&amp;logo=GitHub&amp;logoColor=white" width="120px;" onclick="window.open('<%=userGitHub %>');" style="cursor: pointer;">
+						</div>
 					</section>
 				</div>
 			</div>
 
 			
 			<div id="skills">
-				<h2>🪄 Skills</h2>
+				<h2>💻 Skills</h2>
 				<hr>
 				<table>
 					<tbody><tr>
@@ -99,16 +132,17 @@ div[id="projects"] img{
 					<div class="item">
 						<h4>
 							<img src="https://img.shields.io/badge/Project-Personal-blue">
-							Dummy Project A
+							Enumeration해서.....
+							세트가 있어야 되나???
 						</h4>
 						<table>
 							<tbody><tr>
 								<td><strong>참여자 (기여도)</strong></td>
-								<td>유맑음 (100%)</td>
+								<td><%=userName %> (100%)</td>
 							</tr>
 							<tr>
 								<td><strong>기간</strong></td>
-								<td>2023. 05~</td>
+								<td><%=startDate %> ~ <%=finishDate %></td>
 							</tr>
 							<tr>
 								<td><strong>사용 기술</strong></td>
@@ -142,7 +176,7 @@ div[id="projects"] img{
 						<table>
 							<tbody><tr>
 								<td><strong>참여자 (기여도)</strong></td>
-								<td>유맑음 (50%), ㅇㅇㅇ (50%)</td>
+								<td><%=userName %> (50%), ㅇㅇㅇ (50%)</td>
 							</tr>
 							<tr>
 								<td><strong>기간</strong></td>

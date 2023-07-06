@@ -45,7 +45,7 @@ if (vo.size() != 0) {
 
 %>
 
-	<form name="ResumeForm01">
+	<form name="ResumeForm" method="post" accept-charset="utf-8" action="GeneratedResume01.jsp">
 		<div class="container grid gap-5" style="grid-template-columns: 1fr 1fr;" id="resumeFormDiv">
 			
 			<!-- About me 시작 -->
@@ -71,7 +71,7 @@ if (vo.size() != 0) {
 				<div class="row">
 					<div class="col-4">프로필 사진</div>
 					<div class="col-8">
-						<input type="file" class="form-control" id="profilePic"
+						<input type="file" accept="image/gif, image/jpeg, image/png, image/bmp, application/svg" class="form-control" id="profilePic"
 							name="profilePic" value="<%=profilePic %>">
 					</div>
 				</div>
@@ -79,16 +79,14 @@ if (vo.size() != 0) {
 				<div class="row">
 					<div class="col-4">한 줄 자기소개</div>
 					<div class="col-8">
-						<input type="text" class="form-control" id="introduction"
-							name="introduction" value="">
+						<input type="text" class="form-control" id="userIntroduction" name="userIntroduction" value="">
 					</div>
 				</div>
 
 				<div class="row">
 					<div class="col-4">GitHub Link</div>
 					<div class="col-8">
-						<input type="text" class="form-control" id="githubLink"
-							name="githubLink" value="">
+						<input type="text" class="form-control" id="userGitHub" name="userGitHub" value="">
 					</div>
 				</div>
 			</div>
@@ -137,14 +135,14 @@ if (vo.size() != 0) {
 			</div>
 			<div class="row" id="projectPersonalDiv">
 				<div class="col-4">참여자 (기여도)</div>
-				<div class="col-8"><input type="text" class="form-control w-auto d-inline" name="developerName">
+				<div class="col-8"><input type="text" class="form-control d-inline" style=" width: calc(100% - 108px);" name="developerName" value="<%=userName %>" readonly>
 				<span> (</span><input type="text" class="form-control d-inline" style="width: 80px;" name="partRatio" value="100" readonly><span>%)</span></div>
 			</div>
 			<div class="row" id="projectTeamDiv" style="display: none;">
 				<div class="col-4">참여자 (기여도) <img src="/repo/addition-color-icon.svg" class="small-img btn" onclick="javascript:addDeveloper();"></div>
 				<div class="col-8" id="developerList">
 				<div>
-				<input type="text" class="form-control w-auto d-inline" name="developerName">
+				<input type="text" class="form-control w-auto d-inline" name="developerName" value="<%=userName %>" readonly>
 				<span> (</span><input type="text" class="form-control d-inline" style="width: 80px;" name="partRatio"><span>%)</span></div>
 			</div>
 			</div>
@@ -171,7 +169,7 @@ if (vo.size() != 0) {
 			
 		</div>
 		<div class="center m-5">
-		<input type="button" class="btn-color2 rounded-pill p-2 w-50" style="max-width: 240px; min-width: 80px;" value="이력서 생성">
+		<input type="submit" class="btn-color2 rounded-pill p-2 w-50" style="max-width: 240px; min-width: 80px;" value="이력서 생성">
 		</div>
 	</form>
 
@@ -240,12 +238,13 @@ function developersDiv(){
 //수정 필요
   function validateForm() {
       var userName = document.getElementById("userName").value;
-      var user_pw = document.getElementById("user_pw").value;
 
       // 양식 정보를 클라이언트 측에서도 검증할 수 있습니다.
-      if (userName === "" || user_pw === "") {
+      if (userName === "") {
           alert("Please fill in all fields.");
           return false;
+      } else {
+    	  
       }
       return true;
   }

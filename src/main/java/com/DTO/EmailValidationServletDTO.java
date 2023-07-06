@@ -1,19 +1,23 @@
 package com.DTO;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet implementation class EmailValidationServletDTO
- */
-@WebServlet("/EmailValidationServletDTO")
 public class EmailValidationServletDTO extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
+    private static final long serialVersionUID = 1L;
+
+    private static final String DB_URL = "jdbc:mysql://localhost:8080/instant_resume";
+    private static final String DB_USERNAME = "username";
+    private static final String DB_PASSWORD = "password";
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         processRequest(request, response);
     }
@@ -31,7 +35,7 @@ public class EmailValidationServletDTO extends HttpServlet {
         emailValidationDTO.setEmail(email);
 
         // 이메일 중복 여부 확인
-        boolean isEmailDuplicate = checkEmailDuplicate(emailValidationDTO); // 중복 여부 확인 로직은 별도의 메서드로 분리하여 작성
+        boolean isEmailDuplicate = checkEmailDuplicate(emailValidationDTO);
 
         // JSON 형식으로 결과 반환
         response.setContentType("application/json");
@@ -41,11 +45,21 @@ public class EmailValidationServletDTO extends HttpServlet {
 
     private boolean checkEmailDuplicate(EmailValidationDTO emailValidationDTO) {
         // 이메일 중복 여부를 확인하는 로직 작성
-        // 중복 여부를 데이터베이스 등에서 검사하고, 검사 결과를 반환
+        boolean isEmailDuplicate = false;
 
-        // 예시로 하드코딩으로 중복 여부 확인
-        String duplicateEmail = "test@example.com";
-        String email = emailValidationDTO.getEmail();
-        return duplicateEmail.equalsIgnoreCase(email);
+        try (Connection conn = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
+             PreparedStatement stmt = conn.prepareStatement("SELECT COUNT(*) FROM users WHERE email = ?")) {
+            stmt.setString(1, emailValidationDTO.getEmail());
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    int count = rs.getInt(1);
+                    isEmailDuplicate = (count > 0);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return isEmailDuplicate;
     }
 }
