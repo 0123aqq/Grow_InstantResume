@@ -9,51 +9,42 @@
 <script>
 
 function signUp() {
-	let userID = document.signUpForm.userID.value;
-	let userPW = document.signUpForm.userPW.value;
-		
-	switch(true) {
-	  case !IDValidation(userID):
-	    alert("올바른 이메일 아이디를 입력하십시오.");
-	    $("#wrongID").show();
-	    setTimeout(function () { $("#userID").focus(); }, 100);
-	    break;
-	    
-	  case !(document.signUpForm.userID.readOnly):
-	    alert("이메일 중복확인이 필요합니다.");
-	    setTimeout(function () { $("#duplicateID").focus(); }, 100);
-	    break;
+    let userID = document.signUpForm.userID.value;
+    let userPW = document.signUpForm.userPW.value;
 
-	  case $("#userName").val().length < 2:
-	    alert("이름을 입력하십시오.");
-	    setTimeout(function () { $("#userName").focus(); }, 100);
-	    break;
-
-	  case !PWValidation(userPW):
-	    $("#wrongPW").show();
-	    alert("올바른 비밀번호를 입력하십시오.");
-	    setTimeout(function () { $("#userPW").focus(); }, 100);
-	    break;
-
-	  case !PWCheck():
-	    $("#wrongPWCheck").show();
-	    alert("비밀번호 확인이 일치하지 않습니다.");
-	    setTimeout(function () { $("#checkPW").focus(); }, 100);
-	    break;
-
-	  case IDValidation(userID) && (document.signUpForm.userID.readOnly) && ($("#userName").val().length >= 2) && PWValidation(userPW) && PWCheck():
-		$("#wrongID").hide();
-	    $("#wrongPWCheck").hide();
-	    document.signUpForm.method = "post";
-	    document.signUpForm.action = "signup";
-	    document.signUpForm.submit();
-	    break;
-
-	  default:
-		alert("오류가 발생했습니다.");
-	}
-
+    if (!IDValidation(userID)) {
+        alert("올바른 이메일 아이디를 입력하십시오.");
+        $("#wrongID").show();
+        setTimeout(function () { $("#userID").focus(); }, 100);
+    } else {
+        if (!(document.signUpForm.userID.readOnly)) {
+            alert("이메일 중복확인이 필요합니다.");
+            setTimeout(function () { $("#duplicateID").focus(); }, 100);
+        } else {
+            if ($("#userName").val().length < 2) {
+                alert("이름을 입력하십시오.");
+                setTimeout(function () { $("#userName").focus(); }, 100);
+            } else {
+                if (!PWValidation(userPW)) {
+                    $("#wrongPW").show();
+                    alert("올바른 비밀번호를 입력하십시오.");
+                    setTimeout(function () { $("#userPW").focus(); }, 100);
+                } else {
+                	if ($("#wrongPWCheck").is(":visible")) {
+                        alert("비밀번호 확인이 일치하지 않습니다.");
+                        setTimeout(function () { $("#checkPW").focus(); }, 100);
+                    } else {
+                        $(".wrongNotice").hide();
+                        document.signUpForm.method = "post";
+                        document.signUpForm.action = "signup";
+                        document.signUpForm.submit();
+                    }
+                }
+            }
+        }
+    }
 }
+
 
 function setEmailYN() {
 	if (document.signUpForm.emailSwitch.checked){
