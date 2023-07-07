@@ -42,7 +42,7 @@ function showInput(obj){
 </head>
 
 <body>
-	<h1>이력서 양식 01 </h1>
+	<h1>📜HTML Style</h1>
 <br>
 <%
 String userName = null;
@@ -118,60 +118,64 @@ if (vo.size() != 0) {
 						<option value="input">직접 입력</option>
 					</select>
 					<input type="text" class="form-control" name="skillHeader" style="margin: 0 0.25rem 0.25rem 0.75rem; width: 10rem; display: none;" disabled>
-					<textarea name="skillList" class="form-control d-inline" style="width: calc(100% - 200px); height: 17px; margin:0 0 0.25rem 0;" placeholder="기술 목록을 적으십시오. 기술은 쉼표로 구분합니다."></textarea>
+					<textarea name="skillList" class="form-control d-inline" style="width: calc(100% - 200px); height: 17px; margin:0 0 0.25rem 0;" placeholder="기술 목록을 입력하십시오. 기술은 쉼표로 구분합니다."></textarea>
 				</div>
 			</div>
 			<!-- Skills 끝 -->
-			
+
 			<!-- Projects 시작 -->
 			<div class="grid row-gap-3" style="align-content: baseline;">
 			<h3>Projects <img src="/repo/addition-color-icon.svg" class="small-img-2x" style="width: 24px; cursor: pointer;" onclick="javascript:addProject();"></h3>
-			
+			<div class="grid row-gap-3" id="projectBox">
 			<div class="row">
 				<div class="col-4">프로젝트 종류</div>
 				<div class="col-8">
-				<select class="form-select" name="projectType" id="projectType" onchange="javascript:developersDiv();">
-					<option value="personal">개인 프로젝트</option>
-					<option value="team">팀 프로젝트</option>
+				<select name="projectType" class="form-select" id="projectType" onchange="javascript:developersDiv(this);">
+					<option value="Personal">개인 프로젝트</option>
+					<option value="Team">팀 프로젝트</option>
 				</select>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-4">프로젝트 제목</div>
-				<div class="col-8"><input type="text" class="form-control"></div>
+				<div class="col-8"><input type="text" class="form-control" name="projectName" value="프로젝트 제목 테스트"></div>
 			</div>
 			<div class="row" id="projectPersonalDiv">
 				<div class="col-4">참여자 (기여도)</div>
-				<div class="col-8"><input type="text" class="form-control d-inline" style=" width: calc(100% - 108px);" name="developerName" value="<%=userName %>" readonly>
-				<span> (</span><input type="text" class="form-control d-inline" style="width: 80px;" name="partRatio" value="100" readonly><span>%)</span></div>
+				<div class="col-8"><input type="text" name="developerName" class="form-control d-inline" style=" width: calc(100% - 108px);" value="<%=userName %>" readonly>
+				<span> (</span><input type="text" name="contribution" class="form-control d-inline" style="width: 80px;" value="100" readonly><span>%)</span></div>
 			</div>
 			<div class="row" id="projectTeamDiv" style="display: none;">
-				<div class="col-4">참여자 (기여도) <img src="/repo/addition-color-icon.svg" class="small-img btn" onclick="javascript:addDeveloper();"></div>
+				<div class="col-4">참여자 (기여도) <img src="/repo/addition-color-icon.svg" class="small-img btn" onclick="javascript:addDeveloper(this);"></div>
 				<div class="col-8" id="developerList">
 				<div>
-				<input type="text" class="form-control w-auto d-inline" name="developerName" value="<%=userName %>" readonly>
-				<span> (</span><input type="text" class="form-control d-inline" style="width: 80px;" name="partRatio"><span>%)</span></div>
+				<input type="text" name="developerName" class="form-control w-auto d-inline" value="<%=userName %>" readonly>
+				<span> (</span><input type="number" name="contribution" class="form-control d-inline" style="width: 80px;" min="1" max="100" maxlength="3"><span>%)</span></div>
 			</div>
 			</div>
 			<div class="row">
 				<div class="col-4">수행 기간</div>
-				<div class="col-8"><input type="date" class="form-control w-auto d-inline" name="startDate">
-				<span> ~ </span><input type="date" class="form-control w-auto d-inline" name="finishDate"></div>
+				<div class="col-8"><input type="date" name="startDate" class="form-control w-auto d-inline" value="2023-06-29">
+				<span> ~ </span><input type="date" name="finishDate" class="form-control w-auto d-inline" value="2023-07-07"></div>
 			</div>
 			<div class="row">
 				<div class="col-4">프로젝트 링크</div>
-				<div class="col-8"><input type="text" class="form-control" name="projectUrl"></div>
+				<div class="col-8"><input type="text" name="projectLink" class="form-control" value="testlink"></div>
 			</div>
 			<div class="row">
 				<div class="col-4">주요 기능</div>
-				<div class="col-8"><input type="text" class="form-control" name="projectFunction"></div>
+				<div class="col-8"><textarea name="projectFeatures" class="form-control" placeholder="기능은 줄바꿈으로 구분합니다.">주요기능
+입력값
+테스트</textarea></div>
 			</div>
 			<div class="row">
 				<div class="col-4">비고</div>
-				<div class="col-8"><input type="text" class="form-control" name="projectEtc"></div>
+				<div class="col-8"><textarea name="projectEtc" class="form-control">비고 입력값 테스트</textarea></div>
 			</div>
 			
 			</div>
+		</div>
+		</div>
 			<!-- Projects 끝 -->
 			
 		</div>
@@ -181,6 +185,7 @@ if (vo.size() != 0) {
 	</form>
 
 <script>
+//Skills 블록 시작
 function skillSelectInput(){
 	if ($("#skillSelect").val() == "input"){
 		$("#skillSelect").hide();
@@ -188,41 +193,48 @@ function skillSelectInput(){
 	}
 }
 
-function developersDiv(){
-	if ($("#projectType").val() == "team"){
-		$("#projectPersonalDiv").hide();
-		$("#projectTeamDiv").show();
-	} else{
-		$("#projectPersonalDiv").show();
-		$("#projectTeamDiv").hide();
-	}
-}
-
 function addSkillSet(event) {
 	  var skillList = document.getElementById("skillsDiv");
 	  var newdiv = document.createElement("div");
 	  newdiv.classList.add("row");
-	  newdiv.innerHTML = '<select class=\"form-select\" name=\"skillHeader\" style=\"margin: 0 0.25rem 0.25rem 0.75rem; width: 10rem; display: inline;\" onchange=\"javascript:showInput(this);\"><option value=\"보유 중\">보유 중</option><option value=\"공부 중\">공부 중</option><option value=\"접해 봄\">접해 봄</option><option value=\"input\">직접 입력</option></select><input type=\"text\" class=\"form-control\" name=\"skillHeader\" style=\"margin: 0 0.25rem 0.25rem 0.75rem; width: 10rem; display: none;\" disabled><textarea name=\"skillList\" class=\"form-control d-inline\" style=\"width: calc(100% - 200px); height: 17px; margin:0 0.5rem 0.25rem 0;\" placeholder=\"기술 목록을 적으십시오. 기술은 쉼표로 구분합니다.\"></textarea><img src="/repo/subtract-color-outline-icon.svg" class="small-img btn" onclick="event.currentTarget.parentNode.remove()">';
+	  newdiv.innerHTML = '<select class=\"form-select\" name=\"skillHeader\" style=\"margin: 0 0.25rem 0.25rem 0.75rem; width: 10rem; display: inline;\" onchange=\"javascript:showInput(this);\"><option value=\"보유 중\">보유 중</option><option value=\"공부 중\">공부 중</option><option value=\"접해 봄\">접해 봄</option><option value=\"input\">직접 입력</option></select><input type=\"text\" class=\"form-control\" name=\"skillHeader\" style=\"margin: 0 0.25rem 0.25rem 0.75rem; width: 10rem; display: none;\" disabled><textarea name=\"skillList\" class=\"form-control d-inline\" style=\"width: calc(100% - 200px); height: 17px; margin:0 0.5rem 0.25rem 0;\" placeholder=\"기술 목록을 입력하십시오. 기술은 쉼표로 구분합니다.\"></textarea><img src="/repo/subtract-color-outline-icon.svg" class="small-img btn" onclick="event.currentTarget.parentNode.remove()">';
 	  skillList.appendChild(newdiv);
 	}
+//Skills 블록 끝
+
+//Projects 블록 시작
+function developersDiv(obj){
+	if (obj.value == "Team"){
+		$(obj).parent().parent().parent().find("#projectPersonalDiv").hide();
+		$(obj).parent().parent().parent().find("#projectPersonalDiv input").prop("disabled", true);
+		$(obj).parent().parent().parent().find("#projectTeamDiv").show();
+		$(obj).parent().parent().parent().find("#projectTeamDiv input").prop("disabled", false);
+	} else{
+		$(obj).parent().parent().parent().find("#projectPersonalDiv").show();
+		$(obj).parent().parent().parent().find("#projectPersonalDiv input").prop("disabled", false);
+		$(obj).parent().parent().parent().find("#projectTeamDiv").hide();
+		$(obj).parent().parent().parent().find("#projectTeamDiv input").prop("disabled", true);
+	}
+}
   
-  function addDeveloper(event) {
-	  var skillList = document.getElementById("developerList");
+function addDeveloper(obj) {
+	  var developerList = obj.parentNode.parentNode.querySelector("#developerList");
 	  var newdiv = document.createElement("div");
 	  newdiv.classList.add("mt-1");
-	  newdiv.innerHTML = '<input type=\"text\" class=\"form-control w-auto d-inline\" name=\"developerName\"><span> (</span><input type=\"text\" class=\"form-control d-inline\" style=\"width: 80px;\" name=\"partRatio\"><span>%) </span> <img src=\"/repo/subtract-color-outline-icon.svg\" class=\"small-img btn\" onclick=\"event.currentTarget.parentNode.remove()\">';
-	  skillList.appendChild(newdiv);
+	  newdiv.innerHTML = '<input type=\"text\" class=\"form-control w-auto d-inline\" name=\"developerName\"><span> (</span><input type=\"number\" name=\"contribution\" class=\"form-control d-inline\" style=\"width: 80px;\" min=\"1\" max=\"100\" maxlength=\"3\"><span>%) </span> <img src=\"/repo/subtract-color-outline-icon.svg\" class=\"small-img btn\" onclick=\"event.currentTarget.parentNode.remove()\">';
+	  developerList.appendChild(newdiv);
 	}
-  
-  function addProject(event) {
+
+function addProject(event) {
 	  var skillList = document.getElementById("resumeFormDiv");
 	  var newdiv = document.createElement("div");
 	  newdiv.classList.add("grid");
 	  newdiv.classList.add("row-gap-3");
 	  newdiv.style.alignContent = "baseline";
-	  newdiv.innerHTML = '<div style=\"text-align: right; margin-top:3px;\"><button onclick=\"event.currentTarget.parentNode.parentNode.remove()\" class=\"btn\"><img src=\"/repo/subtract-color-outline-icon.svg\" class=\"small-img\"> Delete Project</button></div><div class=\"row\"><div class=\"col-4\">프로젝트 종류</div><div class=\"col-8\"><select class=\"form-select\" name=\"projectType\"><option value=\"personal\">개인 프로젝트</option><option value=\"team\">팀 프로젝트</option></select></div></div><div class=\"row\"><div class=\"col-4\">프로젝트 제목</div><div class=\"col-8\"><input type=\"text\" class=\"form-control\"></div></div><div class=\"row\"><div class=\"col-4\">참여자 (기여도)</div><div class=\"col-8\"><input type=\"text\" class=\"form-control w-auto d-inline\" name=\"developerName\"><span> (</span><input type=\"text\" class=\"form-control d-inline\" style=\"width: 80px;\" name=\"partRatio\"><span>%)</span></div></div><div class=\"row\"><div class=\"col-4\">수행 기간</div><div class=\"col-8\"><input type=\"date\" class=\"form-control w-auto d-inline\" name=\"startDate\"><span> ~ </span><input type=\"date\" class=\"form-control w-auto d-inline\" name=\"finishDate\"></div></div><div class=\"row\"><div class=\"col-4\">프로젝트 링크</div><div class=\"col-8\"><input type=\"text\" class=\"form-control\" name=\"projectUrl\"></div></div><div class=\"row\"><div class=\"col-4\">주요 기능</div><div class=\"col-8\"><input type=\"text\" class=\"form-control\" name=\"projectFunction\"></div></div><div class=\"row\"><div class=\"col-4\">비고</div><div class=\"col-8\"><input type=\"text\" class=\"form-control\" name=\"projectEtc\"></div></div>';
+	  newdiv.innerHTML = '<div style=\'text-align: right; margin-top:3px;\'><button onclick=\'event.currentTarget.parentNode.parentNode.remove()\' class=\'btn\'><img src=\'/repo/subtract-color-outline-icon.svg\' class=\'small-img\'> Delete This Project</button></div>' + $("#projectBox").html();
 	  skillList.appendChild(newdiv);
 	}
+//Projects 블록 끝
   
 //수정 필요
   function validateForm() {

@@ -9,63 +9,59 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
   </head>
 <%@include file="/view/header.jsp" %>
+
 <style>
-.card-img-top {
-	padding: 2rem 6rem 1rem 6rem;
-}
-
-.grayImg{
-position:absolute;
-}
-
-.grayImg:hover{
-display:none;
-}
-
+i{margin-right: 0.6rem;}
 </style>
-</head>
 
+</head>
 
 <body>
 <h1>Main</h1>
 <br>
 <div class="card-group">
-  <div class="card">
+  <div class="card p-3">
+  <div class="center mb-1">
         <a href="./ResumeForm01.jsp">
-		<img src="./repo/template01_gray.svg" class="card-img-top grayImg btn">
-		<img src="./repo/template01_color.svg" class="card-img-top colorImg">
+		<img src="./repo/template01_gray.svg" class="card-img-top" onmouseover="javascript:imgHoverStart(this);">
+		<img src="./repo/template01_color.svg" class="card-img-top" style="display: none;" onmouseout="javascript:imgHoverEnd(this);">
         </a>
+  </div>
     <div class="card-body">
-      <h5 class="card-title">이력서 양식1 : </h5>
-      <p class="card-text"> 자기소개 / 보유 기술 / 수행 프로젝트 등 기재 가능 </p>
-      <p class="card-text"><small class="text-body-secondary"> 프로젝트에 대한 자세한 설명으로 포트폴리오 작성에 도움이 되는 이력서 </small></p>
+      <h4 class="card-title">📜HTML Style</h4>
+      <p class="card-text">반응형 CSS가 적용된 HTML 형식으로 이력서를 출력할 수 있습니다.</p>
+      <p class="card-text"><small class="text-body-secondary"><i>#홈페이지</i><i>#블로그</i><i>#확장성</i><i>#범용성</i></small></p>
     </div>
   </div>
-  <div class="card">
+
+  <div class="card p-3">
+  <div class="center mb-1">
     <a href="./ResumeForm02.jsp">
-	<img src="./repo/template02_gray.svg" class="card-img-top grayImg btn">
-    <img src="./repo/template02_color.svg" class="card-img-top colorImg">
+	<img src="./repo/template03_gray.svg" class="card-img-top" onmouseover="javascript:imgHoverStart(this);">
+    <img src="./repo/template03_color.svg" class="card-img-top" style="display: none;" onmouseout="javascript:imgHoverEnd(this);">
     </a>
-    <div class="card-body">
-      <h5 class="card-title">이력서 양식2 : </h5>
-      <p class="card-text">이력서 양식2 설명</p>
-      <p class="card-text"><small class="text-body-secondary">이력서 양식2 부가설명</small></p>
     </div>
-  </div>
-  <div class="card">
-    <a href="./ResumeForm03.jsp">
-	<img src="./repo/template03_gray.svg" class="card-img-top grayImg btn">
-    <img src="./repo/template03_color.svg" class="card-img-top colorImg">
-    </a>
     <div class="card-body">
-      <h5 class="card-title">이력서 양식3 : </h5>
-      <p class="card-text">이력서 양식3 설명</p>
-      <p class="card-text"><small class="text-body-secondary">이력서 양식3 부가설명</small></p>
+      <h4 class="card-title">📃Markdown Style</h4>
+      <p class="card-text">경량 마크업 언어인 Markdown 형식으로 이력서를 출력할 수 있습니다.</p>
+      <p class="card-text"><small class="text-body-secondary"><i>#GitHub_Readme</i><i>#Notion</i><i>#심플</i></small></p>
     </div>
   </div>
 </div>
 
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+<script>
+//호버 시 색깔 그림 나타나는 이벤트
+function imgHoverStart(obj){
+	$(obj).hide();
+	$(obj).next().show();
+};
+function imgHoverEnd(obj){
+	$(obj).hide();
+	$(obj).prev().show();
+};
+</script>
+
 <%@include file="/view/footer.jsp" %>
 </body>
 

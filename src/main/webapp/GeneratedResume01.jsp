@@ -78,6 +78,7 @@ $("#gitHubDiv").show();
 
 		<div id="contents">
 
+			<!-- About me 시작 -->
 			<div id="about">
 				<h2>😀‍ About Me</h2>
 				<hr>
@@ -95,154 +96,149 @@ $("#gitHubDiv").show();
 					</section>
 				</div>
 			</div>
+			<!-- About me 끝 -->
 
-			
+			<!-- Skills 시작 -->
 			<div id="skills">
-				<h2>💻 Skills</h2>
-				<hr>
+	<h2>💻 Skills</h2>
+	<hr>
 
-				<table>
-					<tbody>
-						<%
-						String[] skillHeaderArray = request.getParameterValues("skillHeader");
-						String[] skillListArray = request.getParameterValues("skillList");
+	<table>
+		<tbody>
+			<%
+			String[] skillHeaderArray = request.getParameterValues("skillHeader");
+			String[] skillListArray = request.getParameterValues("skillList");
 
-						if (skillHeaderArray != null && skillListArray != null) {
-							for (int i = 0; i < skillHeaderArray.length; i++) {
-								out.print("<tr>");
-								out.print("<td><strong>" + skillHeaderArray[i] + "</strong></td>");
-								out.print("<td>");
-								String[] split = skillListArray[i].split(",");
-								for (int j = 0; j < split.length; j++){
-									 switch(split[j].trim().toLowerCase()) {
-									    case "html/css":
-									      split[j] = "https://img.shields.io/badge/-HTML/CSS-1572B6?style=flat&amp;logo=css3&amp;logoColor=white";
-									      break;
-									    case "java":
-									      split[j] = "https://img.shields.io/badge/-JAVA-orange?style=flat&amp;logo=java&amp;logoColor=white";
-									      break;
-									    case "javascript":
-									      split[j] = "https://img.shields.io/badge/-JavaScript-F7DF1E?style=flat&amp;logo=JavaScript&amp;logoColor=white";
-									      break;
-									    case "spring":
-									      split[j] = "https://img.shields.io/badge/-Spring-6DB33F?style=flat&amp;logo=flat&amp;logoColor=white";
-									      break;
-									    case "node.js":
-									      split[j] = "https://img.shields.io/badge/-Node.js-339933?style=flat&amp;logo=nodedotjs&amp;logoColor=white";
-									      break;
-									    case "react":
-									      split[j] = "https://img.shields.io/badge/-React-61DAFB?style=flat&amp;logo=react&amp;logoColor=white";
-									      break;
-									    case "react.js":
-									      split[j] = "https://img.shields.io/badge/-React.js-61DAFB?style=flat&amp;logo=react&amp;logoColor=white";
-									      break;
-									    case "mysql":
-									      split[j] = "https://img.shields.io/badge/-MySQL-4479A1?style=flat&amp;logo=mysql&amp;logoColor=white";
-									      break;
-									    case "oracle":
-									      split[j] = "https://img.shields.io/badge/-Oracle-F80000?style=flat&amp;logo=oracle&amp;logoColor=white";
-									      break;
-									    default:
-									      split[j] = "https://img.shields.io/badge/-"+split[j]+"-1D267D?style=flat&amp;logo="+split[j]+"&amp;logoColor=white";
-									  }
-									out.print("<img src=\""+split[j]+"\">");
-								}
-								out.print("</td></tr>");
-							}
+			if (skillHeaderArray != null && skillListArray != null) {
+				for (int i = 0; i < skillHeaderArray.length; i++) {
+			%>
+			<tr>
+				<td><strong><%= skillHeaderArray[i] %></strong></td>
+				<td>
+					<%
+					String[] split = skillListArray[i].split(",");
+					for (int j = 0; j < split.length; j++) {
+						String skill = split[j].trim().toLowerCase();
+						String badgeUrl;
+						switch (skill) {
+							case "html/css":
+								badgeUrl = "https://img.shields.io/badge/-HTML/CSS-1572B6?style=flat&amp;logo=css3&amp;logoColor=white";
+								break;
+							case "java":
+								badgeUrl = "https://img.shields.io/badge/-JAVA-orange?style=flat&amp;logo=java&amp;logoColor=white";
+								break;
+							case "javascript":
+								badgeUrl = "https://img.shields.io/badge/-JavaScript-F7DF1E?style=flat&amp;logo=JavaScript&amp;logoColor=white";
+								break;
+							case "spring":
+								badgeUrl = "https://img.shields.io/badge/-Spring-6DB33F?style=flat&amp;logo=flat&amp;logoColor=white";
+								break;
+							case "node.js":
+								badgeUrl = "https://img.shields.io/badge/-Node.js-339933?style=flat&amp;logo=nodedotjs&amp;logoColor=white";
+								break;
+							case "react":
+							case "react.js":
+								badgeUrl = "https://img.shields.io/badge/-React-61DAFB?style=flat&amp;logo=react&amp;logoColor=white";
+								break;
+							case "mysql":
+								badgeUrl = "https://img.shields.io/badge/-MySQL-4479A1?style=flat&amp;logo=mysql&amp;logoColor=white";
+								break;
+							case "oracle":
+								badgeUrl = "https://img.shields.io/badge/-Oracle-F80000?style=flat&amp;logo=oracle&amp;logoColor=white";
+								break;
+							default:
+								badgeUrl = "https://img.shields.io/badge/-"+skill+"-1D267D?style=flat&amp;logo="+skill+"&amp;logoColor=white";
 						}
 						%>
+						<img src="<%= badgeUrl %>">
+						<%}%>
+				</td>
+			</tr>
+			<%}}%>
+		</tbody>
+	</table>
+</div>
+			<!-- Skills 끝 -->
+			
+			<!-- Projects 시작 -->
+			<div id="projects">
+		<h2>🗂️ Projects</h2>
+		<hr>
+		<div class="container gap-5">
+			<%
+			String[] projectTypeArray = request.getParameterValues("projectType");
+			String[] projectNameArray = request.getParameterValues("projectName");
+			String[] developerNameArray = request.getParameterValues("developerName");
+			String[] contributionArray = request.getParameterValues("contribution");
+			String[] startDateArray = request.getParameterValues("startDate");
+			String[] finishDateArray = request.getParameterValues("finishDate");
+			String[] projectLinkArray = request.getParameterValues("projectLink");
+			String[] projectFeaturesArray = request.getParameterValues("projectFeatures");
+			String[] projectEtcArray = request.getParameterValues("projectEtc");
+
+			if (projectTypeArray != null) {
+				for (int i = 0; i < projectTypeArray.length; i++) {
+			%>
+			<div class="item">
+				<h4>
+					<%
+					switch (projectTypeArray[i].toLowerCase()) {
+						case "personal":
+							projectTypeArray[i] = projectTypeArray[i] + "-blue";
+							break;
+						case "team":
+							projectTypeArray[i] = projectTypeArray[i] + "-green";
+							break;
+					}
+					%>
+					<img src="https://img.shields.io/badge/Project-<%=projectTypeArray[i] %>">
+					<%=projectNameArray[i] %>
+				</h4>
+				<table>
+					<tbody>
+						<tr>
+							<td><strong>참여자 (기여도)</strong></td>
+							<td><%=developerNameArray[i] %> (<%=contributionArray[i] %>%)</td>
+						</tr>
+						<tr>
+							<td><strong>기간</strong></td>
+							<td><%=startDateArray[i] %> ~ <%=finishDateArray[i] %></td>
+						</tr>
+						<tr>
+							<td><strong>사용 기술</strong></td>
+							<td>HTML/CSS, JavaScript</td>
+						</tr>
+						<tr>
+							<td><strong>URL</strong></td>
+							<td><a href="<%= projectLinkArray[i] %>"><%= projectLinkArray[i] %></a></td>
+						</tr>
+						<tr>
+							<td><strong>주요 기능</strong></td>
+							<td>
+								<ul>
+									<%
+									String[] split = projectFeaturesArray[i].split("\n");
+									for (int j = 0; j < split.length; j++) {
+										%>
+										<li><%= split[j] %></li>
+										<%}%>
+								</ul>
+							</td>
+						</tr>
+						<tr>
+							<td><strong>비고</strong></td>
+							<td><%=projectEtcArray[i] %></td>
+						</tr>
 					</tbody>
 				</table>
-
 			</div>
-
-			
-			<div id="projects">
-				<h2>🗂️ Projects</h2>
-				<hr>
-				<div class="container column-gap-5">
-					<div class="item">
-						<h4>
-							<img src="https://img.shields.io/badge/Project-Personal-blue">
-							Enumeration해서.....
-							세트가 있어야 되나???
-						</h4>
-						<table>
-							<tbody><tr>
-								<td><strong>참여자 (기여도)</strong></td>
-								<td><%=userName %> (100%)</td>
-							</tr>
-							<tr>
-								<td><strong>기간</strong></td>
-								<td><%=startDate %> ~ <%=finishDate %></td>
-							</tr>
-							<tr>
-								<td><strong>사용 기술</strong></td>
-								<td>HTML/CSS, JavaScript</td>
-							</tr>
-							<tr>
-								<td><strong>URL</strong></td>
-								<td><a href="">github.com/yumalg12/dummyprojectA</a></td>
-							</tr>
-							<tr>
-								<td><strong>주요 기능</strong></td>
-								<td><ul>
-										<li>기능 1</li>
-										<li>기능 2</li>
-										<li>기능 3</li>
-									</ul></td>
-							</tr>
-								<tr>
-									<td><strong>비고</strong></td>
-									<td>어려웠던 점, 느낀 점 등등</td>
-								</tr>
-							</tbody></table>
-					</div>
-					
-					
-					<div class="item">
-						<h4>
-							<img src="https://img.shields.io/badge/Project-TEAM-green">
-							Dummy Project B
-						</h4>
-						<table>
-							<tbody><tr>
-								<td><strong>참여자 (기여도)</strong></td>
-								<td><%=userName %> (50%), ㅇㅇㅇ (50%)</td>
-							</tr>
-							<tr>
-								<td><strong>기간</strong></td>
-								<td>2023. 05~</td>
-							</tr>
-							<tr>
-								<td><strong>사용 기술</strong></td>
-								<td>JAVA</td>
-							</tr>
-							<tr>
-								<td><strong>URL</strong></td>
-								<td><a href="">github.com/yumalg12/dummyprojectB</a></td>
-							</tr>
-							<tr>
-								<td><strong>주요 기능</strong></td>
-								<td><ul>
-										<li>기능 1</li>
-										<li>기능 2</li>
-										<li>기능 3</li>
-									</ul></td>
-							</tr>
-								<tr>
-									<td><strong>비고</strong></td>
-									<td>어려웠던 점, 느낀 점 등등</td>
-								</tr>
-							</tbody></table>
-					</div>
-					
-				</div>
-
-			</div>
+			<%}}%>
 		</div>
 	</div>
-	<br>
-	<br>
+			<!-- Projects 끝 -->
+			
+		</div>
+	</div>
+	
 <%@include file="/view/footer.jsp" %>
 </body></html>
