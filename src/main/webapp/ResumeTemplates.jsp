@@ -44,7 +44,7 @@ i{margin-right: 0.6rem;}
     <div class="card-body">
       <h4 class="card-title">📃Markdown Style</h4>
       <p class="card-text">경량 마크업 언어인 Markdown 형식으로 이력서를 출력할 수 있습니다.</p>
-      <p class="card-text"><small class="text-body-secondary"><i>#GitHub_Readme</i><i>#Notion</i><i>#심플</i></small></p>
+      <p class="card-text"><small class="text-body-secondary"><i>#GitHub</i><i>#README.md</i><i>#Notion</i><i>#심플</i></small></p>
     </div>
   </div>
 </div>

@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>인스턴트 이력서 생성기 | HTML Style</title>
+<title>인스턴트 이력서 생성기 | Markdown Style</title>
 <%@ include file="/view/header.jsp"%>
 <style>
 .skillBox {
@@ -42,7 +42,7 @@ function showInput(obj){
 </head>
 
 <body>
-	<h1>📜HTML Style</h1>
+	<h1>📃Markdown Style</h1>
 <br>
 <%
 String userName = null;
@@ -60,7 +60,7 @@ if (vo.size() != 0) {
 
 %>
 
-	<form name="ResumeForm" method="post" accept-charset="utf-8" action="GeneratedResume01.jsp">
+	<form name="ResumeForm" method="post" accept-charset="utf-8" action="GeneratedResume02.jsp">
 		<div class="container grid gap-5" style="grid-template-columns: 1fr 1fr;" id="resumeFormDiv">
 			
 			<!-- About me 시작 -->
@@ -86,8 +86,7 @@ if (vo.size() != 0) {
 				<div class="row">
 					<div class="col-4">프로필 사진</div>
 					<div class="col-8">
-						<input type="file" accept="image/gif, image/jpeg, image/png, image/bmp, application/svg" class="form-control" id="profilePic"
-							name="profilePic" value="<%=profilePic %>">
+						<input type="text" class="form-control" id="profilePic" name="profilePic" placeholder="웹에 업로드된 이미지 경로를 입력하십시오.">
 					</div>
 				</div>
 
@@ -144,6 +143,10 @@ if (vo.size() != 0) {
 				<div class="col-4">프로젝트 제목</div>
 				<div class="col-8"><input type="text" class="form-control" name="projectName"></div>
 			</div>
+			<div class="row">
+				<div class="col-4">소개</div>
+				<div class="col-8"><textarea name="projectEtc" class="form-control"></textarea></div>
+			</div>
 			<div class="row" id="projectPersonalDiv">
 				<div class="col-4">참여자 (기여도)</div>
 				<div class="col-8"><input type="text" name="developerName" class="form-control d-inline" style=" width: calc(100% - 108px);" value="<%=userName %>" readonly>
@@ -173,10 +176,6 @@ if (vo.size() != 0) {
 			<div class="row">
 				<div class="col-4">주요 기능</div>
 				<div class="col-8"><textarea name="projectFeatures" class="form-control" placeholder="기능은 줄바꿈으로 구분합니다."></textarea></div>
-			</div>
-			<div class="row">
-				<div class="col-4">비고</div>
-				<div class="col-8"><textarea name="projectEtc" class="form-control"></textarea></div>
 			</div>
 			
 			</div>

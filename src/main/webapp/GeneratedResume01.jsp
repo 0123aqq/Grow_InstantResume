@@ -172,6 +172,7 @@ $("#gitHubDiv").show();
 			String[] contributionArray = request.getParameterValues("contribution");
 			String[] startDateArray = request.getParameterValues("startDate");
 			String[] finishDateArray = request.getParameterValues("finishDate");
+			String[] usedStacksArray = request.getParameterValues("usedStacks");
 			String[] projectLinkArray = request.getParameterValues("projectLink");
 			String[] projectFeaturesArray = request.getParameterValues("projectFeatures");
 			String[] projectEtcArray = request.getParameterValues("projectEtc");
@@ -206,7 +207,7 @@ $("#gitHubDiv").show();
 						</tr>
 						<tr>
 							<td><strong>사용 기술</strong></td>
-							<td>HTML/CSS, JavaScript</td>
+							<td><%=usedStacksArray[i] %></td>
 						</tr>
 						<tr>
 							<td><strong>URL</strong></td>
