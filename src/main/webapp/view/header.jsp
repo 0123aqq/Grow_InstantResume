@@ -30,9 +30,11 @@
 .navbar-toggler-icon {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='white' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
 }
-.btn-close {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-x'%3E%3Cpath d='M18 6L6 18M6 6l12 12'/%3E%3C/svg%3E");
+
+.navbar-toggler:focus{
+box-shadow: 0 0 0 0;
 }
+
 .offcanvas-body {
 font-size: 20px;
   display: flex;
@@ -46,9 +48,7 @@ font-size: 20px;
 function logout() {
     alert('로그아웃 하셨습니다.');
     window.location.href = './logout';
-}
-
-  
+}  
 </script>
 
 </head>
@@ -60,16 +60,16 @@ function logout() {
   
       <a class="navbar-brand" href="./" style="padding-left: 20px; color: white;">인스턴트 이력서 생성기</a>
     
-      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation" >
+      <button class="navbar-toggler" id="headerMenuBtn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation" style="border: none;">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+      <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel" style="background-color: #ffffff99;backdrop-filter: blur(15px); border: none;">
         <div class="offcanvas-header">
-          <h3 class="offcanvas-title" id="offcanvasNavbarLabel"> - Menu - </h3><br><br><br>
-          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close" ></button>
+          <h3 class="offcanvas-title m-3" id="offcanvasNavbarLabel">Menu</h3>
+          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close" style="margin: 0;"></button>
         </div>
         <div class="offcanvas-body">
-          <div>
+          <div class="m-3" style="line-height: 3.0;">
             <ul class="navbar-nav justify-content-end pe-3">
               <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="/"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-house-heart" viewBox="0 0 25 25">
@@ -90,19 +90,17 @@ function logout() {
   <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm10-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1z"/>
 </svg>   Resume
                 </a>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="./GeneratedResume01.jsp">이력서 ver.1</a></li>
-                  <br>
-                  <li><a class="dropdown-item" href="#">이력서폼2</a></li>
-                  <br>
-                  <li><a class="dropdown-item" href="#">이력서폼3</a></li>
+                <ul class="dropdown-menu" style="background-color: #ffffff90;">
+                  <li><a class="dropdown-item" href="./GeneratedResume01.jsp">이력서 01</a></li>
+                  <li><a class="dropdown-item" href="./GeneratedResume02.jsp">이력서 02</a></li>
+                  <li><a class="dropdown-item" href="./GeneratedResume03.jsp">이력서 03</a></li>
                 </ul>
               </li>
             </ul>
             </form>
           </div>
           <div>
-            <button onClick="logout();" class="btn btn-danger">logout</button>
+            <button onClick="logout();" class="btn btn-danger m-3">Logout</button>
 
           </div>
         </div>
@@ -110,6 +108,16 @@ function logout() {
     </nav>
   </div>
 </nav>
+
+<script>
+
+//로그인하지 않은 상태라면 메뉴바를 숨김 처리
+<%String userID = (String) session.getAttribute("userID");%>
+var userID = "<%=userID %>";
+if (userID == null || userID == "null" || userID == ""){
+	$("#headerMenuBtn").hide();
+}
+</script>
 
 </body>
 </html>

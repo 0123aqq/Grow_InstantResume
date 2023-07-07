@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html>
 		
-<%String userID = request.getParameter("userID"); 
+<%
 String userName = request.getParameter("userName"); 
 String profilePic = request.getParameter("profilePic"); 
 String userIntroduction = request.getParameter("userIntroduction"); 
@@ -100,28 +100,60 @@ $("#gitHubDiv").show();
 			<div id="skills">
 				<h2>💻 Skills</h2>
 				<hr>
+
 				<table>
-					<tbody><tr>
-						<td><strong>보유 중</strong></td>
-						<td><img src="https://img.shields.io/badge/-HTML/CSS-1572B6?style=flat&amp;logo=css3&amp;logoColor=white">
-						</td>
-					</tr>
-					<tr>
-						<td><strong>공부 중</strong></td>
-						<td><img src="https://img.shields.io/badge/-JAVA-orange?style=flat&amp;logo=java&amp;logoColor=white">
-							<img src="https://img.shields.io/badge/-JavaScript-F7DF1E?style=flat&amp;logo=JavaScript&amp;logoColor=white">
-							<img src="https://img.shields.io/badge/-Spring-6DB33F?style=flat&amp;logo=flat&amp;logoColor=white">
-							<img src="https://img.shields.io/badge/-Node.js-339933?style=flat&amp;logo=nodedotjs&amp;logoColor=white">
-							<img src="https://img.shields.io/badge/-React-61DAFB?style=flat&amp;logo=react&amp;logoColor=white">
-						</td>
-					</tr>
-					<tr>
-						<td><strong>접해 봄</strong></td>
-						<td><img src="https://img.shields.io/badge/-Python-3776AB?style=flat&amp;logo=python&amp;logoColor=white">
-							<img src="https://img.shields.io/badge/-MySQL-4479A1?style=flat&amp;logo=mysql&amp;logoColor=white">
-						</td>
-					</tr>
-				</tbody></table>
+					<tbody>
+						<%
+						String[] skillHeaderArray = request.getParameterValues("skillHeader");
+						String[] skillListArray = request.getParameterValues("skillList");
+
+						if (skillHeaderArray != null && skillListArray != null) {
+							for (int i = 0; i < skillHeaderArray.length; i++) {
+								out.print("<tr>");
+								out.print("<td><strong>" + skillHeaderArray[i] + "</strong></td>");
+								out.print("<td>");
+								String[] split = skillListArray[i].split(",");
+								for (int j = 0; j < split.length; j++){
+									 switch(split[j].trim().toLowerCase()) {
+									    case "html/css":
+									      split[j] = "https://img.shields.io/badge/-HTML/CSS-1572B6?style=flat&amp;logo=css3&amp;logoColor=white";
+									      break;
+									    case "java":
+									      split[j] = "https://img.shields.io/badge/-JAVA-orange?style=flat&amp;logo=java&amp;logoColor=white";
+									      break;
+									    case "javascript":
+									      split[j] = "https://img.shields.io/badge/-JavaScript-F7DF1E?style=flat&amp;logo=JavaScript&amp;logoColor=white";
+									      break;
+									    case "spring":
+									      split[j] = "https://img.shields.io/badge/-Spring-6DB33F?style=flat&amp;logo=flat&amp;logoColor=white";
+									      break;
+									    case "node.js":
+									      split[j] = "https://img.shields.io/badge/-Node.js-339933?style=flat&amp;logo=nodedotjs&amp;logoColor=white";
+									      break;
+									    case "react":
+									      split[j] = "https://img.shields.io/badge/-React-61DAFB?style=flat&amp;logo=react&amp;logoColor=white";
+									      break;
+									    case "react.js":
+									      split[j] = "https://img.shields.io/badge/-React.js-61DAFB?style=flat&amp;logo=react&amp;logoColor=white";
+									      break;
+									    case "mysql":
+									      split[j] = "https://img.shields.io/badge/-MySQL-4479A1?style=flat&amp;logo=mysql&amp;logoColor=white";
+									      break;
+									    case "oracle":
+									      split[j] = "https://img.shields.io/badge/-Oracle-F80000?style=flat&amp;logo=oracle&amp;logoColor=white";
+									      break;
+									    default:
+									      split[j] = "https://img.shields.io/badge/-"+split[j]+"-1D267D?style=flat&amp;logo="+split[j]+"&amp;logoColor=white";
+									  }
+									out.print("<img src=\""+split[j]+"\">");
+								}
+								out.print("</td></tr>");
+							}
+						}
+						%>
+					</tbody>
+				</table>
+
 			</div>
 
 			

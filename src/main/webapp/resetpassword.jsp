@@ -4,7 +4,42 @@
 <head>
 <title>인스턴트 이력서 생성기 | 비밀번호 재설정</title>
 <%@ include file="/view/header.jsp"%>
+
+<script>
+function duplicateID() {
+	let _userID = $("#userID").val();
+	
+	if (!IDValidation(_userID)){
+	    alert("올바른 이메일 아이디를 입력하십시오.");
+	    setTimeout(function () { $("#userID").focus(); }, 100);
+	} else {
+		 $.ajax({
+		        type: "post",
+		        async: false,
+		        url: "EmailValidationDTO",
+		        dataType: "json",
+		        data: {userID: _userID},
+		        success: function(data, textStatus) {
+		            if (data.isEmailDuplicate == true) {
+		                prompt("임시 비밀번호를 발급받을 ID를 다시 입력하십시오.");
+		            } else {
+		                alert("가입되지 않은 ID입니다.");
+		        	    setTimeout(function () { $("#userID").focus(); }, 100);
+		            }
+		        },
+		        error: function(data, textStatus) {
+		        	console.log("data: "+ data +" / textStatus: "+textStatus);
+		            alert("오류가 발생했습니다.");
+		        },
+		        complete: function(data, textStatus) {
+		        }
+		    });
+	}
+}
+</script>
+
 </head>
+
 <body>
 	<h1>비밀번호 재설정</h1>
 	<%-- 세션에서 임시 비밀번호 정보 가져오기 --%>
@@ -14,7 +49,7 @@
 	<p>임시 비밀번호: <%= temporaryPassword %></p>
 	<% } %>
 	<div class="container w-50" style="margin: auto;">
-	<form action="ResetPasswordServlet" method="post">
+	<form onsubmit="javascript:duplicateID();">
 		<div class="row m-5">
 			<div class="col-4">
 				<label>Email ID</label>

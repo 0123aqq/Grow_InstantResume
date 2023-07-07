@@ -16,7 +16,7 @@
 
 <body>
 <h1>마이페이지</h1>
-<%String userID = (String) session.getAttribute("userID"); 
+<%
 String userPW = null;
 String userName = null;
 String emailYN = null;
@@ -105,17 +105,20 @@ if (vo.size() != 0) {
 			</div>
 		</div>
 	</form>
-	
-<div class="center">
-<button class="btn btn-color2 rounded-pill w-50 p-2 mt-5" style="max-width:240px;">회원정보 수정</button>
-<br>
-<button class="btn btn-color2 rounded-pill w-50 p-2 mt-5" style="max-width:220px;" onClick="window.location.href='DeleteUser.jsp'">회원 탈퇴</button>
 
-<br>
-<button class="btn btn-line-color2 rounded-pill w-50 p-2 mt-3" style="max-width:240px;" onclick="location.reload()">취소</button>
-	</div>
-	
-</div>
+			<div class="center mt-5">
+				<button class="btn btn-color2 rounded-pill w-50 p-2"
+					style="max-width: 240px;">회원정보 수정</button>
+				<br>
+				<button class="btn btn-line-color2 rounded-pill w-50 p-2 mt-3"
+					style="max-width: 240px;" onclick="location.reload()">취소</button>
+				<br>
+				<button class="btn btn-outline-danger rounded-pill w-50 p-2 mt-5"
+					style="max-width: 240px;"
+					onclick="window.location.href='DeleteUser.jsp'">회원 탈퇴</button>
+			</div>
+
+		</div>
 </div>
 
 <script>

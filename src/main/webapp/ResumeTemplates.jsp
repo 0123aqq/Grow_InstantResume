@@ -22,8 +22,6 @@ position:absolute;
 display:none;
 }
 
-
-
 </style>
 </head>
 

@@ -24,12 +24,27 @@
 	color: #aaa;
 }
 </style>
+
+<script>
+function showInput(obj){
+	let input = obj.nextElementSibling;
+
+	if (obj.value == "input") {
+		obj.disabled = true;
+		obj.style.display = "none";
+		
+		input.style.display = "inline";
+		input.disabled = false;
+	}
+}
+</script>
+
 </head>
+
 <body>
 	<h1>이력서 양식 01 </h1>
 <br>
-
-<%String userID = (String) session.getAttribute("userID"); 
+<%
 String userName = null;
 String profilePic = null;
 
@@ -49,7 +64,7 @@ if (vo.size() != 0) {
 		<div class="container grid gap-5" style="grid-template-columns: 1fr 1fr;" id="resumeFormDiv">
 			
 			<!-- About me 시작 -->
-			<div class="grid row-gap-3">			
+			<div class="grid row-gap-3" style="align-content: baseline;">			
 				<h3>About Me</h3>
 
 				<div class="row">
@@ -93,31 +108,23 @@ if (vo.size() != 0) {
 			<!-- About me 끝 -->
 			
 			<!-- Skills 시작 -->
-			<div class="grid row-gap-3" id="skillsDiv">
+			<div id="skillsDiv">
 				<h3>Skills <img src="/repo/addition-color-icon.svg" class="small-img-2x" 
 				style="width: 24px; cursor: pointer;" onClick="javascript:addSkillSet();"></h3>
-				<div class="row">
-					<select class="form-select w-auto d-inline" style="margin-left: 0.75rem;"><option value="having">보유 중</option>
-						<option value="studying">공부 중</option>
-						<option value="experienced">접해 봄</option>
+				<div class="row" style="margin-top: 23px;">
+					<select class="form-select" name="skillHeader" style="margin: 0 0.25rem 0.25rem 0.75rem; width: 10rem; display: inline;" onchange="javascript:showInput(this);"><option value="보유 중">보유 중</option>
+						<option value="공부 중">공부 중</option>
+						<option value="접해 봄">접해 봄</option>
 						<option value="input">직접 입력</option>
 					</select>
-					
-					<select class="form-select w-auto d-inline" id="skillSelect" onChange="javascript:skillSelectInput();"><option value="JAVA">JAVA</option>
-						<option value="Python">Python</option>
-						<option value="C++">C++</option>
-						<option value="input">직접 입력</option>
-					</select> 
-					
-					<input class="form-control w-auto d-inline" style="display: none;" id="skillInput" type="text" onkeydown="addSkill(event)">
-					<div id="skillList"></div>
+					<input type="text" class="form-control" name="skillHeader" style="margin: 0 0.25rem 0.25rem 0.75rem; width: 10rem; display: none;" disabled>
+					<textarea name="skillList" class="form-control d-inline" style="width: calc(100% - 200px); height: 17px; margin:0 0 0.25rem 0;" placeholder="기술 목록을 적으십시오. 기술은 쉼표로 구분합니다."></textarea>
 				</div>
-				<hr>
 			</div>
 			<!-- Skills 끝 -->
 			
 			<!-- Projects 시작 -->
-			<div class="grid row-gap-3">
+			<div class="grid row-gap-3" style="align-content: baseline;">
 			<h3>Projects <img src="/repo/addition-color-icon.svg" class="small-img-2x" style="width: 24px; cursor: pointer;" onclick="javascript:addProject();"></h3>
 			
 			<div class="row">
@@ -191,30 +198,11 @@ function developersDiv(){
 	}
 }
 
-  function addSkill(event) {
-    if (event.keyCode === 32 || event.keyCode === 9 || event.keyCode === 13) {
-      event.preventDefault();
-      var inputText = document.getElementById("skillInput").value.trim();
-      if (inputText !== "") {
-        var skillList = document.getElementById("skillList");
-        var newdiv = document.createElement("div");
-        newdiv.classList.add("skillBox");
-        newdiv.classList.add("form-control");
-        newdiv.onclick = function(event) { event.currentTarget.remove(); };
-        newdiv.innerHTML = inputText;
-        skillList.appendChild(newdiv);
-      }
-      document.getElementById("skillInput").value = "";
-    }
-  }
-  
-  function addSkillSet(event) {
+function addSkillSet(event) {
 	  var skillList = document.getElementById("skillsDiv");
 	  var newdiv = document.createElement("div");
 	  newdiv.classList.add("row");
-	  newdiv.style.borderBottom = "1px solid #ccc";
-	  newdiv.style.paddingBottom = "1.05rem";
-	  newdiv.innerHTML = '<select class="form-select w-auto d-inline"><option value="having">보유 중</option><option value="studying">공부 중</option><option value="experienced">접해 봄</option><option value="input">직접 입력</option></select><select class="form-select w-auto d-inline" id="skillSelect" onChange="javascript:skillSelectInput();"><option value="JAVA">JAVA</option><option value="Python">Python</option><option value="C++">C++</option><option value="input">직접 입력</option></select> <input class="form-control w-auto d-inline" style="display: none;" id="skillInput" type="text" onkeydown="addSkill(event)"> <img src="/repo/subtract-color-outline-icon.svg" class="small-img btn" onclick="event.currentTarget.parentNode.remove()" /><div id="skillList"></div>';
+	  newdiv.innerHTML = '<select class=\"form-select\" name=\"skillHeader\" style=\"margin: 0 0.25rem 0.25rem 0.75rem; width: 10rem; display: inline;\" onchange=\"javascript:showInput(this);\"><option value=\"보유 중\">보유 중</option><option value=\"공부 중\">공부 중</option><option value=\"접해 봄\">접해 봄</option><option value=\"input\">직접 입력</option></select><input type=\"text\" class=\"form-control\" name=\"skillHeader\" style=\"margin: 0 0.25rem 0.25rem 0.75rem; width: 10rem; display: none;\" disabled><textarea name=\"skillList\" class=\"form-control d-inline\" style=\"width: calc(100% - 200px); height: 17px; margin:0 0.5rem 0.25rem 0;\" placeholder=\"기술 목록을 적으십시오. 기술은 쉼표로 구분합니다.\"></textarea><img src="/repo/subtract-color-outline-icon.svg" class="small-img btn" onclick="event.currentTarget.parentNode.remove()">';
 	  skillList.appendChild(newdiv);
 	}
   
@@ -231,6 +219,7 @@ function developersDiv(){
 	  var newdiv = document.createElement("div");
 	  newdiv.classList.add("grid");
 	  newdiv.classList.add("row-gap-3");
+	  newdiv.style.alignContent = "baseline";
 	  newdiv.innerHTML = '<div style=\"text-align: right; margin-top:3px;\"><button onclick=\"event.currentTarget.parentNode.parentNode.remove()\" class=\"btn\"><img src=\"/repo/subtract-color-outline-icon.svg\" class=\"small-img\"> Delete Project</button></div><div class=\"row\"><div class=\"col-4\">프로젝트 종류</div><div class=\"col-8\"><select class=\"form-select\" name=\"projectType\"><option value=\"personal\">개인 프로젝트</option><option value=\"team\">팀 프로젝트</option></select></div></div><div class=\"row\"><div class=\"col-4\">프로젝트 제목</div><div class=\"col-8\"><input type=\"text\" class=\"form-control\"></div></div><div class=\"row\"><div class=\"col-4\">참여자 (기여도)</div><div class=\"col-8\"><input type=\"text\" class=\"form-control w-auto d-inline\" name=\"developerName\"><span> (</span><input type=\"text\" class=\"form-control d-inline\" style=\"width: 80px;\" name=\"partRatio\"><span>%)</span></div></div><div class=\"row\"><div class=\"col-4\">수행 기간</div><div class=\"col-8\"><input type=\"date\" class=\"form-control w-auto d-inline\" name=\"startDate\"><span> ~ </span><input type=\"date\" class=\"form-control w-auto d-inline\" name=\"finishDate\"></div></div><div class=\"row\"><div class=\"col-4\">프로젝트 링크</div><div class=\"col-8\"><input type=\"text\" class=\"form-control\" name=\"projectUrl\"></div></div><div class=\"row\"><div class=\"col-4\">주요 기능</div><div class=\"col-8\"><input type=\"text\" class=\"form-control\" name=\"projectFunction\"></div></div><div class=\"row\"><div class=\"col-4\">비고</div><div class=\"col-8\"><input type=\"text\" class=\"form-control\" name=\"projectEtc\"></div></div>';
 	  skillList.appendChild(newdiv);
 	}

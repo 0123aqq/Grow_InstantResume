@@ -7,7 +7,6 @@
 
 <script>
 <%
-String userID = (String) session.getAttribute("userID");
 if (userID == null || userID.equals("")) {
     //response.sendRedirect("Login.jsp");
 	RequestDispatcher dispatch = request.getRequestDispatcher("Login.jsp");

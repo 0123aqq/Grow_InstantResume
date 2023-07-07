@@ -55,38 +55,39 @@ public class EmailValidationDTO extends HttpServlet {
         response.getWriter().write("{\"isEmailDuplicate\": " + isEmailDuplicate + "}");
     }
 
-    private boolean checkEmailDuplicate(String userID) {
+	private boolean checkEmailDuplicate(String userID) {
 
-        boolean isEmailDuplicate = false;
-        Connection conn = null;
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
+		boolean isEmailDuplicate = false;
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
 
-        try {
-        	if(conn == null) {
-        	    throw new SQLException("database is unreachable.");
-        	}
+		try {
+			conn = dataFactory.getConnection();
 
-            conn = dataFactory.getConnection();
+			if (conn == null) {
+				throw new SQLException("database is unreachable.");
+			} else {
 
-            stmt = conn.prepareStatement("SELECT COUNT(*) FROM `instant_resume`.user_data WHERE USER_ID = ?");
-            stmt.setString(1, userID);
-            rs = stmt.executeQuery();
+				stmt = conn.prepareStatement("SELECT COUNT(*) FROM `instant_resume`.user_data WHERE USER_ID = ?");
+				stmt.setString(1, userID);
+				rs = stmt.executeQuery();
 
-            if (rs.next()) {
-                int count = rs.getInt(1);
-                isEmailDuplicate = (count > 0);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            closeResultSet(rs);
-            closeStatement(stmt);
-            closeConnection(conn);
-        }
+				if (rs.next()) {
+					int count = rs.getInt(1);
+					isEmailDuplicate = (count > 0);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			closeResultSet(rs);
+			closeStatement(stmt);
+			closeConnection(conn);
+		}
 
-        return isEmailDuplicate;
-    }
+		return isEmailDuplicate;
+	}
     
 
     private void closeResultSet(ResultSet rs) {
