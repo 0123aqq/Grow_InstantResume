@@ -14,43 +14,41 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/download.do")
 public class FileDownload extends HttpServlet {
+    private static final long serialVersionUID = 1L;
 
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String fileName = request.getParameter("fileName");
+        if (fileName == null || fileName.isEmpty()) {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid file name");
+            return;
+        }
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doHandle(request, response);
-	}
+        String fileDirectory = "/path/to/file/directory";
+        String filePath = fileDirectory + File.separator + fileName;
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)	throws ServletException, IOException {
-		doHandle(request, response);
-	}
+        File file = new File(filePath);
+        if (!file.exists()) {
+            response.sendError(HttpServletResponse.SC_NOT_FOUND, "File not found");
+            return;
+        }
 
-	private void doHandle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
-		response.setContentType("text/html; charset=utf-8");
-		String file_repo = "/Users/babydoll/JavaWeb/file_repo";
-		String fileName = (String) request.getParameter("fileName"); 
-		System.out.println("fileName=" + fileName);
-		OutputStream out = response.getOutputStream();
-		String downFile = file_repo + "/" + fileName; 
-		File f = new File(downFile); 
-		
-		
-		response.setHeader("Cache-Control", "no-cache");
-		response.addHeader("Content-disposition", "attachment; fileName=" + fileName); 
-		
-		FileInputStream in = new FileInputStream(f);
-		
-		
-		byte[] buffer = new byte[1024 * 8]; 
-		while (true) {
-			int count = in.read(buffer); 
-			if (count == -1)
-				break;
-			out.write(buffer, 0, count);
-		}
-		in.close();
-		out.close();
-	}
+        response.setHeader("Content-Type", getServletContext().getMimeType(fileName));
+        response.setHeader("Content-Disposition", "attachment; filename=\"" + fileName + "\"");
+        response.setContentLength((int) file.length());
+
+        try (FileInputStream in = new FileInputStream(file);
+             OutputStream out = response.getOutputStream()) {
+            byte[] buffer = new byte[4096];
+            int bytesRead;
+            while ((bytesRead = in.read(buffer)) != -1) {
+                out.write(buffer, 0, bytesRead);
+            }
+        }
+    }
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doGet(request, response);
+    }
 }
 	 
 	 
