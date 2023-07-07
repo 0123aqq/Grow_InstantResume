@@ -6,12 +6,66 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <title>인스턴트 이력서 생성기 | 마이페이지</title>
 <%@ include file="/view/header.jsp" %>
 
+<%String userID = (String) session.getAttribute("userID");%>
+
+
 <script>
-//ajax로 프로필 사진 변경 구현
+    $(document).ready(function() {
+        $("#change-password-btn").click(function() {
+            const oldPassword = $("#oldPWVal").val();
+            const newPassword = $("#userPW").val();
+            const updatedUserName = $("#userName").val();
+
+            $.ajax({
+                url: '/updatePassword',
+                type: 'POST',
+                data: {
+                    userId: '<%= userID %>',
+                    oldPassword: oldPassword,
+                    newPassword: newPassword,
+                },
+                success: function(res) {
+                    if (res === "success") {
+                        alert("수정되었습니다.");
+                        window.location.reload();
+                    } else {
+                        alert("비밀번호 변경에 실패했습니다.");
+                    }
+                },
+            });
+        });
+    });
 </script>
+
+<script>
+function updateProfileImage() {
+    const formData = new FormData();
+    formData.append('userId', '<%= userID %>');
+    formData.append('file', $('#input-profile-pic')[0].files[0]);
+
+    $.ajax({
+        url: '/upload.do',
+        type: 'POST',
+        data: formData,
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function(res) {
+            if (res === "success") {
+                alert("프로필 사진이 변경되었습니다.");
+                window.location.reload();
+            } else {
+                alert("프로필 사진 변경에 실패했습니다.");
+            }
+        },
+    });
+}
+</script>
+
 </head>
 
 <body>
@@ -41,11 +95,16 @@ if (vo.size() != 0) {
 <div class="container row-gap-3">
 	<div class="center mb-3">
 		<img src="/repo/profile/<%= profilePic %>" class="mb-3" style="width: 150px;">
-		<div class="container w-50 mb-3">
-			<form name="updatePICForm" method="post">
-				<input type="file" accept="image/gif, image/jpeg, image/png, image/bmp, application/svg" class="form-control d-inline" style="width: 50%"> <button class="btn btn-line-color2">프로필 사진 변경</button>
-			</form>
-		</div>
+<div class="container w-50 mb-3">
+
+enctype=multipart/form-data
+
+    <form action="/upload.do" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="userId" value="<%= userID %>">
+        <input type="file" accept="image/gif, image/jpeg, image/png, image/bmp, application/svg" class="form-control d-inline" style="width: 50%" id="input-profile-pic" name="file">
+        <button type="submit" class="btn btn-line-color2">프로필 사진 변경</button>
+    </form>
+</div>
 	</div>
 	<hr>
 <div class="row mt-5">
@@ -106,17 +165,13 @@ if (vo.size() != 0) {
 		</div>
 	</form>
 
-			<div class="center mt-5">
-				<button class="btn btn-color2 rounded-pill w-50 p-2"
-					style="max-width: 240px;">회원정보 수정</button>
-				<br>
-				<button class="btn btn-line-color2 rounded-pill w-50 p-2 mt-3"
-					style="max-width: 240px;" onclick="location.reload()">취소</button>
-				<br>
-				<button class="btn btn-outline-danger rounded-pill w-50 p-2 mt-5"
-					style="max-width: 240px;"
-					onclick="window.location.href='DeleteUser.jsp'">회원 탈퇴</button>
-			</div>
+<div class="center mt-5">
+    <button type="button" id="change-password-btn" class="btn btn-color2 rounded-pill w-50 p-2" style="max-width: 240px;">회원정보 수정</button>
+    <br>
+    <button class="btn btn-line-color2 rounded-pill w-50 p-2 mt-3" style="max-width: 240px;" onclick="location.reload()">취소</button>
+    <br>
+    <button class="btn btn-outline-danger rounded-pill w-50 p-2 mt-5" style="max-width: 240px;" onclick="window.location.href='DeleteUser.jsp'">회원 탈퇴</button>
+</div>
 
 		</div>
 </div>
@@ -128,9 +183,7 @@ function checkPW(){
 }
 </script>
 
-
 <%@ include file="/view/footer.jsp" %>
 
 </body>
 </html>
-

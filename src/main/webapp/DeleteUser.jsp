@@ -4,9 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>인스턴트 이력서 생성기 | 로그인</title>
-
-<!-- 새로 만든 회원탈퇴 페이지 -->
+<title>인스턴트 이력서 생성기 | 회원 탈퇴</title>
 
 <%@ include file="/view/header.jsp" %>
 

@@ -8,6 +8,10 @@
 <head>
 <title>인스턴트 이력서 생성기 | HTML Style</title>
 <%@ include file="/view/header.jsp"%>
+
+<%String userID = (String) session.getAttribute("userID");%>
+
+
 <style>
 .skillBox {
 	padding: 5px 10px 7px 10px;

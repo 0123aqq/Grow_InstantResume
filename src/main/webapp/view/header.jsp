@@ -111,12 +111,7 @@ function logout() {
 
 <script>
 
-//로그인하지 않은 상태라면 메뉴바를 숨김 처리
-<%String userID = (String) session.getAttribute("userID");%>
-var userID = "<%=userID %>";
-if (userID == null || userID == "null" || userID == ""){
-	$("#headerMenuBtn").hide();
-}
+
 </script>
 
 </body>

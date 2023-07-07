@@ -1,5 +1,10 @@
 package com.instantresume;
 
+import java.io.File;
+import java.io.IOException;
+
+import org.springframework.web.multipart.MultipartFile;
+
 public class UserVO {
 
 	private String userID;
@@ -48,5 +53,26 @@ public class UserVO {
 	}
 
 
+MultipartFile file;
 
+public MultipartFile getFile() {
+	return file;
+}
+public void setFile(MultipartFile file) {
+	this.file = file;
+	
+	if(! file.isEmpty()) {
+		this.profilePic = file.getOriginalFilename();
+		File f = new File("C:\\Users\\HASERA\\Desktop\\pro\\team\\update\\Grow_InstantResume\\src\\main\\webapp\\repo\\profile");
+
+		try {
+			file.transferTo(f);
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+}
 }
