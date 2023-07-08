@@ -29,6 +29,7 @@ String finishDate = request.getParameter("finishDate");
 
 <link rel="stylesheet" href="./css/main.css">
 <link rel="stylesheet" href="./css/frame.css">
+<link rel="stylesheet" href="./css/github-markdown.css">
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
@@ -40,14 +41,27 @@ h2 {
 div[id="contents"]>div{
 margin-top: 0;}
 
+.markdown-body {
+	box-sizing: border-box;
+	min-width: 200px;
+	max-width: 980px;
+	margin: 0 auto;
+	padding: 45px;
+}
+
+@media (max-width: 767px) {
+	.markdown-body {
+		padding: 15px;
+	}
+}
 </style>
 
 </head>
 
 <body>
 
-<div id="contents" style="height: calc(100vh - 200px)">
-<textarea class="form-control" id="input">
+<div id="contents">
+<textarea class="form-control" id="input" style="height: calc(100vh - 200px)">
 	
 # 😀‍ About Me
 
@@ -69,7 +83,8 @@ String[] skillListArray = request.getParameterValues("skillList");
 if (skillHeaderArray != null && skillListArray != null) { for (int i = 0; i < skillHeaderArray.length; i++) {
 %>
 > ### <%= skillHeaderArray[i] %>
-<%String[] split = skillListArray[i].split(",");for (int j = 0; j < split.length; j++) {	String skill = split[j].trim().toLowerCase();	String badgeUrl;	switch (skill) {		case "html/css":			badgeUrl = "https://img.shields.io/badge/-HTML/CSS-1572B6?style=flat&amp;logo=css3&amp;logoColor=white";			break;		case "java":			badgeUrl = "https://img.shields.io/badge/-JAVA-orange?style=flat&amp;logo=java&amp;logoColor=white";			break;		case "javascript":			badgeUrl = "https://img.shields.io/badge/-JavaScript-F7DF1E?style=flat&amp;logo=JavaScript&amp;logoColor=white";			break;		case "spring":			badgeUrl = "https://img.shields.io/badge/-Spring-6DB33F?style=flat&amp;logo=flat&amp;logoColor=white";			break;		case "node.js":			badgeUrl = "https://img.shields.io/badge/-Node.js-339933?style=flat&amp;logo=nodedotjs&amp;logoColor=white";			break;		case "react":		case "react.js":			badgeUrl = "https://img.shields.io/badge/-React-61DAFB?style=flat&amp;logo=react&amp;logoColor=white";			break;		case "mysql":			badgeUrl = "https://img.shields.io/badge/-MySQL-4479A1?style=flat&amp;logo=mysql&amp;logoColor=white";			break;		case "oracle":			badgeUrl = "https://img.shields.io/badge/-Oracle-F80000?style=flat&amp;logo=oracle&amp;logoColor=white";			break;		default:			badgeUrl = "https://img.shields.io/badge/-"+skill+"-1D267D?style=flat&amp;logo="+skill+"&amp;logoColor=white";	}%><img src="<%= badgeUrl %>"> <%}}}%>
+<%String[] split = skillListArray[i].split(",");for (int j = 0; j < split.length; j++) {	String skill = split[j].trim().toLowerCase();	String badgeUrl;	switch (skill) {		case "html/css":			badgeUrl = "https://img.shields.io/badge/-HTML/CSS-1572B6?style=flat&amp;logo=css3&amp;logoColor=white";			break;		case "java":			badgeUrl = "https://img.shields.io/badge/-JAVA-orange?style=flat&amp;logo=java&amp;logoColor=white";			break;		case "javascript":			badgeUrl = "https://img.shields.io/badge/-JavaScript-F7DF1E?style=flat&amp;logo=JavaScript&amp;logoColor=white";			break;		case "spring":			badgeUrl = "https://img.shields.io/badge/-Spring-6DB33F?style=flat&amp;logo=flat&amp;logoColor=white";			break;		case "node.js":			badgeUrl = "https://img.shields.io/badge/-Node.js-339933?style=flat&amp;logo=nodedotjs&amp;logoColor=white";			break;		case "react":		case "react.js":			badgeUrl = "https://img.shields.io/badge/-React-61DAFB?style=flat&amp;logo=react&amp;logoColor=white";			break;		case "mysql":			badgeUrl = "https://img.shields.io/badge/-MySQL-4479A1?style=flat&amp;logo=mysql&amp;logoColor=white";			break;		case "oracle":			badgeUrl = "https://img.shields.io/badge/-Oracle-F80000?style=flat&amp;logo=oracle&amp;logoColor=white";			break;		default:			badgeUrl = "https://img.shields.io/badge/-"+skill+"-1D267D?style=flat&amp;logo="+skill+"&amp;logoColor=white";	}%><img src="<%= badgeUrl %>"> 
+<%}}}%>
 
 <br>
 
@@ -87,13 +102,18 @@ String[] projectFeaturesArray = request.getParameterValues("projectFeatures");
 String[] projectEtcArray = request.getParameterValues("projectEtc");
 if (projectTypeArray != null) {
 	for (int i = 0; i < projectTypeArray.length; i++) {
-switch (projectTypeArray[i].toLowerCase()) {
-	case "personal":
-		projectTypeArray[i] = projectTypeArray[i] + "-blue";
-		break;
-	case "team":
-		projectTypeArray[i] = projectTypeArray[i] + "-green";
-		break;
+		switch (projectTypeArray[i].toLowerCase()) {
+			case "personal":
+				projectTypeArray[i] = projectTypeArray[i] + "-blue";
+				break;
+			case "team":
+				projectTypeArray[i] = projectTypeArray[i] + "-green";
+				break;
+		}
+for (int j = 0; j < finishDateArray.length; j++) {
+	if (finishDateArray[j] == ""){
+		finishDateArray[j] = "진행 중";
+	}
 }
 %>
 ### <img src="https://img.shields.io/badge/Project-<%=projectTypeArray[i] %>"> <%=projectNameArray[i] %>
@@ -111,7 +131,7 @@ switch (projectTypeArray[i].toLowerCase()) {
 
 </textarea>			
 <%}}%>
-<div id="output">
+<div class="markdown-body" id="output" style="height: calc(100vh - 200px);padding: 25px;overflow-y: scroll;">
 </div>
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <script>
