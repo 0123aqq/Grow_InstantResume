@@ -194,13 +194,13 @@ public class UserDAO {
 	        String userPW = userVO.getUserPW();
 	        String userName = userVO.getUserName();
 	        String emailYN = userVO.getEmailYN();
-	        String profilePic = userVO.getProfilePic();
+	        //String profilePic = userVO.getProfilePic();
 
 	        String query = "UPDATE USER_DATA SET "
 	            + "user_pw = '" + userPW + "', "
 	            + "user_name = '" + userName + "', "
 	            + "email_yn = '" + emailYN + "', "
-	            + "profile_pic = '" + profilePic + "' "
+	            //+ "profile_pic = '" + profilePic + "' "
 	            + "WHERE user_id = '" + userID + "';";
 
 	        System.out.println("updateUser(): " + query);
@@ -216,27 +216,50 @@ public class UserDAO {
 	    return result;
 	}
 	
-	public boolean updatePassword(String userId, String oldPassword, String newPassword) {
-	    if (checkPassword(userId, oldPassword)) {
-	        try {
-	            conn = dataFactory.getConnection();
-	            String query = "UPDATE USER_DATA SET user_pw = ? WHERE user_id = ?";
-	            pstmt = conn.prepareStatement(query);
-	            pstmt.setString(1, newPassword);
-	            pstmt.setString(2, userId);
-	            pstmt.executeUpdate();
-	            pstmt.close();
-	            conn.close();
-	            return true;
-	        } catch (SQLException e) {
-	            e.printStackTrace();
-	        }
-	    }
-	    return false;
-	}
 
-	
-	
+public boolean updateInfo(String userId, String userName, String oldPassword, String newPassword, String emailYN) {
+    //PW 포함 업데이트
+	if (checkPassword(userId, oldPassword)) {
+        try {
+            conn = dataFactory.getConnection();
+            String query = "UPDATE USER_DATA SET user_pw = ?, user_name = ?, email_YN = ? WHERE user_id = ?";
+            pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, newPassword);
+            pstmt.setString(2, userName);
+            pstmt.setString(3, emailYN);
+            pstmt.setString(4, userId);
+            pstmt.executeUpdate();
+            pstmt.close();
+            conn.close();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    return false;
+}
+
+public boolean updateInfo(String userId, String userName, String oldPassword, String emailYN) {
+	//PW 제외 업데이트
+	if (checkPassword(userId, oldPassword)) {
+		try {
+			conn = dataFactory.getConnection();
+			String query = "UPDATE USER_DATA SET user_name = ?, email_YN = ? WHERE user_id = ?";
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userName);
+			pstmt.setString(2, emailYN);
+			pstmt.setString(3, userId);
+			pstmt.executeUpdate();
+			pstmt.close();
+			conn.close();
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	return false;
+}
+
 	public boolean checkPassword(String userId, String oldPassword) {
 	    String SQL = "SELECT USER_PW FROM USER_DATA WHERE USER_ID = ?";
 	    try {
@@ -254,7 +277,6 @@ public class UserDAO {
 	    }
 	    return false;
 	}
-
 
 
 	public boolean deleteUser(String userID, String userPW) {
@@ -298,5 +320,6 @@ public void setProfilePictureUrl(String userId, String fileName) {
         e.printStackTrace();
     }
 }
+
 }
 

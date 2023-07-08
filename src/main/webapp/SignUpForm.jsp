@@ -22,7 +22,7 @@ function signUp() {
             setTimeout(function () { $("#duplicateID").focus(); }, 100);
         } else {
             if ($("#userName").val().length < 2) {
-                alert("이름을 입력하십시오.");
+                alert("올바른 이름을 입력하십시오.");
                 setTimeout(function () { $("#userName").focus(); }, 100);
             } else {
                 if (!PWValidation(userPW)) {

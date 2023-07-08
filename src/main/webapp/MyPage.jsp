@@ -12,35 +12,6 @@
 
 <%String userID = (String) session.getAttribute("userID");%>
 
-
-<script>
-    $(document).ready(function() {
-        $("#change-password-btn").click(function() {
-            const oldPassword = $("#oldPWVal").val();
-            const newPassword = $("#userPW").val();
-            const updatedUserName = $("#userName").val();
-
-            $.ajax({
-                url: '/updatePassword',
-                type: 'POST',
-                data: {
-                    userId: '<%= userID %>',
-                    oldPassword: oldPassword,
-                    newPassword: newPassword,
-                },
-                success: function(res) {
-                    if (res === "success") {
-                        alert("수정되었습니다.");
-                        window.location.reload();
-                    } else {
-                        alert("비밀번호 변경에 실패했습니다.");
-                    }
-                },
-            });
-        });
-    });
-</script>
-
 <script>
 function updateProfileImage() {
     const formData = new FormData();
@@ -90,6 +61,12 @@ if (vo.size() != 0) {
     response.sendRedirect("/");
 }
 
+if (emailYN.equals("Y")){
+	emailYN = "checked";
+} else {
+	emailYN = "";
+}
+
 %>
 
 <div class="container row-gap-3">
@@ -97,7 +74,7 @@ if (vo.size() != 0) {
 		<img src="/repo/profile/<%= profilePic %>" class="mb-3" style="width: 150px;">
 <div class="container w-50 mb-3">
 
-enctype=multipart/form-data
+<!-- enctype=multipart/form-data -->
 
     <form action="/upload.do" method="post" enctype="multipart/form-data">
         <input type="hidden" name="userId" value="<%= userID %>">
@@ -108,30 +85,31 @@ enctype=multipart/form-data
 	</div>
 	<hr>
 <div class="row mt-5">
-	<form name="signUpForm">
+	<form name="updateForm">
 		<div class="container grid w-50 gap-3" style="margin: auto;">
 			<div class="row">
 				<div class="col-4">Email ID</div>
 				<div class="col-8">
-					<input type="text" class="form-control" id="userID" value="<%= userID %>" disabled>
+					<input type="text" class="form-control" name="userID" id="userID" value="<%= userID %>" readonly>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-4">가입일</div>
 				<div class="col-8">
-					<input type="text" class="form-control" id="joinDate" value="<%= joinDate %>" disabled>
+					<input type="text" class="form-control" id="joinDate" value="<%= joinDate %>" readonly>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-4">Name</div>
 				<div class="col-8">
-					<input type="text" class="form-control" id="userName" value="<%= userName %>">
+					<input type="text" class="form-control" name="userName" id="userName" value="<%= userName %>">
 				</div>
 			</div>
 			<div class="row" id="oldPW">
 				<div class="col-4">PW</div>
 				<div class="col-8">
-					<input type="password" class="form-control d-inline" style="width: calc(100% - 122px)" id="oldPWVal" value=""> <span class="btn btn-line-color2" onclick="javascript:checkPW();">비밀번호 변경</span>
+					<input type="password" class="form-control d-inline" id="oldPW" name="oldPW" style="width: calc(100% - 122px)">
+					<span class="btn btn-line-color2" id="newPWButton" onclick="javascript:showNewPW();">비밀번호 변경</span>
 				</div>
 			</div>
 
@@ -139,7 +117,7 @@ enctype=multipart/form-data
 			<div class="row">
 				<div class="col-4">New PW</div>
 				<div class="col-8">
-					<input type="password" class="form-control" id="userPW" name="userPW" value="" onInput="PWValidation(this.value); PWCheck();">
+					<input type="password" class="form-control" id="userPW" name="userPW" onInput="PWValidation(this.value); PWCheck();">
 					<span id="wrongPW" class="wrongNotice" style="display: none;">
 					<img src="./repo/exclamation-circle.svg" class="small-img"> 비밀번호는 영문, 숫자로 이루어진 4~20자리의 문자여야 합니다.</span>
 				</div>
@@ -147,7 +125,7 @@ enctype=multipart/form-data
 			<div class="row">
 				<div class="col-4">PW check</div>
 				<div class="col-8">
-					<input type="password" class="form-control" id="checkPW" value="" onInput="PWCheck();">
+					<input type="password" class="form-control" id="checkPW" onInput="PWCheck();">
 					<span id="wrongPWCheck" class="wrongNotice" style="display: none;"><img src="./repo/exclamation-circle.svg" class="small-img"> 비밀번호 확인이 일치하지 않습니다.</span>
 				</div>
 			</div>
@@ -157,7 +135,7 @@ enctype=multipart/form-data
 				<div class="col-4">광고 이메일 수신</div>
 				<div class="col-8">
 					<div class="form-check form-switch">
-						<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" style="height: 1.8rem; width: 3rem;" checked>
+						<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" name="emailSwitch" style="height: 1.8rem; width: 3rem;" <%=emailYN %>>
 						<input type="hidden" value="" id="emailYN" name="emailYN">
 					</div>
 				</div>
@@ -166,20 +144,113 @@ enctype=multipart/form-data
 	</form>
 
 <div class="center mt-5">
-    <button type="button" id="change-password-btn" class="btn btn-color2 rounded-pill w-50 p-2" style="max-width: 240px;">회원정보 수정</button>
+    <button type="button" id="change-password-btn" class="btn btn-color2 rounded-pill w-50 p-2" style="max-width: 240px;" onclick="javascript:validateForm();">회원정보 수정</button>
     <br>
     <button class="btn btn-line-color2 rounded-pill w-50 p-2 mt-3" style="max-width: 240px;" onclick="location.reload()">취소</button>
     <br>
     <button class="btn btn-outline-danger rounded-pill w-50 p-2 mt-5" style="max-width: 240px;" onclick="window.location.href='DeleteUser.jsp'">회원 탈퇴</button>
 </div>
 
-		</div>
+</div>
 </div>
 
 <script>
-function checkPW(){
-	$("#oldPW").hide();
+function showNewPW(){
 	$("#newPW").show();
+    $("#newPW input").prop("disabled", false);
+    $("#newPWButton").html("변경 취소");
+    $('#newPWButton').prev().css('width', 'calc(100% - 93px)');
+    document.getElementById("newPWButton").onclick = function() {cancelNewPW();}
+}
+
+function cancelNewPW(){
+	$("#newPW").hide();
+    $("#newPW input").prop("disabled", true);
+    $("#newPWButton").html("비밀번호 변경");
+    $('#newPWButton').prev().css('width', 'calc(100% - 122px)');
+    document.getElementById("newPWButton").onclick = function() {showNewPW();}
+}
+
+function validateForm(){
+	let isValidate = true;
+	
+	if (document.updateForm.userName.value.length < 2){
+		alert("올바른 이름을 입력하십시오.");
+		isValidate = false;
+        setTimeout(function () { $("#userName").focus(); }, 100);
+	} else if (document.updateForm.oldPW.value.length < 4){
+		alert("올바른 비밀번호를 입력하십시오.");
+		isValidate = false;
+		setTimeout(function () { $("#oldPW").focus(); }, 100);
+	} else if ($("#userPW").is(":visible") && ( document.updateForm.userPW.value.length < 4 || $("#wrongPW").is(":visible")) ){
+		alert("새 비밀번호를 입력하십시오.");
+		isValidate = false;
+		setTimeout(function () { $("#userPW").focus(); }, 100);
+	} else if ($("#checkPW").is(":visible") && ( document.updateForm.checkPW.value.length < 4 || $("#wrongPWCheck").is(":visible") )){
+        alert("비밀번호 확인이 일치하지 않습니다.");
+        isValidate = false;
+		setTimeout(function () { $("#checkPW").focus(); }, 100);
+	} else {
+		isValidate = true;
+	}
+	
+	if (document.updateForm.emailSwitch.checked){
+		document.updateForm.emailYN.value = "Y";
+	} else {
+		document.updateForm.emailYN.value = "N";			
+	}
+	
+	if (isValidate && $("#checkPW").is(":visible")){
+		const oldPassword = document.updateForm.oldPW.value;
+        const newPassword = document.updateForm.userPW.value;
+        const userName = document.updateForm.userName.value;
+        const emailYN = document.updateForm.emailYN.value;
+
+        $.ajax({
+            url: '/update',
+            type: 'POST',
+            data: {
+            	type: 'all',
+                userId: '<%= userID %>',
+                userName: userName,
+                oldPassword: oldPassword,
+                newPassword: newPassword,
+                emailYN: emailYN
+            },
+            success: function(res) {
+                if (res === "success") {
+                    alert("회원정보가 변경되었습니다. 다시 로그인하세요.");
+                    location.href("logout");
+                } else {
+                    alert("비밀번호가 틀렸습니다.");
+                }
+            },
+        });
+	} else if (isValidate && $("#checkPW").is(":hidden")){
+		const oldPassword = document.updateForm.oldPW.value;
+        const userName = document.updateForm.userName.value;
+        const emailYN = document.updateForm.emailYN.value;
+
+        $.ajax({
+            url: '/update',
+            type: 'POST',
+            data: {
+            	type: 'basic',
+                userId: '<%= userID %>',
+                userName: userName,
+                oldPassword: oldPassword,
+                emailYN: emailYN
+            },
+            success: function(res) {
+                if (res === "success") {
+                    alert("회원정보가 변경되었습니다.");
+                    window.location.reload();
+                } else {
+                    alert("비밀번호가 틀렸습니다.");
+                }
+            },
+        });
+	}
 }
 </script>
 
