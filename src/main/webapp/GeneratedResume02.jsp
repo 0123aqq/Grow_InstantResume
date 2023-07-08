@@ -5,6 +5,7 @@
 
 <!DOCTYPE html>
 <html>
+		<%String userID = (String) session.getAttribute("userID");%>
 		
 <%
 String userName = request.getParameter("userName"); 

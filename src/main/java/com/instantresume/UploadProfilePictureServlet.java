@@ -18,7 +18,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 
 @MultipartConfig(
-    location = ("C:\\Users\\HASERA\\Desktop\\pro\\team\\update\\Grow_InstantResume\\src\\main\\webapp\\repo\\profile"),
+    location = ("C://DevStudy//WebStudy//Grow_InstantResume//src//main//webapp//repo//profile"),
     maxFileSize = 10485760, // 10MB
     maxRequestSize = 10485760, // 10MB
     fileSizeThreshold = 5242880 // 5MB
@@ -35,7 +35,7 @@ public class UploadProfilePictureServlet extends HttpServlet {
         String encoding = "utf-8";
         
         // Set the file upload directory
-        File currentDirPath = new File("C:\\Users\\HASERA\\Desktop\\pro\\team\\update\\Grow_InstantResume\\src\\main\\webapp\\repo\\profile");
+        File currentDirPath = new File("C://DevStudy//WebStudy//Grow_InstantResume//src//main//webapp//repo//profile");
 
         String fileName = "";
         
@@ -82,7 +82,7 @@ public class UploadProfilePictureServlet extends HttpServlet {
         response.setContentType("text/html; charset=UTF-8");
         PrintWriter out = response.getWriter();
         out.println("<script>");
-        out.println("alert('ÇÁ·ÎÇÊ »çÁøÀÌ ¾÷µ¥ÀÌÆ®µÇ¾ú½À´Ï´Ù.');");
+        out.println("alert('í”„ë¡œí•„ ì‚¬ì§„ì´ ì—…ë°ì´íŠ¸ë˜ì—ˆìŠµë‹ˆë‹¤.');");
         out.println("location.href='./MyPage.jsp';");
         out.println("</script>");
 

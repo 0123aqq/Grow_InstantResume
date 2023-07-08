@@ -63,7 +63,7 @@ public void setFile(MultipartFile file) {
 	
 	if(! file.isEmpty()) {
 		this.profilePic = file.getOriginalFilename();
-		File f = new File("C:\\Users\\HASERA\\Desktop\\pro\\team\\update\\Grow_InstantResume\\src\\main\\webapp\\repo\\profile");
+		File f = new File("C://DevStudy//WebStudy//Grow_InstantResume//src//main//webapp//repo//profile");
 
 		try {
 			file.transferTo(f);
