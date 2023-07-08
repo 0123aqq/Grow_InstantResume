@@ -7,17 +7,12 @@
 <html>
 
 <%String userID = (String) session.getAttribute("userID");%>
-
       
 <%
 String userName = request.getParameter("userName"); 
 String profilePic = request.getParameter("profilePic"); 
 String userIntroduction = request.getParameter("userIntroduction"); 
 String userGitHub = request.getParameter("userGitHub"); 
-
-String startDate = request.getParameter("startDate"); 
-String finishDate = request.getParameter("finishDate"); 
-
 %>
 
 <head>
@@ -32,7 +27,6 @@ String finishDate = request.getParameter("finishDate");
 <link rel="stylesheet" href="./css/main.css">
 <link rel="stylesheet" href="./css/frame.css">
 <link rel="stylesheet" href="./css/table.css">
-<script src="./script/myscript.js"></script>
 
 <style>
 h2 {
@@ -238,6 +232,7 @@ for (const img of images) {
          String[] contributionArray = request.getParameterValues("contribution");
          String[] startDateArray = request.getParameterValues("startDate");
          String[] finishDateArray = request.getParameterValues("finishDate");
+         String[] usedStacksArray = request.getParameterValues("usedStacks");
          String[] projectLinkArray = request.getParameterValues("projectLink");
          String[] projectFeaturesArray = request.getParameterValues("projectFeatures");
          String[] projectEtcArray = request.getParameterValues("projectEtc");
@@ -272,7 +267,7 @@ for (const img of images) {
                   </tr>
                   <tr>
                      <td><strong>사용 기술</strong></td>
-                     <td>HTML/CSS, JavaScript</td>
+                     <td><%=usedStacksArray[i] %></td>
                   </tr>
                   <tr>
                      <td><strong>URL</strong></td>

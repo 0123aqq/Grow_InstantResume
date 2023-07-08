@@ -20,6 +20,14 @@ label {
 	font-weight: bold;
 }
 
+input[readonly]{
+	background-color: #f7f7f7;
+}
+
+input[readonly]:focus{
+	background-color: #f9f9f9;
+}
+
 ::selection {
 	background-color: #aaa;
 }
