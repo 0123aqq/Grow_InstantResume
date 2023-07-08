@@ -8,9 +8,8 @@
 
 <%@ include file="/view/header.jsp" %>
 
-
 <%
-String userID = request.getParameter("userID");
+String userID = (String) session.getAttribute("userID");
 String userPW = request.getParameter("userPW");
 boolean showResult = false;
 if(userID != null && userPW != null) {
@@ -28,12 +27,10 @@ if(userID != null && userPW != null) {
 
 <script>
  function deleteUser() {
-      var userID = document.getElementById("floatingInput").value;
-      var userPW = document.getElementById("floatingPassword").value;
+      var userID = document.getElementById("userID").value;
+      var userPW = document.getElementById("userPW").value;
 
       if (userID != "" && userPW != "") {
-          document.getElementById("userID").value = userID;
-          document.getElementById("userPW").value = userPW;
           document.getElementById("deleteUserForm").submit();
       } else {
           alert("Email ID와 Password를 입력해주세요.");
@@ -44,7 +41,7 @@ if(userID != null && userPW != null) {
      if ('<%=showResult%>'.toString() === 'true') {
          alert('<%= session.getAttribute("message") %>');
          <% session.removeAttribute("message"); %>
-         window.location.href = "Login.jsp";
+         window.location.href = "logout";
      }
  }
 </script>
@@ -57,34 +54,28 @@ if(userID != null && userPW != null) {
 </head>
 <body>
 	<div class="row">
-		<div class="col-7 p-5 center">
-			<img src="./repo/main-gradation.svg">
-		</div>
-		<div class="col-5 center">
-		<div class="center w-75">
-			<div class="form-floating mb-3" style="border-bottom: 1px solid #ccc;">
-			     <input type="email" class="form-control border-none" id="floatingInput" placeholder=" " name="userID"> 
-			     <label for="floatingInput" style="color: #ccc;"><img src="./repo/person-fill.svg" class="loginform-img"> Email ID</label>
-			</div>
-			<div class="form-floating mb-3" style="border-bottom: 1px solid #ccc;">
-			     <input type="password" class="form-control border-none" id="floatingPassword" placeholder=" " name="userPW"> 
-			     <label for="floatingPassword" style="color: #ccc;"><img src="./repo/lock-fill.svg" class="loginform-img"> Password</label>
-			</div>
-			
-			<form id="deleteUserForm" method="post" style="display: none;">
-			     <input type="hidden" id="userID" name="userID">
-			     <input type="hidden" id="userPW" name="userPW">
-			</form>
-			
-			<div class="mb-4">
-			</div>
-			<div>
-				<div class="d-grid gap-2 col-6 mx-auto">
-				      <button type="button" onClick="javascript:deleteUser();" class="btn btn-danger">회원 탈퇴</button>
+		<h1>회원 탈퇴</h1>
+		<div class="col-6 center">
+		    <form id="deleteUserForm" method="post">
+		<div class="container grid gap-3 mt-3" style="margin: auto;">
+	<div class="row">
+				<div class="col-4">Email ID</div>
+				<div class="col-8">
+					<input type="text" class="form-control" name="userID" id="userID" value="<%= userID %>" readonly>
 				</div>
 			</div>
+			
+			
+			<div class="row">
+				<div class="col-4">PW</div>
+				<div class="col-8">
+					<input type="password" class="form-control" id="userPW" name="userPW" value="">
+				</div>
 			</div>
-		</div>
+
+		</div>  <button type="button" onclick="javascript:deleteUser();" class="btn btn-danger rounded-pill w-50 mt-5" style="max-width: 240px;">회원 탈퇴</button>
+    </form>
+	</div>
 	</div>
 
 <%@ include file="/view/footer.jsp" %>
