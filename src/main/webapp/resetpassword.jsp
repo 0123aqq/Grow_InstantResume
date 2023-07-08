@@ -21,7 +21,7 @@ function duplicateID() {
 		        data: {userID: _userID},
 		        success: function(data, textStatus) {
 		            if (data.isEmailDuplicate == true) {
-		                prompt("임시 비밀번호를 발급받을 ID를 다시 입력하십시오.");
+		                location.href="ForgotPassword";
 		            } else {
 		                alert("가입되지 않은 ID입니다.");
 		        	    setTimeout(function () { $("#userID").focus(); }, 100);

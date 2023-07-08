@@ -5,8 +5,13 @@
 <meta charset="UTF-8">
 <title>인스턴트 이력서 생성기 | About</title>
 
-<%@include file="/view/header.jsp" %>
-
+<%String userID = (String) session.getAttribute("userID");
+String fileName = "";
+if (userID != null && userID != "") {%>
+<%@include file="view/header.jsp"%>
+<%} else {%>
+<%@include file="view/header2.jsp"%>
+<%}%>
 </head>
 <body>
 	<!-- 여기에 main-content 클래스를 추가함(내용 잘림 방지) -->

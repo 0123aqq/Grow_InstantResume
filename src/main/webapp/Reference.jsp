@@ -8,7 +8,14 @@
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
   </head>
-<%@include file="/view/header.jsp" %>
+
+<%String userID = (String) session.getAttribute("userID");
+String fileName = "";
+if (userID != null && userID != "") {%>
+<%@include file="view/header.jsp"%>
+<%} else {%>
+<%@include file="view/header2.jsp"%>
+<%}%>
 <style>
 .card-img-top {
 	width: auto;

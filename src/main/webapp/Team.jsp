@@ -3,8 +3,13 @@
 <html>
 <head>
 <title>인스턴트 이력서 생성기 | Team</title>
-<%@ include file="/view/header.jsp" %>
-
+<%String userID = (String) session.getAttribute("userID");
+String fileName = "";
+if (userID != null && userID != "") {%>
+<%@include file="view/header.jsp"%>
+<%} else {%>
+<%@include file="view/header2.jsp"%>
+<%}%>
 </head>
 <body>
 	<div class="row row-gap-5">
