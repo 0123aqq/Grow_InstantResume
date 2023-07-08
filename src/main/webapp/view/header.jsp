@@ -92,8 +92,8 @@ function logout() {
 </svg>   Resume
                 </a>
                 <ul class="dropdown-menu" style="background-color: #ffffff90;">
-                  <li><a class="dropdown-item" href="./GeneratedResume01.jsp">HTML 이력서</a></li>
-                  <li><a class="dropdown-item" href="./GeneratedResume02.jsp">Markdown 이력서</a></li>
+                  <li><a class="dropdown-item" href="./ResumeForm01.jsp">HTML 이력서</a></li>
+                  <li><a class="dropdown-item" href="./ResumeForm02.jsp">Markdown 이력서</a></li>
                 </ul>
               </li>
             </ul>
