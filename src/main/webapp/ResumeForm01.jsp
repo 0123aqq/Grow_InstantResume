@@ -11,7 +11,6 @@
 
 <%String userID = (String) session.getAttribute("userID");%>
 
-
 <style>
 .skillBox {
 	padding: 5px 10px 7px 10px;

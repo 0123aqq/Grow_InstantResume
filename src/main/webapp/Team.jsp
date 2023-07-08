@@ -3,6 +3,7 @@
 <html>
 <head>
 <title>인스턴트 이력서 생성기 | Team</title>
+
 <%String userID = (String) session.getAttribute("userID");
 String fileName = "";
 if (userID != null && userID != "") {%>

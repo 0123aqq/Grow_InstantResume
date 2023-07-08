@@ -5,9 +5,8 @@
 
 <!DOCTYPE html>
 <html>
-		<%String userID = (String) session.getAttribute("userID");%>
-		
-<%
+
+<%String userID = (String) session.getAttribute("userID");
 String userName = request.getParameter("userName"); 
 String profilePic = request.getParameter("profilePic"); 
 String userIntroduction = request.getParameter("userIntroduction"); 

@@ -4,7 +4,7 @@
 <html>
 <head>
 <title>인스턴트 이력서 생성기 | 회원가입</title>
-<%@ include file="/view/header.jsp"%>
+<%@ include file="/view/header2.jsp"%>
 
 <script>
 

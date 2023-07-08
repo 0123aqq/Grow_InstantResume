@@ -49,6 +49,7 @@ function logout() {
     alert('로그아웃 하셨습니다.');
     window.location.href = './logout';
 }  
+
 </script>
 
 </head>
@@ -91,9 +92,8 @@ function logout() {
 </svg>   Resume
                 </a>
                 <ul class="dropdown-menu" style="background-color: #ffffff90;">
-                  <li><a class="dropdown-item" href="./GeneratedResume01.jsp">이력서 01</a></li>
-                  <li><a class="dropdown-item" href="./GeneratedResume02.jsp">이력서 02</a></li>
-                  <li><a class="dropdown-item" href="./GeneratedResume03.jsp">이력서 03</a></li>
+                  <li><a class="dropdown-item" href="./GeneratedResume01.jsp">HTML 이력서</a></li>
+                  <li><a class="dropdown-item" href="./GeneratedResume02.jsp">Markdown 이력서</a></li>
                 </ul>
               </li>
             </ul>

@@ -4,6 +4,7 @@
 <head>
 <title>인스턴트 이력서 생성기 | 로그인</title>
 <%@ include file="/view/header2.jsp" %>
+<% session.removeAttribute("userID"); %>
 
 <script>
 

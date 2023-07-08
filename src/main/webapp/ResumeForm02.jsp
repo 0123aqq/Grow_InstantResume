@@ -8,6 +8,7 @@
 <head>
 <title>인스턴트 이력서 생성기 | Markdown Style</title>
 <%@ include file="/view/header.jsp"%>
+
 <%String userID = (String) session.getAttribute("userID");%>
 
 <style>

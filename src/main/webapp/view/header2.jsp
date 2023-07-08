@@ -26,30 +26,6 @@
 	
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script  src="./js/main.js"></script>
-<style>
-.navbar-toggler-icon {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='white' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
-}
-
-.navbar-toggler:focus{
-box-shadow: 0 0 0 0;
-}
-
-.offcanvas-body {
-font-size: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
-}
-</style>
-
-<script>
-function logout() {
-    alert('로그아웃 하셨습니다.');
-    window.location.href = './logout';
-}  
-</script>
 
 </head>
 <body>
@@ -59,7 +35,7 @@ function logout() {
     <nav class="navbar navbar-light fixed-top" style="background-color: #0C134F;">
   
       <a class="navbar-brand" href="./" style="padding-left: 20px; color: white;">인스턴트 이력서 생성기</a>
-
+ 
     </nav>
   </div>
 </nav>

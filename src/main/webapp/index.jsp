@@ -7,7 +7,6 @@
 
 <%String userID = (String) session.getAttribute("userID");%>
 
-
 <script>
 <%
 if (userID == null || userID.equals("")) {
