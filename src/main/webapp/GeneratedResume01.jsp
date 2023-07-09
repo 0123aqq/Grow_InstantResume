@@ -7,11 +7,23 @@
 <html>
 
 <%String userID = (String) session.getAttribute("userID");
+
+
+
 String userName = request.getParameter("userName"); 
-String profilePic = request.getParameter("profilePic"); 
 String userIntroduction = request.getParameter("userIntroduction"); 
 String userGitHub = request.getParameter("userGitHub"); 
+
+String profilePic = null;
+
+UserDAO dao = new UserDAO();
+List<UserVO> vo = dao.userInfo(userID);
+
+if (vo.size() != 0) {
+profilePic = vo.get(0).getProfilePic();
+}
 %>
+
 
 <head>
 <meta charset="UTF-8">
@@ -22,7 +34,6 @@ String userGitHub = request.getParameter("userGitHub");
 <meta property="og:image" content="./repo/profile/<%=profilePic %>">
 <meta property="og:description" content="<%=userName %>의 이력서입니다.">
 
-<link rel="stylesheet" href="./css/main.css">
 <link rel="stylesheet" href="./css/frame.css">
 <link rel="stylesheet" href="./css/table.css">
 

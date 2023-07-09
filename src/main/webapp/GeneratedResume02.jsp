@@ -60,7 +60,7 @@ margin-top: 0;}
 <body>
 
 <div id="contents">
-<textarea class="form-control" id="input" style="height: calc(100vh - 200px)">
+<textarea class="form-control" id="input" style="height: calc(100vh - 200px)" onchange="(function() { this.innerHTML = marked.parse(document.getElementById('input').value); })()">
 	
 # 😀‍ About Me
 
@@ -134,8 +134,7 @@ for (int j = 0; j < finishDateArray.length; j++) {
 </div>
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <script>
-    document.getElementById('output').innerHTML =
-      marked.parse(document.getElementById('input').value);
+    document.getElementById('output').innerHTML = marked.parse(document.getElementById('input').value);
   </script>
 </div>
 	

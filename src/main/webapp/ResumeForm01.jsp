@@ -89,8 +89,7 @@ response.sendRedirect("/");
 				<div class="row">
 					<div class="col-4">프로필 사진</div>
 					<div class="col-8">
-						<input type="file" accept="image/gif, image/jpeg, image/png, image/bmp, application/svg" class="form-control" id="profilePic"
-							name="profilePic" value="<%=profilePic %>">
+						<input type="text" class="form-control d-inline" id="profilePic" name="profilePic" value="<%=profilePic %>" style="width: calc(100% - 86px); margin-right: 5px;" readonly><span class="btn btn-line-color2" onclick="location.href='./MyPage.jsp'">Update</span>
 					</div>
 				</div>
 
@@ -156,8 +155,8 @@ response.sendRedirect("/");
 				<div class="col-4">참여자 (기여도) <img src="/repo/addition-color-icon.svg" class="small-img btn" onclick="javascript:addDeveloper(this);"></div>
 				<div class="col-8" id="developerList">
 				<div>
-				<input type="text" name="developerName" id="developerName" class="form-control d-inline" style="width: calc(100% - 128px)" value="<%=userName %>" readonly>
-				<span> (</span><input type="number" name="contribution" id="contribution" class="form-control d-inline" style="width: 80px;" min="1" max="100"  maxlength="3"><span>%)</span></div>
+				<input type="text" name="developerName" id="developerName" class="form-control d-inline" style="width: calc(100% - 128px)" value="<%=userName %>" readonly disabled>
+				<span> (</span><input type="number" name="contribution" id="contribution" class="form-control d-inline" style="width: 80px;" min="1" max="100"  maxlength="3" disabled><span>%)</span></div>
 			</div>
 			</div>
 			<div class="row">
@@ -245,7 +244,6 @@ function addProject(event) {
 	}
 //Projects 블록 끝
 
-//validation function 수정중. name으로 받아와서 빈 칸을 찾는 로직 추가 필요
 function validateForm() {
 	let isValidationComplete = false;
 
@@ -322,6 +320,7 @@ function validateForm() {
 						console.log("["+i+"] "+total); // 누적합 출력
 						
 						if (total != 100){
+							console.log(total);
 							alert("기여도 합은 100%가 되어야 합니다.");
 							isThisLoop = false;
 							break;				

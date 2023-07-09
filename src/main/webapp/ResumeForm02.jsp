@@ -159,8 +159,8 @@ if (vo.size() != 0) {
 				<div class="col-4">참여자 (기여도) <img src="/repo/addition-color-icon.svg" class="small-img btn" onclick="javascript:addDeveloper(this);"></div>
 				<div class="col-8" id="developerList">
 				<div>
-				<input type="text" name="developerName" class="form-control d-inline" value="<%=userName %>" style="width: calc(100% - 128px);" readonly>
-				<span> (</span><input type="number" name="contribution" class="form-control d-inline" style="width: 80px;" min="1" max="100" maxlength="3"><span>%)</span></div>
+				<input type="text" name="developerName" class="form-control d-inline" value="<%=userName %>" style="width: calc(100% - 128px);" readonly disabled>
+				<span> (</span><input type="number" name="contribution" class="form-control d-inline" style="width: 80px;" min="1" max="100" maxlength="3" disabled><span>%)</span></div>
 			</div>
 			</div>
 			<div class="row">
@@ -249,8 +249,8 @@ function addProject(event) {
 function validateForm() {
 	let isValidationComplete = false;
 
-	let optionalInput = [ "profilePic", "userIntroduction", "userGitHub", "finishDate", "usedStacks", "projectLink"];
-	let requireInput = [ "skillList", "projectName", "developerName", "contribution", "startDate", "projectFeatures"];
+	let optionalInput = [ "profilePic", "userGitHub", "finishDate", "usedStacks", "projectLink"];
+	let requireInput = [ "userIntroduction", "skillList", "projectName", "developerName", "contribution", "startDate", "projectFeatures"];
 	let emptyOptional = "";
 
 	//optional 값 중 빈 칸이 있으면 confirm
@@ -308,26 +308,27 @@ function validateForm() {
 				isThisLoop = false;
 				break;
 			} else if (requireInput[i] == "contribution") {
-				let total = 0; 
-
 				let divlist = document.getElementsByClassName("developerDiv");
 
 				for (let i = 0; i < divlist.length; i++) {
-				  if (divlist[i].style.display !== 'none') { // display가 none이 아닐 경우에만 합 계산
-				    const contributions = divlist[i].querySelectorAll('[name="contribution"]');
+					let total = 0; //for문 돌릴 때 (각 developerDiv마다) 초기화
+					
+					if (divlist[i].style.display !== 'none') { // display가 none이 아닐 경우에만 합 계산
+				    	let contributions = divlist[i].querySelectorAll('[name="contribution"]');
 				  
-				    for (let j = 0; j < contributions.length; j++) {
-				        total += parseInt(contributions[j].value);
-				    }
+					    for (let j = 0; j < contributions.length; j++) {
+					        total += parseInt(contributions[j].value);
+					    }
+						console.log("["+i+"] "+total); // 누적합 출력
+						
+						if (total != 100){
+							console.log(total);
+							alert("기여도 합은 100%가 되어야 합니다.");
+							isThisLoop = false;
+							break;				
+						}
 				  }
 				}
-
-				console.log(total); // 누적합 출력
-				
-				if (total != 100){
-					alert("기여도 합은 100%가 되어야 합니다.");
-					isThisLoop = false;
-					break;				}
 
 			} else {
 				isValidationComplete = true; // for문을 돌렸을 때 list[j].value 가 빈 값이 아니라면 true로 설정
