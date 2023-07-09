@@ -80,7 +80,7 @@ public class UploadProfilePictureServlet extends HttpServlet {
             e.printStackTrace();
         }
         UserDAO userDao = new UserDAO();
-        userDao.setProfilePictureUrl(userId, fileName); // 수정된: 'fileName' 변수를 사용하여 파일 경로 업데이트
+        userDao.setProfilePicture(userId, fileName); // 수정된: 'fileName' 변수를 사용하여 파일 경로 업데이트
 
         response.setContentType("text/html; charset=UTF-8");
         PrintWriter out = response.getWriter();

@@ -52,32 +52,6 @@ public class UserDAO {
 		return -2;
 	}
 
-	public int isDuplicateID(String userID) {
-		int result = -1;
-		
-		try {
-			conn = dataFactory.getConnection();
-
-			String query = "select count(*) as result from user_data" 
-			+ " where MEMBER_ID = '" + userID + "';";
-
-			System.out.println("isDuplicateID query: " + query);
-
-			pstmt = conn.prepareStatement(query);
-			ResultSet rs = pstmt.executeQuery();
-			rs.next();
-
-			result = Integer.parseInt(rs.getString("result"));
-
-			rs.close();
-			pstmt.close();
-			conn.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return result;
-	}
-
 	public void signUp(UserVO userVO) {
 		String userID = userVO.getUserID();
 		String userPW = userVO.getUserPW();
@@ -186,37 +160,6 @@ public class UserDAO {
 		}
 		return list;
 	}
-
-	public int updateUser(UserVO userVO) {
-	    int result = 0;
-	    try {
-	        conn = dataFactory.getConnection();
-
-	        String userID = userVO.getUserID();
-	        String userPW = userVO.getUserPW();
-	        String userName = userVO.getUserName();
-	        String emailYN = userVO.getEmailYN();
-	        //String profilePic = userVO.getProfilePic();
-
-	        String query = "UPDATE USER_DATA SET "
-	            + "user_pw = '" + userPW + "', "
-	            + "user_name = '" + userName + "', "
-	            + "email_yn = '" + emailYN + "', "
-	            //+ "profile_pic = '" + profilePic + "' "
-	            + "WHERE user_id = '" + userID + "';";
-
-	        System.out.println("updateUser(): " + query);
-
-	        pstmt = conn.prepareStatement(query);
-	        result = pstmt.executeUpdate();
-
-	        pstmt.close();
-	        conn.close();
-	    } catch (SQLException e) {
-	        e.printStackTrace();
-	    }
-	    return result;
-	}
 	
 
 public boolean updateInfo(String userId, String userName, String oldPassword, String newPassword, String emailYN) {
@@ -307,22 +250,6 @@ public boolean updateInfo(String userId, String userName, String oldPassword, St
 	    }
 	    return false;
 	}
-
-public void setProfilePictureUrl(String userId, String fileName) {
-    try {
-        conn = dataFactory.getConnection();
-        String query = "UPDATE USER_DATA SET profile_pic = ? WHERE user_id = ?";
-        pstmt = conn.prepareStatement(query);
-        pstmt.setString(1, fileName);
-        pstmt.setString(2, userId);
-        pstmt.executeUpdate();
-        pstmt.close();
-        conn.close();
-    } catch (SQLException e) {
-        e.printStackTrace();
-    }
-}
-
 
 	public void setProfilePicture(String userId, String fileName) {
 	    try {
