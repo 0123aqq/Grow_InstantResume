@@ -1,4 +1,4 @@
-package com.instantresume;
+package com.instantresume.UserService;
 
 import java.io.IOException;
 import java.security.SecureRandom;
@@ -12,7 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.instantresume.UserDAO;
+import com.instantresume.DAO.UserDAO;
 
 @WebServlet("/ForgotPassword")
 public class ForgotPassword extends HttpServlet {

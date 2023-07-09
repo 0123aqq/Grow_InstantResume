@@ -1,4 +1,4 @@
-package com.instantresume;
+package com.instantresume.DAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,6 +10,8 @@ import java.util.List;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
+
+import com.instantresume.VO.UserVO;
 
 
 public class UserDAO {
@@ -321,5 +323,21 @@ public void setProfilePictureUrl(String userId, String fileName) {
     }
 }
 
-}
+
+	public void setProfilePicture(String userId, String fileName) {
+	    try {
+	        conn = dataFactory.getConnection();
+	        String query = "UPDATE USER_DATA SET profile_pic = ? WHERE user_id = ?";
+	        pstmt = conn.prepareStatement(query);
+	        pstmt.setString(1, fileName);
+	        pstmt.setString(2, userId);
+	        pstmt.executeUpdate();
+	        pstmt.close();
+	        conn.close();
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	}
+
+	}
 

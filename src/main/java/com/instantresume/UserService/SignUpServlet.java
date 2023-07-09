@@ -1,4 +1,4 @@
-package com.instantresume;
+package com.instantresume.UserService;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.instantresume.UserDAO;
-import com.instantresume.UserVO;
+import com.instantresume.DAO.UserDAO;
+import com.instantresume.VO.UserVO;
 
 @WebServlet("/signup")
 public class SignUpServlet extends HttpServlet {
@@ -54,7 +54,7 @@ public class SignUpServlet extends HttpServlet {
 			System.out.println(userID + " / " + userPW + " / " + userName + " / " + emailYN);
 			
 			PrintWriter writer = response.getWriter();
-			writer.println("<script>alert('"+userID+" Sign up Success.'); location.href='/';</script>"); 
+			writer.println("<script>alert('"+userID+" 님의 회원가입이 완료되었습니다.'); location.href='/';</script>"); 
 			writer.close();
 
 		} else {

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
-<%@ page import="java.sql.*, javax.sql.*, com.instantresume.UserDAO"%>
+<%@ page import="java.sql.*, javax.sql.*, com.instantresume.DAO.UserDAO"%>
 
 <!DOCTYPE html>
 <html>

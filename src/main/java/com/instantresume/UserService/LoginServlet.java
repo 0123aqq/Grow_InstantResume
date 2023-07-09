@@ -1,4 +1,4 @@
-package com.instantresume;
+package com.instantresume.UserService;
 
 import java.io.IOException;
 
@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import com.instantresume.UserDAO;
+import com.instantresume.DAO.UserDAO;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {

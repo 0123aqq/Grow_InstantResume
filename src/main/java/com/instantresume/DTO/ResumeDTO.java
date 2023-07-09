@@ -1,4 +1,4 @@
-package com.instantresume;
+package com.instantresume.DTO;
 
 public class ResumeDTO {
 	private String name;

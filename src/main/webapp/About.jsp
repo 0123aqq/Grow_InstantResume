@@ -14,7 +14,6 @@ if (userID != null && userID != "") {%>
 <%}%>
 </head>
 <body>
-	<!-- 여기에 main-content 클래스를 추가함(내용 잘림 방지) -->
 	<div class="row row-gap-5 main-content">
 		<div>
 			<h1>About</h1>

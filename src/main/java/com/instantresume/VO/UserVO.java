@@ -1,9 +1,4 @@
-package com.instantresume;
-
-import java.io.File;
-import java.io.IOException;
-
-import org.springframework.web.multipart.MultipartFile;
+package com.instantresume.VO;
 
 public class UserVO {
 
@@ -51,28 +46,4 @@ public class UserVO {
 	public void setJoinDate(String joinDate) {
 		this.joinDate = joinDate;
 	}
-
-
-MultipartFile file;
-
-public MultipartFile getFile() {
-	return file;
-}
-public void setFile(MultipartFile file) {
-	this.file = file;
-	
-	if(! file.isEmpty()) {
-		this.profilePic = file.getOriginalFilename();
-		File f = new File("C://DevStudy//WebStudy//Grow_InstantResume//src//main//webapp//repo//profile");
-
-		try {
-			file.transferTo(f);
-		} catch (IllegalStateException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-	
-}
 }

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"%>
-<%@ page import="com.instantresume.UserDAO" %>
-<%@ page import="com.instantresume.UserVO" %>
+<%@ page import="com.instantresume.DAO.UserDAO" %>
+<%@ page import="com.instantresume.VO.UserVO" %>
 <%@ page import="java.util.List" %>
 
 <!DOCTYPE html>

@@ -1,10 +1,11 @@
-package com.instantresume;
+package com.instantresume.Update;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -16,13 +17,14 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
+import com.instantresume.DAO.UserDAO;
 
 @MultipartConfig(
-    location = ("C://DevStudy//WebStudy//Grow_InstantResume//src//main//webapp//repo//profile"),
-    maxFileSize = 10485760, // 10MB
-    maxRequestSize = 10485760, // 10MB
-    fileSizeThreshold = 5242880 // 5MB
-)
+	    location = "/repo/profile",
+	    maxFileSize = 10485760, // 10MB
+	    maxRequestSize = 10485760, // 10MB
+	    fileSizeThreshold = 5242880 // 5MB
+	)
 @WebServlet("/upload.do")
 public class UploadProfilePictureServlet extends HttpServlet {
 
@@ -33,19 +35,20 @@ public class UploadProfilePictureServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
         String encoding = "utf-8";
-        
-        // Set the file upload directory
-        File currentDirPath = new File("C://DevStudy//WebStudy//Grow_InstantResume//src//main//webapp//repo//profile");
+
+        ServletContext context = request.getSession().getServletContext();
+        String basePath = context.getRealPath("/repo/profile");
+        File currentDirPath = new File(basePath);
 
         String fileName = "";
-        
+        String userId = "";
+
         DiskFileItemFactory factory = new DiskFileItemFactory();
         factory.setRepository(currentDirPath);
         factory.setSizeThreshold(1024 * 1024 * 1024);
 
         ServletFileUpload upload = new ServletFileUpload(factory);
-        
-        String userId = ""; // Add this line to initialize userId variable
+        boolean isSuccess = true;
 
         try {
             List<FileItem> items = upload.parseRequest(request);
@@ -67,7 +70,7 @@ public class UploadProfilePictureServlet extends HttpServlet {
                         if (idx == -1) {
                             idx = fileItem.getName().lastIndexOf("/");
                         }
-                        fileName = fileItem.getName().substring(idx + 1);
+                        fileName = fileItem.getName().substring(idx + 1); // Use 'fileName' variable to store the original file name
                         File uploadFile = new File(currentDirPath + "\\" + fileName);
                         fileItem.write(uploadFile);
                     }
@@ -77,7 +80,7 @@ public class UploadProfilePictureServlet extends HttpServlet {
             e.printStackTrace();
         }
         UserDAO userDao = new UserDAO();
-        userDao.setProfilePictureUrl(userId, fileName); // Replace 'userId' with the appropriate user ID variable
+        userDao.setProfilePictureUrl(userId, fileName); // 수정된: 'fileName' 변수를 사용하여 파일 경로 업데이트
 
         response.setContentType("text/html; charset=UTF-8");
         PrintWriter out = response.getWriter();

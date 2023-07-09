@@ -1,4 +1,4 @@
-package com.instantresume;
+package com.instantresume.DTO;
 
 import java.io.IOException;
 import java.sql.Connection;
