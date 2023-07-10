@@ -37,8 +37,6 @@ h2 {
 	color: #000000;
 	padding-top: 1.2rem;
 }
-div[id="contents"]>div{
-margin-top: 0;}
 
 .markdown-body {
 	box-sizing: border-box;
@@ -53,6 +51,8 @@ margin-top: 0;}
 		padding: 15px;
 	}
 }
+
+
 </style>
 
 <!-- 0710 텍스트 다운로드 추가 -->
@@ -84,7 +84,7 @@ function downloadResume() {
 </div>
 
 <div id="contents">
-<textarea class="form-control" id="input" style="height: calc(100vh - 200px)">
+<textarea class="form-control" id="input" style="height: calc(100vh - 225px); margin-top: 15px; padding: 25px;">
 	
 # 😀‍ About Me
 
@@ -94,8 +94,8 @@ function downloadResume() {
 ``<%=userIntroduction %>``
 
 📩  E-mail: <%=userID %>
- 
-☑️ GitHub: [<%=userGitHub %>](<%=userGitHub %>)
+
+<% if (userGitHub != ""){out.print("☑️ GitHub: ["+userGitHub+"]("+userGitHub+")");} %> 
 
 <br>
 
@@ -154,7 +154,7 @@ for (int j = 0; j < finishDateArray.length; j++) {
 
 </textarea>			
 <%}}%>
-<div class="markdown-body" id="output" style="height: calc(100vh - 200px);padding: 25px;overflow-y: scroll;">
+<div class="markdown-body" id="output" style="height: calc(100vh - 225px);padding: 25px;overflow-y: scroll;">
 </div>
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <script>
