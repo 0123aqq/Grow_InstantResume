@@ -55,12 +55,36 @@ margin-top: 0;}
 }
 </style>
 
+<!-- 0710 텍스트 다운로드 추가 -->
+
+<script>
+function downloadResume() {
+  const resumeText = document.getElementById("input").value;
+  const fileName = "resume.txt";
+  const element = document.createElement("a");
+
+  element.href = URL.createObjectURL(new Blob([resumeText], { type: "text/plain" }));
+  element.download = fileName;
+  element.style.display = "none";
+
+  document.body.appendChild(element);
+  element.click();
+  document.body.removeChild(element);
+}
+</script>
+
+
 </head>
 
 <body>
+<!-- 0710 텍스트 다운로드 버튼 추가 -->
+
+<div style="text-align: right;">
+    <button class="btn btn-line-color2" id="downloadBtn" onclick="downloadResume()"><img src="/repo/file-earmark-arrow-down.svg" class="small-img">Text Download</button>
+</div>
 
 <div id="contents">
-<textarea class="form-control" id="input" style="height: calc(100vh - 200px)" onchange="(function() { this.innerHTML = marked.parse(document.getElementById('input').value); })()">
+<textarea class="form-control" id="input" style="height: calc(100vh - 200px)">
 	
 # 😀‍ About Me
 

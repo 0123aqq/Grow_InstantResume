@@ -64,7 +64,7 @@ $("#gitHubDiv").show();
 </script>
 
 
-<!-- 0707 현재 페이지 안깨지고 다운로드 되는 자바 스크립트 코드 추가, Download 버튼에 함수 실행하게 함 -->
+<!-- 0710 다운로드할때 외부 css 안깨지게 개선 -->
 
 <script>
 async function downloadPage() {
@@ -75,7 +75,7 @@ async function downloadPage() {
 
     const fetchCssFile = async (url) => {
       try {
-        const response = await fetch(url);
+        const response = await fetch(url, { mode: 'cors', credentials: 'include' });
         const cssText = await response.text();
         return cssText;
       } catch (error) {
@@ -100,40 +100,58 @@ async function downloadPage() {
     const currentDocumentClone = document.cloneNode(true);
     currentDocumentClone.head.appendChild(newStyle);
 
+    const imageUrlPrefix = "http://localhost:8091";
+    const images = currentDocumentClone.querySelectorAll("img");
+    for (const img of images) {
+        const relativeSrc = img.getAttribute('src');
+        const absoluteSrc = new URL(relativeSrc, imageUrlPrefix).toString();
+        img.src = absoluteSrc;
+    }
+    
+    const downloadBlob = (content, fileName, mimeType) => {
+      const blob = new Blob([content], { type: mimeType });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = fileName;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    };
 
-const imageUrlPrefix = "http://localhost:8091"; // 
-const images = currentDocumentClone.querySelectorAll("img");
-for (const img of images) {
-    const relativeSrc = img.getAttribute('src');
-    const absoluteSrc = new URL(relativeSrc, imageUrlPrefix).toString();
-    img.src = absoluteSrc;
-}
+    const fileName = 'page.html';
 
-    const currentDocumentCloneString = "<!DOCTYPE html>" + new XMLSerializer().serializeToString(currentDocumentClone.documentElement);
+    const doctype = new XMLSerializer().serializeToString(
+        document.implementation.createDocumentType(
+            document.doctype.name,
+            document.doctype.publicId,
+            document.doctype.systemId
+        )
+    );
 
-    const fileName = "mypage.html";
-    const fileType = "text/html; charset=UTF-8";
-    const a = document.createElement("a");
-    const blob = new Blob([currentDocumentCloneString], { type: fileType });
-
-    a.href = URL.createObjectURL(blob);
-    a.download = fileName;
-    a.style.display = "none";
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
+    const markup = doctype + '\n' + currentDocumentClone.documentElement.outerHTML;
+    downloadBlob(markup, fileName, 'text/html;charset=utf-8');
 }
 </script>
 
-
 </head>
+
 
 <body>
 
 <div style="text-align: right;">
-<button class="btn btn-line-color2" onclick="downloadPage()"><img src="/repo/file-earmark-arrow-down.svg" class="small-img">HTML Download</button>
+    <button class="btn btn-line-color2" id="downloadBtn"><img src="/repo/file-earmark-arrow-down.svg" class="small-img">HTML Download</button>
 </div>
 
+<script>
+
+<!-- 0710 추가 : downloadBtn 엘리먼트에 클릭 리스너 추가함 -->
+
+const downloadBtn = document.getElementById('downloadBtn');
+downloadBtn.addEventListener('click', downloadPage);
+
+</script>
+    
+    
    <div id="realbody">
       <sidebar>
          <h4 style="padding: 15px 0px 0px 10px">📑목차</h4>
