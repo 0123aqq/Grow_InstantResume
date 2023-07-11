@@ -211,6 +211,12 @@ downloadBtn.addEventListener('click', downloadPage);
                      case "html/css":
                         badgeUrl = "https://img.shields.io/badge/-HTML/CSS-1572B6?style=flat&amp;logo=css3&amp;logoColor=white";
                         break;
+                     case "html5":
+                        badgeUrl = "https://img.shields.io/badge/-HTML5-E34F26?style=flat&amp;logo=html5&amp;logoColor=white";
+                        break;
+                     case "css3":
+                        badgeUrl = "https://img.shields.io/badge/-CSS3-1572B6?style=flat&amp;logo=css3&amp;logoColor=white";
+                        break;
                      case "java":
                         badgeUrl = "https://img.shields.io/badge/-JAVA-orange?style=flat&amp;logo=java&amp;logoColor=white";
                         break;
@@ -232,6 +238,12 @@ downloadBtn.addEventListener('click', downloadPage);
                         break;
                      case "oracle":
                         badgeUrl = "https://img.shields.io/badge/-Oracle-F80000?style=flat&amp;logo=oracle&amp;logoColor=white";
+                        break;
+                     case "jquery":
+                        badgeUrl = "https://img.shields.io/badge/-jQuery-0769AD?style=flat&amp;logo=jquery&amp;logoColor=white";
+                        break;
+                     case "bootstrap":
+                        badgeUrl = "https://img.shields.io/badge/-Bootstrap-7952B3?style=flat&amp;logo=bootstrap&amp;logoColor=white";
                         break;
                      default:
                         badgeUrl = "https://img.shields.io/badge/-"+skill+"-1D267D?style=flat&amp;logo="+skill+"&amp;logoColor=white";
@@ -286,7 +298,8 @@ downloadBtn.addEventListener('click', downloadPage);
                <tbody>
                   <tr>
                      <td><strong>참여자 (기여도)</strong></td>
-                     <td><%=developerNameArray[i] %> (<%=contributionArray[i] %>%)</td>
+                     <td><%=developerNameArray[i] %> (<%=contributionArray[i] %>%) 
+                     </td>
                   </tr>
                   <tr>
                      <td><strong>기간</strong></td>

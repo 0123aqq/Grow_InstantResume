@@ -220,7 +220,7 @@ function validateForm(){
             success: function(res) {
                 if (res === "success") {
                     alert("회원정보가 변경되었습니다. 다시 로그인하세요.");
-                    location.href("logout");
+                    window.location.href("/logout");
                 } else {
                     alert("비밀번호가 틀렸습니다.");
                 }
