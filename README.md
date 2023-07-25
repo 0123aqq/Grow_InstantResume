@@ -86,6 +86,8 @@ Markdown 미리보기 기능도 제공하며, 여기에는 Marked.js 및 GitHub 
 
 - 웹페이지 작성에 어려움을 겪는 초보 개발자
 
+<br>
+
 ### 기술 구현한 내용 및 근거 자료
 
 - 프론트엔드
@@ -111,7 +113,6 @@ Markdown 미리보기 기능도 제공하며, 여기에는 Marked.js 및 GitHub 
 ![code_session.png](Readme/code_session.png)
 
 <br>
-<br>
 
 ### 기대효과
 
@@ -135,23 +136,23 @@ Markdown 미리보기 기능도 제공하며, 여기에는 Marked.js 및 GitHub 
 
 ## Wire Frame
 
-![wireframe(1).png](Readme/wireframe (1).png)
+![wireframe_1.png](Readme/wireframe_1.png)
 
 <br>
 
 ## Design
 
-![wireframe(2).png](Readme/wireframe (2).png)
+![wireframe_2.png](Readme/wireframe_2.png)
 
-![wireframe(3).png](Readme/wireframe (3).png)
+![wireframe_3.png](Readme/wireframe_3.png)
 
-![wireframe(4).png](Readme/wireframe (4).png)
+![wireframe_4.png](Readme/wireframe_4.png)
 
-![wireframe(5).png](Readme/wireframe (5).png)
+![wireframe_5.png](Readme/wireframe_5.png)
 
-![wireframe(6).png](Readme/wireframe (6).png)
+![wireframe_6.png](Readme/wireframe_6.png)
 
-![wireframe(7).png](Readme/wireframe (7).png)     
+![wireframe_7.png](Readme/wireframe_7.png)   
 
 <br>
 
